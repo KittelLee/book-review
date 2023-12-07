@@ -39,9 +39,9 @@ function Header() {
           <FontAwesomeIcon icon={faLock} id="icon-color6" />
           <span>Login</span>
         </Link>
-        <Link to="/Join" className="sub-list">
+        <Link to="/SignUp" className="sub-list">
           <FontAwesomeIcon icon={faUserLock} id="icon-color7" />
-          <span>Join</span>
+          <span>SignUp</span>
         </Link>
       </Navbar>
     </HeaderWrap>

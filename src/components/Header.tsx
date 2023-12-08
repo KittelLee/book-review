@@ -58,6 +58,7 @@ const HeaderWrap = styled.div`
 
 const Navbar = styled.div`
   position: relative;
+  margin: 10px;
   .sub-list {
     text-decoration: none;
     color: black;
@@ -65,6 +66,9 @@ const Navbar = styled.div`
     z-index: 1;
     margin: 0 20px;
     font-size: 36px;
+    @media screen and (max-width: 600px) {
+      font-size: 28px;
+    }
     span {
       display: none;
     }

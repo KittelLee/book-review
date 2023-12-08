@@ -53,12 +53,7 @@ export default Header;
 const HeaderWrap = styled.div`
   display: flex;
   justify-content: center;
-  position: fixed;
-  top: 35px;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
-  z-index: 1;
 `;
 
 const Navbar = styled.div`

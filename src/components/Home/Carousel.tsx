@@ -25,20 +25,20 @@ class Carousel extends React.Component {
       centerMode: true,
     };
 
-    let Super = styled.div`
+    const Super = styled.div`
       background-color: black;
 
       width: 1500px;
     `;
 
-    let Main = styled.div`
+    const Main = styled.div`
       margin: auto;
       margin-top: 150px;
 
       width: 900px;
     `;
 
-    let Carousel = styled.div`
+    const Carousel = styled.div`
       margin-left: auto;
       width: 100%;
       height: 400px;
@@ -46,7 +46,7 @@ class Carousel extends React.Component {
       background-color: yellow;
     `;
 
-    let Photobox = styled.img`
+    const Photobox = styled.img`
       max-width: 100%;
       height: 100%;
       width: 100%;

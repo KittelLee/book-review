@@ -55,7 +55,7 @@ const HeaderWrap = styled.div`
   justify-content: center;
   width: 100%;
   background-color: rgb(251, 251, 251);
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 

@@ -54,6 +54,9 @@ const HeaderWrap = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  background-color: rgb(251, 251, 251);
+  position: fixed;
+  top: 0;
 `;
 
 const Navbar = styled.div`
@@ -79,7 +82,7 @@ const Navbar = styled.div`
       color: orange;
     }
     #icon-color3 {
-      color: yellow;
+      color: gold;
     }
     #icon-color4 {
       color: green;

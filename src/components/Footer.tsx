@@ -82,8 +82,6 @@ const FooterWrap = styled.div`
   justify-content: center;
   width: 100%;
   background-color: rgb(251, 251, 251);
-  position: absolute;
-  bottom: 0;
 `;
 
 const FooterInner = styled.div`

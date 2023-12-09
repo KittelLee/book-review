@@ -4,7 +4,6 @@ import {
   faClipboardList,
   faHouse,
   faLock,
-  faUserLock,
   faBook,
   faMagnifyingGlass,
   faUser,
@@ -38,10 +37,6 @@ function Header() {
         <Link to="/Login" className="sub-list">
           <FontAwesomeIcon icon={faLock} id="icon-color6" />
           <span>Login</span>
-        </Link>
-        <Link to="/SignUp" className="sub-list">
-          <FontAwesomeIcon icon={faUserLock} id="icon-color7" />
-          <span>SignUp</span>
         </Link>
       </Navbar>
     </HeaderWrap>
@@ -92,9 +87,6 @@ const Navbar = styled.div`
     }
     #icon-color6 {
       color: purple;
-    }
-    #icon-color7 {
-      color: black;
     }
   }
 `;

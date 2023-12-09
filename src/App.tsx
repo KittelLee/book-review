@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./components/Login/Login";
-import SignUp from "./components/SignUp/SignUp";
 import BackgroundImg from "./assets/images/deco.png";
 
 const GlobalStyle = createGlobalStyle`
@@ -31,7 +30,6 @@ function App() {
         <Route path="/Board" element={<Board />} />
         <Route path="/Mypage" element={<MyPage />} /> */}
           <Route path="/Login" element={<Login />} />
-          <Route path="/SignUp" element={<SignUp />} />
         </Routes>
         <Footer />
       </div>

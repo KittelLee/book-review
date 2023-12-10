@@ -115,10 +115,11 @@ const MenuList = styled.div`
   }
   @media screen and (max-width: 600px) {
     ul li {
-      margin-left: 5px;
+      margin-left: 2px;
+      font-size: 0.66rem;
     }
     ul li a {
-      font-size: 0.8rem;
+      font-size: 0.66rem;
     }
   }
 `;

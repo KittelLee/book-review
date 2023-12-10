@@ -158,11 +158,15 @@ const IconImg = styled.img`
 const FooterRight = styled.div`
   width: 30%;
   @media screen and (max-width: 600px) {
+    margin-top: 20px;
     width: 100%;
     h3,
     p,
     a {
       text-align: center;
+    }
+    a {
+      font-size: 0.72rem;
     }
   }
   p {

@@ -65,7 +65,7 @@ const Navbar = styled.div`
     margin: 0 20px;
     font-size: 36px;
     @media screen and (max-width: 600px) {
-      font-size: 28px;
+      font-size: 20px;
     }
     span {
       display: none;

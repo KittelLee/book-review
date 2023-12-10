@@ -88,10 +88,17 @@ const FooterInner = styled.div`
   display: flex;
   width: 70%;
   padding: 12px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const FooterLeft = styled.div`
   width: 70%;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const MenuList = styled.div`
@@ -106,12 +113,25 @@ const MenuList = styled.div`
   ul li a:hover {
     text-decoration: underline;
   }
+  @media screen and (max-width: 600px) {
+    ul li {
+      margin-left: 2px;
+      font-size: 0.66rem;
+    }
+    ul li a {
+      font-size: 0.66rem;
+    }
+  }
 `;
 
 const PersonInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 50px;
+  @media screen and (max-width: 600px) {
+    text-align: center;
+    margin-left: 0;
+  }
   a {
     text-decoration: none;
     color: inherit;
@@ -137,6 +157,18 @@ const IconImg = styled.img`
 
 const FooterRight = styled.div`
   width: 30%;
+  @media screen and (max-width: 600px) {
+    margin-top: 20px;
+    width: 100%;
+    h3,
+    p,
+    a {
+      text-align: center;
+    }
+    a {
+      font-size: 0.72rem;
+    }
+  }
   p {
     line-height: 0.5;
     font-family: Arial;

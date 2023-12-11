@@ -4,6 +4,22 @@ import cover from "../../assets/images/cover.jpg"
 import side from "../../assets/images/side.jpg"
 import back from "../../assets/images/back.jpg"
 
+
+const BookComponent: React.FC = () => {
+  return (
+    <BookSection>
+      <BookContainer>
+        <BookCover src={side}></BookCover>
+        <BookBackCover src={back} />
+        <BookImage src={cover} alt="Book" />
+      </BookContainer>
+    </BookSection>
+  );
+};
+
+export default BookComponent;
+
+
 const BookSection = styled.section`
   display: flex;
   justify-content: center;
@@ -59,16 +75,3 @@ const BookImage = styled.img`
   object-fit: cover;
 `;
 
-const BookComponent: React.FC = () => {
-  return (
-    <BookSection>
-      <BookContainer>
-        <BookCover src={side}></BookCover>
-        <BookBackCover src={back} />
-        <BookImage src={cover} alt="Book" />
-      </BookContainer>
-    </BookSection>
-  );
-};
-
-export default BookComponent;

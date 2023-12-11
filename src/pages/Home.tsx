@@ -1,11 +1,11 @@
 import Carousel from "../components/Home/Carousel";
-import BookComponent from "../components/Home/BookSection";
+import Book from "../components/Home/BookSection";
 
 function Home() {
   return (
     <div>
       <Carousel />
-      <BookComponent />
+      <Book />
     </div>
 
   );

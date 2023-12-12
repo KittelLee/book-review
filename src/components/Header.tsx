@@ -18,9 +18,9 @@ function Header() {
           <FontAwesomeIcon icon={faHouse} id="icon-color1" />
           <span>Home</span>
         </Link>
-        <Link to="/Review" className="sub-list">
+        <Link to="/List" className="sub-list">
           <FontAwesomeIcon icon={faBook} id="icon-color2" />
-          <span>BookReview</span>
+          <span>BookList</span>
         </Link>
         <Link to="/Search" className="sub-list">
           <FontAwesomeIcon icon={faMagnifyingGlass} id="icon-color3" />

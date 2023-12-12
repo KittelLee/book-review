@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Catimg from "../../assets/images/test5.jpg";
+import CatImg from "../../assets/images/test5.jpg";
 
 function MyPage() {
   return (
@@ -8,7 +7,7 @@ function MyPage() {
       <Card>
         <Lines></Lines>
         <ImgBx>
-          <img src={Catimg}></img>
+          <img src={CatImg}></img>
         </ImgBx>
         <ConTent>
           <DeTail>
@@ -176,6 +175,7 @@ const Data = styled.div`
     color: #45f3ff;
     line-height: 1.2em;
     font-size: 600;
+    margin-left: 15px;
   }
 
   span {

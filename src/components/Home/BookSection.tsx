@@ -1,11 +1,9 @@
-import React from 'react';
 import styled from "styled-components";
 import cover from "../../assets/images/cover.jpg"
 import side from "../../assets/images/side.jpg"
 import back from "../../assets/images/back.jpg"
 
-
-const BookComponent: React.FC = () => {
+function BookComponent() {
   return (
     <BookSection>
       <BookContainer>

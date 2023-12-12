@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   UserCredential,
 } from "firebase/auth";
-import { auth } from "../../../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 

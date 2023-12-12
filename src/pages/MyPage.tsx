@@ -1,35 +1,36 @@
 import styled from "styled-components";
-import CatImg from "../../assets/images/test5.jpg";
+import CatImg from "../assets/images/test5.jpg";
 
 function MyPage() {
   return (
     <Body>
       <Card>
-        <Lines></Lines>
+        <Lines />
         <ImgBx>
-          <img src={CatImg}></img>
+          <img src={CatImg} />
         </ImgBx>
         <ConTent>
           <DeTail>
             <h2>
-              닉네임 넣는자리 <br />
+              닉네임 <br />
             </h2>
             <Data>
               <h3>
-                Nickname<br></br> <span>sonjinbin</span>{" "}
+                Nickname
+                <br /> <span>sonjinbin</span>{" "}
               </h3>
               <h3>
-                ID <br></br>
+                ID <br />
                 <span>withsjb1@gmail.com</span>{" "}
               </h3>
               <h3>
-                Password <br></br>
+                Password <br />
                 <span>asd7170882@</span>{" "}
               </h3>
             </Data>
 
             <ActionBtn>
-              <button>반영하기</button>
+              <button>수정하기</button>
             </ActionBtn>
           </DeTail>
         </ConTent>

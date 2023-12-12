@@ -5,8 +5,11 @@ import BackgroundImg from "./assets/images/deco.png";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Login from "./components/Login/Login";
-import MyPage from "./components/Profile/MyPage";
+import Login from "./pages/Login";
+import MyPage from "./pages/MyPage";
+import List from "./pages/List";
+import Search from "./pages/Search";
+import Board from "./pages/Board";
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -26,10 +29,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/Search" element={<Search />} />
-          <Route path="/Board" element={<Board />} /> */}
-          <Route path="/Mypage" element={<MyPage />} />
-
+          <Route path="/List" element={<List />} />
+          <Route path="/Search" element={<Search />} />
+          <Route path="/Board" element={<Board />} />
+          <Route path="/MyPage" element={<MyPage />} />
           <Route path="/Login" element={<Login />} />
         </Routes>
         <Footer />

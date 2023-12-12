@@ -4,7 +4,6 @@ import {
   faClipboardList,
   faHouse,
   faLock,
-  faBook,
   faMagnifyingGlass,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,10 +16,6 @@ function Header() {
         <Link to="/" className="sub-list">
           <FontAwesomeIcon icon={faHouse} id="icon-color1" />
           <span>Home</span>
-        </Link>
-        <Link to="/Review" className="sub-list">
-          <FontAwesomeIcon icon={faBook} id="icon-color2" />
-          <span>BookReview</span>
         </Link>
         <Link to="/Search" className="sub-list">
           <FontAwesomeIcon icon={faMagnifyingGlass} id="icon-color3" />

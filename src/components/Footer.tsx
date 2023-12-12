@@ -15,10 +15,6 @@ function Footer() {
               </li>
               <li>|</li>
               <li>
-                <Link to="/Review">책 리뷰</Link>
-              </li>
-              <li>|</li>
-              <li>
                 <Link to="/Search">책 검색</Link>
               </li>
               <li>|</li>
@@ -116,10 +112,10 @@ const MenuList = styled.div`
   @media screen and (max-width: 600px) {
     ul li {
       margin-left: 2px;
-      font-size: 0.66rem;
+      font-size: 1rem;
     }
     ul li a {
-      font-size: 0.66rem;
+      font-size: 1rem;
     }
   }
 `;

@@ -27,6 +27,7 @@ function Review() {
         </Submit>
         <CommentList>
           <p>홍길동</p>
+          <p>|</p>
           <p>이 책 매우 재밌습니다!</p>
         </CommentList>
       </Comment>
@@ -51,6 +52,9 @@ const BookWrap = styled.div`
   border: 1px solid #e1e1e1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const Book = styled.div`
@@ -62,8 +66,17 @@ const Book = styled.div`
   background-color: whitesmoke;
   margin-right: 100px;
   img {
+    width: 350px;
+    height: 350px;
+  }
+  @media screen and (max-width: 600px) {
+    margin-right: 0px;
     width: 300px;
     height: 300px;
+    img {
+      width: 250px;
+      height: 250px;
+    }
   }
 `;
 
@@ -76,6 +89,11 @@ const BookInfo = styled.div`
     list-style-type: square;
     margin-left: -20px;
     line-height: 2;
+  }
+  @media screen and (max-width: 600px) {
+    margin-right: 0px;
+    width: 260px;
+    height: 260px;
   }
 `;
 
@@ -112,6 +130,17 @@ const Submit = styled.div`
     margin-top: 6px;
     border-radius: 4px;
   }
+  @media screen and (max-width: 600px) {
+    input {
+      width: 96.9%;
+    }
+    textarea {
+      width: 97.7%;
+    }
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 const CommentList = styled.div`
@@ -124,5 +153,10 @@ const CommentList = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   p {
     width: 50%;
+  }
+  @media screen and (max-width: 600px) {
+    p {
+      font-size: 0.64rem;
+    }
   }
 `;

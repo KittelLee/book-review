@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import cover from "../../../assets/images/book/cover2.jpg"
-import side from "../../../assets/images/book/side2.jpg"
-import back from "../../../assets/images/book/back2.jpg"
+import cover from "../../../assets/images/book/cover2.jpg";
+import side from "../../../assets/images/book/side2.jpg";
+import back from "../../../assets/images/book/back2.jpg";
 
 function BookComponent() {
   return (
@@ -13,10 +13,9 @@ function BookComponent() {
       </BookContainer>
     </BookSection>
   );
-};
+}
 
 export default BookComponent;
-
 
 const BookSection = styled.section`
   display: flex;
@@ -33,12 +32,12 @@ const BookContainer = styled.div`
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
   transform-style: preserve-3d;
   transition: transform 0.5s;
-  
+
   &:hover {
     transform: rotateY(35deg);
     box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
   }
-  
+
   &:active {
     transform: rotateY(180deg);
   }
@@ -70,4 +69,3 @@ const BookImage = styled.img`
   height: 100%;
   object-fit: cover;
 `;
-

@@ -30,9 +30,9 @@ function Header() {
           <FontAwesomeIcon icon={faClipboardList} id="icon-color4" />
           <span>Board</span>
         </Link>
-        <Link to="/Mypage" className="sub-list">
+        <Link to="/MyPage" className="sub-list">
           <FontAwesomeIcon icon={faUser} id="icon-color5" />
-          <span>Mypage</span>
+          <span>MyPage</span>
         </Link>
         <Link to="/Login" className="sub-list">
           <FontAwesomeIcon icon={faLock} id="icon-color6" />
@@ -68,6 +68,7 @@ const Navbar = styled.div`
     @media screen and (max-width: 600px) {
       font-size: 20px;
     }
+
     span {
       display: none;
     }

@@ -22,10 +22,13 @@ function Review() {
         <h2>리뷰(댓글)</h2>
         <Submit>
           <input placeholder="닉네임" />
-          <textarea placeholder="리뷰를 작성해주세요"></textarea>
+          <textarea placeholder="리뷰를 작성해주세요" />
           <button>제출하기</button>
         </Submit>
-        <CommentList></CommentList>
+        <CommentList>
+          <p>홍길동</p>
+          <p>이 책 매우 재밌습니다!</p>
+        </CommentList>
       </Comment>
     </ContentWrap>
   );
@@ -43,20 +46,30 @@ const BookWrap = styled.div`
   align-items: center;
   width: 80%;
   margin: 0 auto 10px auto;
-  border: 1px solid black;
-  padding: 10px;
+  padding: 20px;
+  background-color: rgb(251, 251, 251);
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 `;
 
 const Book = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 400px;
+  background-color: whitesmoke;
+  margin-right: 100px;
   img {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
   }
 `;
 
 const BookInfo = styled.div`
   padding: 20px;
-  background-color: white;
+  background-color: whitesmoke;
   width: 360px;
   height: 360px;
   ul {
@@ -69,23 +82,47 @@ const BookInfo = styled.div`
 const Comment = styled.div`
   width: 80%;
   margin: 0 auto;
-  padding: 10px;
-  border: 1px solid black;
+  padding: 20px;
+  background-color: rgb(251, 251, 251);
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 `;
 
 const Submit = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  input {
+    width: 10%;
+  }
   textarea {
-    margin-top: 10px;
+    margin-top: 6px;
+    width: 90%;
+    height: 100px;
+  }
+  input,
+  textarea {
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
   }
   button {
     width: 10%;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 6px;
     border-radius: 4px;
   }
 `;
 
-const CommentList = styled.div``;
+const CommentList = styled.div`
+  display: flex;
+  margin-top: 20px;
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  p {
+    width: 50%;
+  }
+`;

@@ -1,5 +1,5 @@
 import Carousel from "../components/Home/Carousel";
-import Book from "../components/Home/BookSection";
+import Book from "../components/Home/DesignBookStyle";
 
 function Home() {
   return (

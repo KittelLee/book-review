@@ -1,11 +1,9 @@
-import React from 'react';
 import styled from "styled-components";
-import cover from "../../assets/images/cover.jpg"
-import side from "../../assets/images/side.jpg"
-import back from "../../assets/images/back.jpg"
+import cover from "../../../assets/images/book/cover4.jpg"
+import side from "../../../assets/images/book/side4.jpg"
+import back from "../../../assets/images/book/back4.jpg"
 
-
-const BookComponent: React.FC = () => {
+function BookComponent() {
   return (
     <BookSection>
       <BookContainer>
@@ -30,8 +28,8 @@ const BookSection = styled.section`
 
 const BookContainer = styled.div`
   position: relative;
-  width: 383px;
-  height: 567px;
+  width: 200px;
+  height: 300px;
   box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
   transform-style: preserve-3d;
   transition: transform 0.5s;
@@ -51,7 +49,6 @@ const BookCover = styled.img`
   width: 60px;
   height: 100%;
   transform-origin: left;
-  background: url(side.jpg);
   background-position: center;
   transform: rotateY(90deg);
 `;
@@ -61,7 +58,6 @@ const BookBackCover = styled.img`
   width: 100%;
   height: 100%;
   transform-origin: center;
-  background: url(back.jpg);
   background-position: center;
   transform: rotateY(180deg) translateZ(60px);
 `;

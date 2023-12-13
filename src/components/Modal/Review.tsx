@@ -131,8 +131,12 @@ const Submit = styled.div`
     border-radius: 4px;
   }
   @media screen and (max-width: 600px) {
-    input,
-    textarea,
+    input {
+      width: 96.9%;
+    }
+    textarea {
+      width: 97.7%;
+    }
     button {
       width: 100%;
     }

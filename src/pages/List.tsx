@@ -54,8 +54,9 @@ export default List;
 const ListWrap = styled.div``;
 
 const Book = styled.img`
-  margin: 50px;
-  padding: 100px;
+  height: 300px;
+  margin: 180px;
+  // padding: 100px;
   cursor: pointer;
 `;
 

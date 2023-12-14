@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
 import Review from "../components/Modal/Review";
+import CatImg from "../assets/images/test5.jpg";
 
 const customStyles = {
   content: {
@@ -31,7 +32,7 @@ function List() {
 
   return (
     <ListWrap>
-      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
+      <img src={CatImg} onClick={openModal} />
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -42,29 +43,27 @@ function List() {
           <button onClick={closeModal}>X</button>
         </CloseBtn>
       </Modal>
-      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
-      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
-      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
+      <img src={CatImg} onClick={openModal} />
+      <img src={CatImg} onClick={openModal} />
+      <img src={CatImg} onClick={openModal} />
     </ListWrap>
   );
 }
 
 export default List;
 
-const ListWrap = styled.div``;
+const ListWrap = styled.div`
+  img {
+    height: 300px;
+    margin: 180px;
+    cursor: pointer;
+  }`
+;
 
-const Book = styled.img`
-  height: 300px;
-  margin: 180px;
-  // padding: 100px;
-  cursor: pointer;
-`;
-
-const CloseBtn = styled.div`
+const CloseBtn = styled.img`
   position: absolute;
   top: 10px;
   right: 10px;
-  float: right;
   button {
     border: none;
     background-color: #fff;
@@ -73,5 +72,5 @@ const CloseBtn = styled.div`
       cursor: pointer;
       color: red;
     }
-  }
-`;
+  }`
+;

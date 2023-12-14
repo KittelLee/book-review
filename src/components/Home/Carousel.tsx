@@ -28,27 +28,21 @@ function Carousel() {
       <Main>
         <Slider {...settings}>
           <Carousela>
-            <Photowirte></Photowirte>
             <Photobox src={Test1}></Photobox>
           </Carousela>
           <Carousela>
-            <Photowirte></Photowirte>
             <Photobox src={Test2}></Photobox>
           </Carousela>
           <Carousela>
-            <Photowirte></Photowirte>
             <Photobox src={Test3}></Photobox>
           </Carousela>
           <Carousela>
-            <Photowirte></Photowirte>
             <Photobox src={Test4}></Photobox>
           </Carousela>
           <Carousela>
-            <Photowirte></Photowirte>
             <Photobox src={Test5}></Photobox>
           </Carousela>
           <Carousela>
-            <Photowirte></Photowirte>
             <Photobox src={Test5}></Photobox>
           </Carousela>
         </Slider>
@@ -84,36 +78,6 @@ const Carousela = styled.div`
   overflow: hidden;
   @media (max-width: 1120px) {
     height: 300px;
-  }
-`;
-
-const Photowirte = styled.div`
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-  position: absolute;
-  width: 40%;
-  color: white;
-  h2 {
-    position: relative;
-    top: 150px;
-    left: 100px;
-    font-size: 2.3em;
-  }
-  h3 {
-    position: relative;
-    top: 200px;
-    left: 100px;
-    font-size: 1.5em;
-  }
-
-  @media (max-width: 1380px) {
-    h2 {
-      font-size: 2em;
-    }
-    h3 {
-      font-size: 1.5em;
-    }
   }
 `;
 

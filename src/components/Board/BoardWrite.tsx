@@ -40,8 +40,6 @@ function BoardWrite() {
     }
   };
 
-  const BackBoard = navigate("/board");
-
   return (
     <Main>
       <WriteForm>

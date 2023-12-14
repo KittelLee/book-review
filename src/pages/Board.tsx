@@ -12,7 +12,7 @@ import {
 function Board() {
   const [posts, setPosts] = useState<BoardData[]>([]);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize] = useState(10);
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수 추가
   const navigate = useNavigate();
 
@@ -36,6 +36,8 @@ function Board() {
   useEffect(() => {
     async function fetchData() {
       try {
+        const startIdx: number = (page - 1) * pageSize;
+        const endIdx: number = startIdx + pageSize;
         const query = collection(db, "Board");
         const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(query);
         const data: BoardData[] = querySnapshot.docs.map((doc) => ({
@@ -49,13 +51,19 @@ function Board() {
           title: doc.data().title,
           views: doc.data().views,
         }));
-        setPosts(data);
+        const slicedData: BoardData[] = data.slice(startIdx, endIdx);
+        setPosts(slicedData);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
-  }, []);
+  }, [page, pageSize]);
+
+  useEffect(() => {
+    const total = Math.ceil(posts.length / pageSize);
+    setTotalPages(total);
+  }, [posts, pageSize]);
 
   return (
     <Main>

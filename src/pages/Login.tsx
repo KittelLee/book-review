@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   UserCredential,
 } from "firebase/auth";
-import { auth } from "../../../firebaseConfig";
+import { auth } from "../../firebaseConfig";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 

@@ -4,7 +4,7 @@ import "../firebaseConfig";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import Login from "./components/Login/Login";
+import Login from "./pages/Login";
 import BackgroundImg from "./assets/images/deco.png";
 import MyPage from "./components/Profile/MyPage";
 import Board from "./pages/Board";

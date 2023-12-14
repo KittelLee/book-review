@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import Login from "./components/Login/Login";
 import BackgroundImg from "./assets/images/deco.png";
 import MyPage from "./components/Profile/MyPage";
+import Board from "./pages/Board";
+import BoardWrite from "./components/Board/BoardWrite";
+import Boarddetail from "./components/Board/BoardDetail";
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -28,12 +31,16 @@ function App() {
           <Route path="/" element={<Home />} />
           {/* <Route path="/Review" element={<Review />} />
         <Route path="/Search" element={<Search />} />
-        <Route path="/Board" element={<Board />} />
+       
         */}
           <Route path="/Mypage" element={<MyPage />} />
+          <Route path="/Board" element={<Board />} />
+          <Route path="/Boardwrite" element={<BoardWrite />} />
+          <Route path="/Boarddetail/:id" element={<Boarddetail />} />
 
           <Route path="/Login" element={<Login />} />
         </Routes>
+
         <Footer />
       </div>
     </>

@@ -18,9 +18,9 @@ function Header() {
           <FontAwesomeIcon icon={faHouse} id="icon-color1" />
           <span>Home</span>
         </Link>
-        <Link to="/Review" className="sub-list">
+        <Link to="/List" className="sub-list">
           <FontAwesomeIcon icon={faBook} id="icon-color2" />
-          <span>BookReview</span>
+          <span>BookList</span>
         </Link>
         <Link to="/Search" className="sub-list">
           <FontAwesomeIcon icon={faMagnifyingGlass} id="icon-color3" />
@@ -30,9 +30,9 @@ function Header() {
           <FontAwesomeIcon icon={faClipboardList} id="icon-color4" />
           <span>Board</span>
         </Link>
-        <Link to="/Mypage" className="sub-list">
+        <Link to="/MyPage" className="sub-list">
           <FontAwesomeIcon icon={faUser} id="icon-color5" />
-          <span>Mypage</span>
+          <span>MyPage</span>
         </Link>
         <Link to="/Login" className="sub-list">
           <FontAwesomeIcon icon={faLock} id="icon-color6" />
@@ -52,6 +52,7 @@ const HeaderWrap = styled.div`
   background-color: rgb(251, 251, 251);
   position: sticky;
   top: 0;
+  z-index: 9999;
 `;
 
 const Navbar = styled.div`
@@ -67,6 +68,7 @@ const Navbar = styled.div`
     @media screen and (max-width: 600px) {
       font-size: 20px;
     }
+
     span {
       display: none;
     }

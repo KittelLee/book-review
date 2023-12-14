@@ -105,7 +105,7 @@ const Super = styled.div`
 
 const Main = styled.div`
   margin: auto;
-  margin-top: 150px;
+  margin-top: 50px;
 
   width: 1400px;
   @media (max-width: 1380px) {

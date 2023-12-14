@@ -34,7 +34,7 @@ const BookDesign = styled.section`
 
 const Book = styled.div`
     display: flex;
-    gap: 10px;
+    gap: 20px;
     padding: 10px;
     @media screen and (max-width: 700px) {
         flex-direction: column;

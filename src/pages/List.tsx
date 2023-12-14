@@ -31,7 +31,7 @@ function List() {
 
   return (
     <ListWrap>
-      <button onClick={openModal}>모달창</button>
+      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -42,6 +42,9 @@ function List() {
           <button onClick={closeModal}>X</button>
         </CloseBtn>
       </Modal>
+      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
+      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
+      <Book src="../../src/assets/images/test5.jpg" onClick={openModal}/>
     </ListWrap>
   );
 }
@@ -50,10 +53,17 @@ export default List;
 
 const ListWrap = styled.div``;
 
+const Book = styled.img`
+  margin: 50px;
+  padding: 100px;
+  cursor: pointer;
+`;
+
 const CloseBtn = styled.div`
   position: absolute;
   top: 10px;
   right: 10px;
+  float: right;
   button {
     border: none;
     background-color: #fff;

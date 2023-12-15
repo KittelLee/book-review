@@ -32,14 +32,14 @@ function List() {
 
   return (
 
-  <div>
-    <IISection>
+  <BackColor>
+    <SearchSection>
       <input placeholder="검색창" />
-    </IISection>
+    </SearchSection>
 
-    <AddSection>
+    <BookAddSection>
       <button onClick={openModal}>북추가</button>
-    </AddSection>
+    </BookAddSection>
 
 
     <BookMainWrap>
@@ -149,13 +149,17 @@ function List() {
         </CloseBtn>
       </Modal>
     </BookMainWrap>
-  </div>
+  </BackColor>
   );
 }
 
 export default List;
 
-const IISection = styled.div`
+const BackColor = styled.div`
+  background-color: #FFFFFF
+`;
+
+const SearchSection = styled.div`
   display: flex;
   justify-content: center;
   margin: 10px;
@@ -165,7 +169,7 @@ const IISection = styled.div`
   }
 `;
 
-const AddSection = styled.div`
+const BookAddSection = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-right: 50px;

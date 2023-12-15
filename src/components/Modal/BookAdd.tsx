@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import BookAddIcon from "../../assets/icons/BookAddIcon.jpeg";
 
@@ -6,12 +7,24 @@ interface BookAddProps {
 }
 
 function BookAdd({ closeBookAddModal }: BookAddProps) {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setSelectedFile(files[0]);
+    }
+  };
+
   return (
     <BookAddWrap>
       <h2>책 추가하기</h2>
-      <img src={BookAddIcon} />
+      <img
+        src={selectedFile ? URL.createObjectURL(selectedFile) : BookAddIcon}
+        alt="책 이미지"
+      />
       <Upload>
-        <button>파일 선택</button>
+        <input id="fileInput" type="file" onChange={handleFileChange} />
         <input type="text" placeholder="책제목을 기입해주세요" />
         <input type="text" placeholder="저자를 기입해주세요" />
         <input type="text" placeholder="출판사를 기입해주세요" />
@@ -40,7 +53,8 @@ const Upload = styled.div`
   display: flex;
   flex-direction: column;
   input,
-  button {
+  button,
+  label {
     margin-bottom: 10px;
   }
   button {

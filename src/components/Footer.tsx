@@ -19,10 +19,6 @@ function Footer() {
               </li>
               <li>|</li>
               <li>
-                <Link to="/Search">책 검색</Link>
-              </li>
-              <li>|</li>
-              <li>
                 <Link to="/Board">커뮤니티</Link>
               </li>
               <li>|</li>
@@ -115,7 +111,7 @@ const MenuList = styled.div`
   }
   @media screen and (max-width: 600px) {
     ul li {
-      margin-left: 2px;
+      margin: 0 2px;
       font-size: 0.9rem;
     }
     ul li a {

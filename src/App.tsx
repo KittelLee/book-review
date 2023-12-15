@@ -31,11 +31,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/Review" element={<Review />} />
-        <Route path="/Search" element={<Search />} /> 
-        */}
           <Route path="/Mypage" element={<MyPage />} />
-
           <Route path="/Boardwrite" element={<BoardWrite />} />
           <Route path="/Boarddetail/:id" element={<Boarddetail />} />
           <Route path="/List" element={<List />} />

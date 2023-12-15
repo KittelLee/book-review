@@ -11,7 +11,6 @@ import BoardWrite from "./components/Board/BoardWrite";
 import Boarddetail from "./components/Board/BoardDetail";
 import MyPage from "./pages/MyPage";
 import List from "./pages/List";
-import Search from "./pages/Search";
 
 const GlobalStyle = createGlobalStyle`
   body, html {
@@ -31,15 +30,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/Review" element={<Review />} />
-        <Route path="/Search" element={<Search />} /> 
-        */}
           <Route path="/Mypage" element={<MyPage />} />
-
           <Route path="/Boardwrite" element={<BoardWrite />} />
           <Route path="/Boarddetail/:id" element={<Boarddetail />} />
           <Route path="/List" element={<List />} />
-          <Route path="/Search" element={<Search />} />
           <Route path="/Board" element={<Board />} />
           <Route path="/Login" element={<Login />} />
         </Routes>

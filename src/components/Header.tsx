@@ -5,7 +5,6 @@ import {
   faHouse,
   faLock,
   faBook,
-  faMagnifyingGlass,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -22,20 +21,16 @@ function Header() {
           <FontAwesomeIcon icon={faBook} id="icon-color2" />
           <span>BookList</span>
         </Link>
-        <Link to="/Search" className="sub-list">
-          <FontAwesomeIcon icon={faMagnifyingGlass} id="icon-color3" />
-          <span>BookSearch</span>
-        </Link>
         <Link to="/Board" className="sub-list">
-          <FontAwesomeIcon icon={faClipboardList} id="icon-color4" />
+          <FontAwesomeIcon icon={faClipboardList} id="icon-color3" />
           <span>Board</span>
         </Link>
         <Link to="/MyPage" className="sub-list">
-          <FontAwesomeIcon icon={faUser} id="icon-color5" />
+          <FontAwesomeIcon icon={faUser} id="icon-color4" />
           <span>MyPage</span>
         </Link>
         <Link to="/Login" className="sub-list">
-          <FontAwesomeIcon icon={faLock} id="icon-color6" />
+          <FontAwesomeIcon icon={faLock} id="icon-color5" />
           <span>Login</span>
         </Link>
       </Navbar>
@@ -79,15 +74,12 @@ const Navbar = styled.div`
       color: orange;
     }
     #icon-color3 {
-      color: gold;
-    }
-    #icon-color4 {
       color: green;
     }
-    #icon-color5 {
+    #icon-color4 {
       color: blue;
     }
-    #icon-color6 {
+    #icon-color5 {
       color: purple;
     }
   }

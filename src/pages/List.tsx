@@ -29,7 +29,7 @@ const customStyles2 = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "50%",
+    height: "54%",
     width: "40%",
   },
   overlay: {
@@ -60,8 +60,111 @@ function List() {
   }
 
   return (
-    <ListWrap>
-      <img src={CatImg} onClick={openReviewModal} />
+    <BackColor>
+      <SearchSection>
+        <input placeholder="검색창" />
+      </SearchSection>
+
+      <BookAddSection>
+        <button onClick={openBookAddModal}>책 추가하기</button>
+      </BookAddSection>
+
+      <BookMainWrap>
+        <BookWrap>
+          <BookSection>
+            <BookLeftSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookLeftSection>
+            <BookRightSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookRightSection>
+            <BookLeftSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookLeftSection>
+            <BookRightSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookRightSection>
+          </BookSection>
+          <BookSection>
+            <BookLeftSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookLeftSection>
+            <BookRightSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookRightSection>
+            <BookLeftSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookLeftSection>
+            <BookRightSection>
+              <ImgSection>
+                <img src={CatImg} onClick={openReviewModal} />
+              </ImgSection>
+              <InfoSection onClick={openReviewModal}>
+                <p>책제목: 고양이3</p>
+                <p>저자: 집사3</p>
+                <p>출판사: 집사협회</p>
+                <p>가격: 1004원</p>
+              </InfoSection>
+            </BookRightSection>
+          </BookSection>
+        </BookWrap>
+      </BookMainWrap>
       <Modal
         isOpen={reviewModalIsOpen}
         onRequestClose={closeReviewModal}
@@ -73,7 +176,6 @@ function List() {
         </CloseBtn>
       </Modal>
 
-      <img src={CatImg} onClick={openBookAddModal} />
       <Modal
         isOpen={bookAddModalIsOpen}
         onRequestClose={closeBookAddModal}
@@ -84,23 +186,89 @@ function List() {
           <button onClick={closeBookAddModal}>X</button>
         </CloseBtn>
       </Modal>
-
-      <img src={CatImg} onClick={openReviewModal} />
-      <img src={CatImg} onClick={openReviewModal} />
-      <img src={CatImg} onClick={openReviewModal} />
-    </ListWrap>
+    </BackColor>
   );
 }
 
 export default List;
 
-const ListWrap = styled.div`
+const BackColor = styled.div`
+  background-color: #fff;
+`;
+
+const SearchSection = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  input {
+    width: 300px;
+    height: 20px;
+  }
+`;
+
+const BookAddSection = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+  button {
+    width: 150px;
+    height: 50px;
+    &:hover {
+      cursor: pointer;
+      background-color: #fff;
+    }
+  }
+`;
+
+const BookMainWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
+
+const BookWrap = styled.div`
+  width: 90%;
+`;
+
+const BookSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
+const BookLeftSection = styled.div`
+  display: flex;
+  width: 50%;
+  padding: 10px;
+`;
+
+const ImgSection = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
-    height: 300px;
-    margin: 180px;
+    width: 140px;
+    height: 200px;
     cursor: pointer;
   }
 `;
+
+const InfoSection = styled.div`
+  width: 50%;
+  padding: 10px;
+  p {
+    cursor: pointer;
+    font-weight: bold;
+  }
+`;
+
+const BookRightSection = styled.div`
+  display: flex;
+  padding: 10px;
+  width: 50%;
+`;
+
 const CloseBtn = styled.div`
   position: absolute;
   top: 10px;

@@ -165,6 +165,7 @@ function List() {
           </BookSection>
         </BookWrap>
       </BookMainWrap>
+
       <Modal
         isOpen={reviewModalIsOpen}
         onRequestClose={closeReviewModal}
@@ -247,26 +248,6 @@ const ImgSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  img {
-    width: 140px;
-    height: 200px;
-    cursor: pointer;
-  }
-`;
-
-const InfoSection = styled.div`
-  width: 50%;
-  padding: 10px;
-  p {
-    cursor: pointer;
-    font-weight: bold;
-  }
-`;
-
-const BookRightSection = styled.div`
-  display: flex;
-  padding: 10px;
-  width: 50%;
 `;
 
 const CloseBtn = styled.div`

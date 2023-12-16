@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
 import Review from "../components/Modal/Review";
-import CatImg from "../assets/images/test5.jpg";
 import BookAdd from "../components/Modal/BookAdd";
 
 const customStyles = {
@@ -37,11 +36,20 @@ const customStyles2 = {
   },
 };
 
+interface Book {
+  imageUrl: string;
+  bookTitle: string;
+  author: string;
+  publisher: string;
+  price: string;
+}
+
 Modal.setAppElement("#root");
 
 function List() {
   const [reviewModalIsOpen, setReviewModalIsOpen] = useState(false);
   const [bookAddModalIsOpen, setBookAddModalIsOpen] = useState(false);
+  const [newBook, setNewBook] = useState<Book | null>(null);
 
   function openReviewModal() {
     setReviewModalIsOpen(true);
@@ -73,94 +81,88 @@ function List() {
         <BookWrap>
           <BookSection>
             <BookLeftSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
+              {newBook && typeof newBook.imageUrl !== "undefined" ? (
+                <>
+                  <ImgSection onClick={openReviewModal}>
+                    {newBook.imageUrl ? (
+                      <img src={newBook.imageUrl} alt="책 이미지" />
+                    ) : (
+                      <p>이미지가 없습니다.</p>
+                    )}
+                  </ImgSection>
+                  <InfoSection onClick={openReviewModal}>
+                    <p>책 제목: {newBook.bookTitle}</p>
+                    <p>저자: {newBook.author}</p>
+                    <p>출판사: {newBook.publisher}</p>
+                    <p>가격: {newBook.price}원</p>
+                  </InfoSection>
+                </>
+              ) : (
+                <p>책이 추가되지 않았습니다.</p>
+              )}
             </BookLeftSection>
             <BookRightSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
+              {newBook && typeof newBook.imageUrl !== "undefined" ? (
+                <>
+                  <ImgSection onClick={openReviewModal}>
+                    {newBook.imageUrl ? (
+                      <img src={newBook.imageUrl} alt="책 이미지" />
+                    ) : (
+                      <p>이미지가 없습니다.</p>
+                    )}
+                  </ImgSection>
+                  <InfoSection onClick={openReviewModal}>
+                    <p>책 제목: {newBook.bookTitle}</p>
+                    <p>저자: {newBook.author}</p>
+                    <p>출판사: {newBook.publisher}</p>
+                    <p>가격: {newBook.price}원</p>
+                  </InfoSection>
+                </>
+              ) : (
+                <p>책이 추가되지 않았습니다.</p>
+              )}
             </BookRightSection>
             <BookLeftSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
+              {newBook && typeof newBook.imageUrl !== "undefined" ? (
+                <>
+                  <ImgSection onClick={openReviewModal}>
+                    {newBook.imageUrl ? (
+                      <img src={newBook.imageUrl} alt="책 이미지" />
+                    ) : (
+                      <p>이미지가 없습니다.</p>
+                    )}
+                  </ImgSection>
+                  <InfoSection onClick={openReviewModal}>
+                    <p>책 제목: {newBook.bookTitle}</p>
+                    <p>저자: {newBook.author}</p>
+                    <p>출판사: {newBook.publisher}</p>
+                    <p>가격: {newBook.price}원</p>
+                  </InfoSection>
+                </>
+              ) : (
+                <p>책이 추가되지 않았습니다.</p>
+              )}
             </BookLeftSection>
             <BookRightSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
-            </BookRightSection>
-          </BookSection>
-          <BookSection>
-            <BookLeftSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
-            </BookLeftSection>
-            <BookRightSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
-            </BookRightSection>
-            <BookLeftSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
-            </BookLeftSection>
-            <BookRightSection>
-              <ImgSection>
-                <img src={CatImg} onClick={openReviewModal} />
-              </ImgSection>
-              <InfoSection onClick={openReviewModal}>
-                <p>책제목: 고양이3</p>
-                <p>저자: 집사3</p>
-                <p>출판사: 집사협회</p>
-                <p>가격: 1004원</p>
-              </InfoSection>
+              {newBook && typeof newBook.imageUrl !== "undefined" ? (
+                <>
+                  <ImgSection onClick={openReviewModal}>
+                    {newBook.imageUrl ? (
+                      <img src={newBook.imageUrl} alt="책 이미지" />
+                    ) : (
+                      <p>이미지가 없습니다.</p>
+                    )}
+                  </ImgSection>
+                  <InfoSection onClick={openReviewModal}>
+                    <p>책 제목: {newBook.bookTitle}</p>
+                    <p>저자: {newBook.author}</p>
+                    <p>출판사: {newBook.publisher}</p>
+                    <p>가격: {newBook.price}원</p>
+                  </InfoSection>
+                </>
+              ) : (
+                <p>책이 추가되지 않았습니다.</p>
+              )}
             </BookRightSection>
           </BookSection>
         </BookWrap>
@@ -182,7 +184,10 @@ function List() {
         onRequestClose={closeBookAddModal}
         style={customStyles2}
       >
-        <BookAdd closeBookAddModal={closeBookAddModal} />
+        <BookAdd
+          closeBookAddModal={closeBookAddModal}
+          setNewBook={setNewBook}
+        />
         <CloseBtn>
           <button onClick={closeBookAddModal}>X</button>
         </CloseBtn>

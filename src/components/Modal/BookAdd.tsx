@@ -8,6 +8,19 @@ interface BookAddProps {
   closeBookAddModal: () => void;
 }
 
+interface BookAddProps {
+  closeBookAddModal: () => void;
+  addNewBook: (newBook: Book) => void;
+}
+
+interface Book {
+  imageUrl: string;
+  bookTitle: string;
+  author: string;
+  publisher: string;
+  price: string;
+}
+
 /*firebaseConfig부분 props로 내려줄수있지않나?*/
 const firebaseConfig = {
   apiKey: "AIzaSyAu1pu4r4m_kJLEyeL7Jgc6tWz94Upzk98",
@@ -23,7 +36,7 @@ firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.storage();
 
-function BookAdd({ closeBookAddModal }: BookAddProps) {
+function BookAdd({ closeBookAddModal, addNewBook }: BookAddProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [bookTitle, setBookTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -48,12 +61,13 @@ function BookAdd({ closeBookAddModal }: BookAddProps) {
     // 업로드된 파일의 다운로드 URL을 가져옴
     const downloadURL = await fileRef.getDownloadURL();
 
-    // 책 정보 및 다운로드 URL을 콘솔에 출력
-    console.log("책 제목:", bookTitle);
-    console.log("저자:", author);
-    console.log("출판사:", publisher);
-    console.log("가격:", price);
-    console.log("이미지 URL:", downloadURL);
+    addNewBook({
+      imageUrl: downloadURL,
+      bookTitle,
+      author,
+      publisher,
+      price,
+    });
 
     // 모달 닫기
     closeBookAddModal();
@@ -84,7 +98,7 @@ function BookAdd({ closeBookAddModal }: BookAddProps) {
           onChange={(e) => setPublisher(e.target.value)}
         />
         <input
-          type="number"
+          type="text"
           placeholder="가격을 기입해주세요"
           onChange={(e) => setPrice(e.target.value)}
         />

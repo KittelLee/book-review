@@ -10,7 +10,7 @@ interface BookAddProps {
 
 interface BookAddProps {
   closeBookAddModal: () => void;
-  setNewBook: React.Dispatch<React.SetStateAction<Book | null>>;
+  addNewBook: (newBook: Book) => void;
 }
 
 interface Book {
@@ -36,7 +36,7 @@ firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.storage();
 
-function BookAdd({ closeBookAddModal, setNewBook }: BookAddProps) {
+function BookAdd({ closeBookAddModal, addNewBook }: BookAddProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [bookTitle, setBookTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -61,7 +61,7 @@ function BookAdd({ closeBookAddModal, setNewBook }: BookAddProps) {
     // 업로드된 파일의 다운로드 URL을 가져옴
     const downloadURL = await fileRef.getDownloadURL();
 
-    setNewBook({
+    addNewBook({
       imageUrl: downloadURL,
       bookTitle,
       author,
@@ -98,7 +98,7 @@ function BookAdd({ closeBookAddModal, setNewBook }: BookAddProps) {
           onChange={(e) => setPublisher(e.target.value)}
         />
         <input
-          type="number"
+          type="text"
           placeholder="가격을 기입해주세요"
           onChange={(e) => setPrice(e.target.value)}
         />

@@ -186,7 +186,7 @@ function List() {
       >
         <BookAdd
           closeBookAddModal={closeBookAddModal}
-          setNewBook={setNewBook}
+          addNewBook={setNewBook}
         />
         <CloseBtn>
           <button onClick={closeBookAddModal}>X</button>

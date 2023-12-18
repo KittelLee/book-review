@@ -22,7 +22,7 @@ function BoardWrite() {
         content: newcontent,
         likes: 0,
         views: 0,
-        comments: "",
+        comments: [],
         image: "",
       });
       // 성공적으로 추가되었을 때 필요한 작업 수행

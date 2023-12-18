@@ -76,12 +76,6 @@ function BoardDetail() {
     return () => unsubscribe();
   }, []);
 
-  /*const currentUserInfo = currentUser ? (
-    <p>{currentUser.displayName}님이 댓글을 작성했습니다.</p>
-  ) : (
-    <p>로그인 후 댓글을 작성하세요.</p>
-  );*/
-
   const handleCommentSubmit = async (e: FormEvent) => {
     e.preventDefault();
 

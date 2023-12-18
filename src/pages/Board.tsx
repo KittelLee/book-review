@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -21,12 +20,17 @@ function Board() {
     id: string;
     author: string;
     category: string;
-    comments: string;
+    comments: CommentData[];
     content: string;
     image: string;
     likes: number;
     title: string;
     views: number;
+  }
+
+  interface CommentData {
+    user: string;
+    content: string;
   }
 
   const pageNumbers = Array.from(
@@ -127,7 +131,7 @@ const Main = styled.div`
 `;
 
 const Bh1 = styled.h1`
-  background-color: white;
+  background-color: whitesmoke;
   color: black;
   font-size: 30pt;
   padding: 10px 0 0 6em;
@@ -136,7 +140,7 @@ const Bh1 = styled.h1`
 `;
 
 const Bh2 = styled.span`
-  background-color: white;
+  background-color: whitesmoke;
   color: gray;
   font-size: 12pt;
   height: auto;
@@ -212,12 +216,13 @@ const BoardBody = styled.div`
   width: 967px;
   margin: 0;
   margin-bottom: 10px;
+  background-color: whitesmoke;
 `;
 
 const PostBtn = styled.button`
   border-bottom: lightgray 1px solid;
   color: black;
-  background-color: white;
+  background-color: whitesmoke;
   width: 1100px;
   height: 40px;
   font-size: 13pt;
@@ -300,4 +305,3 @@ const PgSelect = styled.button`
     text-decoration: underline;
   }
 `;
-

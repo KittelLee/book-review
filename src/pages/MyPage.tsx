@@ -1,14 +1,94 @@
 import styled from "styled-components";
-import CatImg from "../assets/images/test5.jpg";
+import CatImg from "../assets/images/baseimg.jpg";
+import { useState, useEffect } from "react";
+import Modal from "react-modal";
+import Intro from "../components/Modal/Intro";
+import { db } from "../Firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+import { User } from "firebase/auth";
+
+const modalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    height: "80%",
+    width: "80%",
+    zIndex: 11,
+  },
+};
+
+interface NewIntro {
+  imageUrl: string;
+}
 
 function MyPage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [newintro, setNewIntro] = useState<NewIntro | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+
+  function openModal() {
+    setModalOpen(true);
+  }
+
+  function closeModal() {
+    setModalOpen(false);
+  }
+
+  const userdataget = async () => {
+    try {
+      const currentUser = auth.currentUser;
+
+      if (currentUser) {
+        const uid = currentUser.uid;
+
+        const userDocRef = doc(db, "User", uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+
+          if (userData) {
+            setNewIntro({ imageUrl: userData.profileImageUrl });
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error user data", error);
+    }
+  };
+
+  useEffect(() => {
+    // 현재 로그인된 사용자 상태 변경 감지
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    // 컴포넌트 언마운트 시 unsubscribe
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // 사용자가 로그인되면 해당 사용자의 데이터를 가져옴
+    if (user) {
+      userdataget();
+    }
+  }, [user]);
+
   return (
     <Body>
       <Card>
         <Lines />
-        <ImgBx>
-          <img src={CatImg} />
-        </ImgBx>
+        {!modalOpen && (
+          <ImgBx>
+            <img src={newintro?.imageUrl || CatImg} alt="User Image" />
+          </ImgBx>
+        )}
         <ConTent>
           <DeTail>
             <h2>
@@ -30,11 +110,16 @@ function MyPage() {
             </Data>
 
             <ActionBtn>
-              <button>수정하기</button>
+              <button onClick={openModal}> 수정하기</button>
             </ActionBtn>
           </DeTail>
         </ConTent>
       </Card>
+      <Modal isOpen={modalOpen} onRequestClose={closeModal} style={modalStyles}>
+        <Intro closeModal={closeModal} changeintro={setNewIntro}></Intro>
+
+        <button onClick={closeModal}>닫기</button>
+      </Modal>
     </Body>
   );
 }

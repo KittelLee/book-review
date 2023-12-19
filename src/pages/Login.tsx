@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   UserCredential,
 } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { db } from "../Firebase";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -54,9 +56,30 @@ function Login() {
     }
   };
 
+  const FirstLogin = async () => {
+    try {
+      const uid = auth.currentUser?.uid;
+
+      if (uid) {
+        const userDocRef = doc(db, "User", uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (!userDocSnapshot.exists()) {
+          await setDoc(userDocRef, {
+            profileImageUrl: "",
+          });
+        }
+      }
+    } catch {}
+  };
+
   const toggleForm = () => {
     setShowForm(!showForm);
   };
+
+  useEffect(() => {
+    FirstLogin();
+  }, []);
 
   return (
     <Main showForm={showForm}>

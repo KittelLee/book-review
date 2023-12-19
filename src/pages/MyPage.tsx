@@ -25,12 +25,14 @@ const modalStyles = {
 
 interface NewIntro {
   imageUrl: string;
+  NickName: string;
 }
 
 function MyPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [newintro, setNewIntro] = useState<NewIntro | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   function openModal() {
     setModalOpen(true);
@@ -54,9 +56,13 @@ function MyPage() {
           const userData = userDocSnapshot.data();
 
           if (userData) {
-            setNewIntro({ imageUrl: userData.profileImageUrl });
+            setNewIntro({
+              imageUrl: userData.profileImageUrl,
+              NickName: userData.NickName,
+            });
           }
         }
+        setUserEmail(currentUser.email);
       }
     } catch (error) {
       console.error("Error user data", error);
@@ -92,20 +98,16 @@ function MyPage() {
         <ConTent>
           <DeTail>
             <h2>
-              닉네임 <br />
+              {newintro?.NickName} <br />
             </h2>
             <Data>
               <h3>
-                Nickname
-                <br /> <span>sonjinbin</span>{" "}
-              </h3>
-              <h3>
                 ID <br />
-                <span>withsjb1@gmail.com</span>{" "}
+                <span>{userEmail}</span>{" "}
               </h3>
               <h3>
-                Password <br />
-                <span>asd7170882@</span>{" "}
+                NickName <br />
+                <span>{newintro?.NickName}</span>{" "}
               </h3>
             </Data>
 

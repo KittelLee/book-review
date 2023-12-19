@@ -8,6 +8,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 interface NewIntro {
   imageUrl: string;
+  NickName: string;
 }
 
 interface ChangeIntroProps {
@@ -23,6 +24,7 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [newPassword, setNewPassword] = useState<string>("");
+  const [newNickname, setNewNickname] = useState<string>("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -77,6 +79,7 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
         if (userDocSnapshot.exists()) {
           await updateDoc(userDocRef, {
             profileImageUrl: downloadURL,
+            NickName: newNickname,
           });
         }
       }
@@ -93,6 +96,7 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
 
       changeintro({
         imageUrl: downloadURL,
+        NickName: newNickname,
       });
 
       // 모달 닫기
@@ -110,6 +114,11 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
           type="text"
           placeholder="새 비밀번호를 적어주세요"
           onChange={(e) => setNewPassword(e.target.value)}
+        ></input>
+        <input
+          type="text"
+          placeholder="새 닉네임을 적어주세요"
+          onChange={(e) => setNewNickname(e.target.value)}
         ></input>
       </div>
       <div>

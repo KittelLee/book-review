@@ -5,8 +5,10 @@ import {
   UserCredential,
 } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { db } from "../Firebase";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +16,7 @@ function Login() {
   const [error, setError] = useState("");
   const [user, setUser] = useState<UserCredential | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [nickName, setnickName] = useState("");
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,7 +46,8 @@ function Login() {
         email,
         password
       );
-      setUser(userCredential); // 사용자 정보 저장
+      setUser(userCredential);
+      await FirstLogin(); // 사용자 정보 저장
       // 회원가입 성공 처리, 예를 들어 홈페이지로 리디렉션
     } catch (error) {
       if (error instanceof Error) {
@@ -52,6 +56,24 @@ function Login() {
         setError("An unknown error occurred"); // 'error'가 'Error' 타입이 아닌 경우의 처리
       }
     }
+  };
+
+  const FirstLogin = async () => {
+    try {
+      const uid = auth.currentUser?.uid;
+
+      if (uid) {
+        const userDocRef = doc(db, "User", uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (!userDocSnapshot.exists()) {
+          await setDoc(userDocRef, {
+            profileImageUrl: "",
+            NickName: nickName,
+          });
+        }
+      }
+    } catch {}
   };
 
   const toggleForm = () => {
@@ -88,6 +110,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
               />
+
               <button type="submit">Login</button>
               <Link to="#" className="forgot">
                 Forgot Password
@@ -112,6 +135,12 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+              />
+              <input
+                type="text"
+                value={nickName}
+                onChange={(e) => setnickName(e.target.value)}
+                placeholder="NickName"
               />
               <button type="submit">Sign Up</button>
             </form>

@@ -39,6 +39,7 @@ const customStyles2 = {
 };
 
 interface Book {
+  id: string;
   imageUrl: string;
   bookTitle: string;
   author: string;
@@ -52,11 +53,13 @@ function List() {
   const [reviewModalIsOpen, setReviewModalIsOpen] = useState(false);
   const [bookAddModalIsOpen, setBookAddModalIsOpen] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
+  const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
 
   const fetchBooks = useCallback(async () => {
     const db = firebase.firestore();
     const booksSnapshot = await db.collection("books").get();
     return booksSnapshot.docs.map((doc) => ({
+      id: doc.id,
       imageUrl: doc.data().imageUrl,
       bookTitle: doc.data().bookTitle,
       author: doc.data().author,
@@ -70,11 +73,19 @@ function List() {
     setBooks(booksFromFirestore);
   }, [fetchBooks]);
 
+  const deleteBook = async (id: string) => {
+    // async 키워드를 추가합니다
+    const db = firebase.firestore();
+    await db.collection("books").doc(id).delete();
+    setBooks(books.filter((book) => book.id !== id));
+  };
+
   useEffect(() => {
     refreshBooks();
   }, [refreshBooks]);
 
-  const openReviewModal = () => {
+  const openReviewModal = (bookId: string) => {
+    setSelectedBookId(bookId);
     setReviewModalIsOpen(true);
   };
 
@@ -105,10 +116,11 @@ function List() {
           <BookSection>
             {books.map((book, index) => (
               <BookLeftSection key={index}>
-                <ImgSection onClick={openReviewModal}>
+                <ImgSection onClick={() => openReviewModal(book.id)}>
                   <img src={book.imageUrl} alt="책 이미지" />
                 </ImgSection>
-                <InfoSection onClick={openReviewModal}>
+
+                <InfoSection onClick={() => openReviewModal(book.id)}>
                   <p>책 제목: {book.bookTitle}</p>
                   <p>저자: {book.author}</p>
                   <p>출판사: {book.publisher}</p>
@@ -125,7 +137,9 @@ function List() {
         onRequestClose={closeReviewModal}
         style={customStyles}
       >
-        <Review />
+        {selectedBookId !== null && (
+          <Review bookId={selectedBookId} onDelete={deleteBook} />
+        )}
         <CloseBtn>
           <button onClick={closeReviewModal}>X</button>
         </CloseBtn>

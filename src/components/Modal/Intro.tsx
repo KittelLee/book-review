@@ -13,10 +13,11 @@ interface NewIntro {
 
 interface ChangeIntroProps {
   closeModal: () => void;
-  changeintro: React.Dispatch<React.SetStateAction<NewIntro | null>>;
+  changeIntro: React.Dispatch<React.SetStateAction<NewIntro | null>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Intro({ closeModal, changeintro }: ChangeIntroProps) {
+function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
   if (!firebase.apps.length) {
     firebase.initializeApp(db);
   }
@@ -59,6 +60,7 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
   };
 
   const handleUpload = async () => {
+    setLoading(true);
     try {
       if (!selectedFile) return;
 
@@ -94,7 +96,7 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
 
       await handlePasswordReset();
 
-      changeintro({
+      changeIntro({
         imageUrl: downloadURL,
         NickName: newNickname,
       });
@@ -104,6 +106,7 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
     } catch (error) {
       console.error("An error occurred during upload:", error);
     }
+    setLoading(false);
   };
 
   return (

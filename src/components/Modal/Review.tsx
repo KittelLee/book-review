@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import CatImg from "../../assets/images/test5.jpg";
 
-function Review() {
+interface ReviewProps {
+  bookId: string;
+  onDelete: (id: string) => void;
+}
+
+function Review({ bookId, onDelete }: ReviewProps) {
+  const handleDelete = () => {
+    onDelete(bookId);
+  };
   return (
     <ContentWrap>
       <BookWrap>
@@ -16,6 +24,7 @@ function Review() {
             <li>출판사</li>
             <li>가격</li>
           </ul>
+          <button onClick={handleDelete}>책 삭제</button>
         </BookInfo>
       </BookWrap>
       <Comment>

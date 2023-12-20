@@ -50,7 +50,7 @@ function MyPage() {
 
       if (currentUser) {
         const uid = currentUser.uid;
-
+        console.log(uid);
         const userDocRef = doc(db, "User", uid);
         const userDocSnapshot = await getDoc(userDocRef);
 

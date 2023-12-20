@@ -2,7 +2,7 @@ import { db } from "../../Firebase";
 import { useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
-import { updatePassword, sendPasswordResetEmail } from "firebase/auth";
+import { updatePassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
@@ -31,31 +31,6 @@ function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
     const files = event.target.files;
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
-    }
-  };
-
-  const handlePasswordReset = async () => {
-    try {
-      if (auth.currentUser) {
-        const userEmail = auth.currentUser.email;
-
-        if (userEmail !== null) {
-          // userEmail이 null이 아닌 경우에만 비밀번호 재설정 이메일 보내기
-          await sendPasswordResetEmail(auth, userEmail);
-
-          closeModal(); // 모달 닫기
-        } else {
-          console.error("User email is null.");
-        }
-      } else {
-        console.error("No user is currently signed in.");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      } else {
-        console.error("An unknown error occurred");
-      }
     }
   };
 
@@ -93,8 +68,6 @@ function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
       } else {
         console.error("No user is currently signed in.");
       }
-
-      await handlePasswordReset();
 
       changeIntro({
         imageUrl: downloadURL,

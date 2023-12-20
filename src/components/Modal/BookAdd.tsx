@@ -6,11 +6,7 @@ import BookAddIcon from "../../assets/icons/BookAddIcon.jpeg";
 
 interface BookAddProps {
   closeBookAddModal: () => void;
-}
-
-interface BookAddProps {
-  closeBookAddModal: () => void;
-  addNewBook: (newBook: Book) => void;
+  refreshBooks: () => Promise<void>;
 }
 
 interface Book {
@@ -36,7 +32,7 @@ firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.storage();
 
-function BookAdd({ closeBookAddModal, addNewBook }: BookAddProps) {
+function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [bookTitle, setBookTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -50,6 +46,11 @@ function BookAdd({ closeBookAddModal, addNewBook }: BookAddProps) {
     }
   };
 
+  const addBookToFirestore = async (book: Book) => {
+    const db = firebase.firestore();
+    await db.collection("books").add(book);
+  };
+
   const handleUpload = async () => {
     if (!selectedFile) return;
 
@@ -61,13 +62,18 @@ function BookAdd({ closeBookAddModal, addNewBook }: BookAddProps) {
     // 업로드된 파일의 다운로드 URL을 가져옴
     const downloadURL = await fileRef.getDownloadURL();
 
-    addNewBook({
+    const newBook = {
       imageUrl: downloadURL,
       bookTitle,
       author,
       publisher,
       price,
-    });
+    };
+
+    await addBookToFirestore(newBook);
+
+    // 책 목록 새로고침
+    await refreshBooks();
 
     // 모달 닫기
     closeBookAddModal();

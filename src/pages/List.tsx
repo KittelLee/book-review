@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
 import Review from "../components/Modal/Review";
 import BookAdd from "../components/Modal/BookAdd";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 const customStyles = {
   content: {
@@ -49,23 +51,44 @@ Modal.setAppElement("#root");
 function List() {
   const [reviewModalIsOpen, setReviewModalIsOpen] = useState(false);
   const [bookAddModalIsOpen, setBookAddModalIsOpen] = useState(false);
-  const [newBook, setNewBook] = useState<Book | null>(null);
+  const [books, setBooks] = useState<Book[]>([]);
 
-  function openReviewModal() {
+  const fetchBooks = useCallback(async () => {
+    const db = firebase.firestore();
+    const booksSnapshot = await db.collection("books").get();
+    return booksSnapshot.docs.map((doc) => ({
+      imageUrl: doc.data().imageUrl,
+      bookTitle: doc.data().bookTitle,
+      author: doc.data().author,
+      publisher: doc.data().publisher,
+      price: doc.data().price,
+    }));
+  }, []);
+
+  const refreshBooks = useCallback(async () => {
+    const booksFromFirestore = await fetchBooks();
+    setBooks(booksFromFirestore);
+  }, [fetchBooks]);
+
+  useEffect(() => {
+    refreshBooks();
+  }, [refreshBooks]);
+
+  const openReviewModal = () => {
     setReviewModalIsOpen(true);
-  }
+  };
 
-  function closeReviewModal() {
+  const closeReviewModal = () => {
     setReviewModalIsOpen(false);
-  }
+  };
 
-  function openBookAddModal() {
+  const openBookAddModal = () => {
     setBookAddModalIsOpen(true);
-  }
+  };
 
-  function closeBookAddModal() {
+  const closeBookAddModal = () => {
     setBookAddModalIsOpen(false);
-  }
+  };
 
   return (
     <BackColor>
@@ -80,90 +103,19 @@ function List() {
       <BookMainWrap>
         <BookWrap>
           <BookSection>
-            <BookLeftSection>
-              {newBook && typeof newBook.imageUrl !== "undefined" ? (
-                <>
-                  <ImgSection onClick={openReviewModal}>
-                    {newBook.imageUrl ? (
-                      <img src={newBook.imageUrl} alt="책 이미지" />
-                    ) : (
-                      <p>이미지가 없습니다.</p>
-                    )}
-                  </ImgSection>
-                  <InfoSection onClick={openReviewModal}>
-                    <p>책 제목: {newBook.bookTitle}</p>
-                    <p>저자: {newBook.author}</p>
-                    <p>출판사: {newBook.publisher}</p>
-                    <p>가격: {newBook.price}원</p>
-                  </InfoSection>
-                </>
-              ) : (
-                <p>책이 추가되지 않았습니다.</p>
-              )}
-            </BookLeftSection>
-            <BookRightSection>
-              {newBook && typeof newBook.imageUrl !== "undefined" ? (
-                <>
-                  <ImgSection onClick={openReviewModal}>
-                    {newBook.imageUrl ? (
-                      <img src={newBook.imageUrl} alt="책 이미지" />
-                    ) : (
-                      <p>이미지가 없습니다.</p>
-                    )}
-                  </ImgSection>
-                  <InfoSection onClick={openReviewModal}>
-                    <p>책 제목: {newBook.bookTitle}</p>
-                    <p>저자: {newBook.author}</p>
-                    <p>출판사: {newBook.publisher}</p>
-                    <p>가격: {newBook.price}원</p>
-                  </InfoSection>
-                </>
-              ) : (
-                <p>책이 추가되지 않았습니다.</p>
-              )}
-            </BookRightSection>
-            <BookLeftSection>
-              {newBook && typeof newBook.imageUrl !== "undefined" ? (
-                <>
-                  <ImgSection onClick={openReviewModal}>
-                    {newBook.imageUrl ? (
-                      <img src={newBook.imageUrl} alt="책 이미지" />
-                    ) : (
-                      <p>이미지가 없습니다.</p>
-                    )}
-                  </ImgSection>
-                  <InfoSection onClick={openReviewModal}>
-                    <p>책 제목: {newBook.bookTitle}</p>
-                    <p>저자: {newBook.author}</p>
-                    <p>출판사: {newBook.publisher}</p>
-                    <p>가격: {newBook.price}원</p>
-                  </InfoSection>
-                </>
-              ) : (
-                <p>책이 추가되지 않았습니다.</p>
-              )}
-            </BookLeftSection>
-            <BookRightSection>
-              {newBook && typeof newBook.imageUrl !== "undefined" ? (
-                <>
-                  <ImgSection onClick={openReviewModal}>
-                    {newBook.imageUrl ? (
-                      <img src={newBook.imageUrl} alt="책 이미지" />
-                    ) : (
-                      <p>이미지가 없습니다.</p>
-                    )}
-                  </ImgSection>
-                  <InfoSection onClick={openReviewModal}>
-                    <p>책 제목: {newBook.bookTitle}</p>
-                    <p>저자: {newBook.author}</p>
-                    <p>출판사: {newBook.publisher}</p>
-                    <p>가격: {newBook.price}원</p>
-                  </InfoSection>
-                </>
-              ) : (
-                <p>책이 추가되지 않았습니다.</p>
-              )}
-            </BookRightSection>
+            {books.map((book, index) => (
+              <BookLeftSection key={index}>
+                <ImgSection onClick={openReviewModal}>
+                  <img src={book.imageUrl} alt="책 이미지" />
+                </ImgSection>
+                <InfoSection onClick={openReviewModal}>
+                  <p>책 제목: {book.bookTitle}</p>
+                  <p>저자: {book.author}</p>
+                  <p>출판사: {book.publisher}</p>
+                  <p>가격: {book.price}원</p>
+                </InfoSection>
+              </BookLeftSection>
+            ))}
           </BookSection>
         </BookWrap>
       </BookMainWrap>
@@ -186,7 +138,7 @@ function List() {
       >
         <BookAdd
           closeBookAddModal={closeBookAddModal}
-          addNewBook={setNewBook}
+          refreshBooks={refreshBooks}
         />
         <CloseBtn>
           <button onClick={closeBookAddModal}>X</button>
@@ -267,12 +219,6 @@ const InfoSection = styled.div`
     cursor: pointer;
     font-weight: bold;
   }
-`;
-
-const BookRightSection = styled.div`
-  display: flex;
-  padding: 10px;
-  width: 50%;
 `;
 
 const CloseBtn = styled.div`

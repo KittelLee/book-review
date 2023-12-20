@@ -1,3 +1,4 @@
+import CatImg from "../../assets/images/baseimg.jpg";
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import styled from "styled-components";
 import { db } from "../../Firebase";
@@ -14,6 +15,13 @@ import { useParams } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { User } from "firebase/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEraser,
+  faEye,
+  faThumbsUp,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 function BoardDetail() {
   interface BoardData {
@@ -33,10 +41,22 @@ function BoardDetail() {
     content: string;
   }
 
+  interface UserGetData {
+    imageUrl: string;
+    NickName: string;
+  }
+
   const { id } = useParams<{ id: string }>();
   const [posts, setPosts] = useState<BoardData[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [commentInput, setCommentInput] = useState("");
+  const [chatdata, setChatData] = useState<UserGetData>({
+    imageUrl: "",
+    NickName: "",
+  });
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [userImage, setUserImage] = useState<string | null>(null);
+  const [userNickname, setUserNickname] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -60,7 +80,15 @@ function BoardDetail() {
           title: doc.data().title,
           views: doc.data().views,
         }));
-        setPosts(data);
+
+        const selectedPost = data.find((post) => post.id === id);
+
+        // 해당 게시물만을 상태에 저장
+        if (selectedPost) {
+          setPosts([selectedPost]);
+        } else {
+          console.error("Post not found");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -72,6 +100,11 @@ function BoardDetail() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+
+      if (user) {
+        setCurrentUserId(user.uid);
+        userdataget();
+      }
     });
     return () => unsubscribe();
   }, []);
@@ -83,7 +116,7 @@ function BoardDetail() {
       try {
         console.log(currentUser);
         const commentData: CommentData = {
-          user: currentUser.email || "Anonymous",
+          user: currentUserId || "Anonymous",
           content: commentInput,
         };
 
@@ -114,6 +147,32 @@ function BoardDetail() {
     }
   };
 
+  const userdataget = async () => {
+    try {
+      const currentUser = auth.currentUser;
+
+      if (currentUser) {
+        const uid = currentUser.uid;
+        console.log(uid);
+        const userDocRef = doc(db, "User", uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+
+          if (userData) {
+            setChatData({
+              imageUrl: userData.profileImageUrl,
+              NickName: userData.NickName,
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error user data", error);
+    }
+  };
+
   return (
     <Main>
       <Box>
@@ -121,19 +180,66 @@ function BoardDetail() {
           <Line></Line>
           <h1>{posts[0]?.title}</h1>
           <Line></Line>
-          <h2>{posts[0]?.author}</h2>
+
+          <h2>
+            {posts[0]?.author}
+            <p>
+              <FontAwesomeIcon icon={faEraser} />
+            </p>
+
+            <p>
+              <FontAwesomeIcon icon={faTrash} />
+            </p>
+          </h2>
+
+          <RightSide>
+            <p>
+              <FontAwesomeIcon icon={faEye} />
+            </p>
+            <p>21</p>
+            <p>
+              <FontAwesomeIcon icon={faThumbsUp} />
+            </p>
+            <p>15</p>
+          </RightSide>
         </Title>
         <Content>
           <h3>{posts[0]?.content}</h3>
+          <Likesroom>
+            <p>
+              <FontAwesomeIcon icon={faThumbsUp} />
+            </p>
+          </Likesroom>
         </Content>
         <Chatroom>
-          <h3>댓글쓴사람</h3>
+          <h3>댓글: 4</h3>
           <ul>
             {posts[0]?.comments.map((comment, index) => (
-              <li key={index}>
-                {`${comment.user}`} <span> {`${comment.content}`}</span>
+              <div>
                 <ChatLine></ChatLine>
-              </li>
+                <li key={index}>
+                  <ChatUserRooom>
+                    <ChatUserImg>
+                      <img
+                        src={
+                          comment.user === currentUserId
+                            ? chatdata.imageUrl
+                            : CatImg
+                        }
+                        alt="프로필"
+                      ></img>
+                    </ChatUserImg>
+                    <h3>
+                      {" "}
+                      {comment.user === currentUserId
+                        ? chatdata.NickName
+                        : "익명"}{" "}
+                    </h3>
+                  </ChatUserRooom>
+                  <br /> <span> {`${comment.content}`}</span>
+                </li>
+                <ChatLine></ChatLine>
+              </div>
             ))}
           </ul>
 
@@ -145,7 +251,7 @@ function BoardDetail() {
                 setCommentInput(e.target.value)
               }
             ></Chatself>
-            <button type="submit">댓글 달기</button>
+            <Chatsubmit type="submit">댓글 달기</Chatsubmit>
           </form>
         </Chatroom>
       </Box>
@@ -159,25 +265,43 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 `;
 
 const Box = styled.div`
+  margin-top: 150px;
+  margin-bottom: 150px;
   width: 1300px;
   height: 100%;
-
   background-color: #fff;
 `;
 
 const Title = styled.div`
   width: 100%;
   height: 200px;
+  position: relative;
+  border-bottom: 1px solid rgb(128, 128, 128);
+  h1 {
+    margin-left: 30px;
+  }
+  h2 {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+  }
+  p {
+    margin-left: 10px;
+  }
 `;
 
 const Content = styled.div`
   width: 100%;
   height: 600px;
-  border: 3px solid red;
+  margin-top: 2px;
+  border-top: 1px solid rgb(128, 128, 128);
+  border-bottom: 1px solid rgb(128, 128, 128);
+  position: relative;
+
   h3 {
     font-size: 15px;
     margin-left: 15px;
@@ -186,7 +310,17 @@ const Content = styled.div`
 
 const Chatroom = styled.div`
   width: 1300px;
-  border: 3px solid yellow;
+
+  position: relative;
+  h3 {
+    margin-left: 30px;
+  }
+  li {
+    align-items: center;
+    margin-top: 30px;
+    height: 100px;
+    list-style: none;
+  }
 `;
 
 const Chatself = styled.textarea`
@@ -206,4 +340,72 @@ const ChatLine = styled.div`
 
   border-bottom: 1px solid #1e1c1c;
   margin-bottom: 5px;
+`;
+
+const ChatUserRooom = styled.div`
+  display: flex;
+  position: relative;
+  h3 {
+    position: absolute;
+    top: -18px;
+    left: 10px;
+  }
+`;
+const ChatUserImg = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: black;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const RightSide = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 95px;
+
+  height: 100px;
+  width: 150px;
+  p {
+    font-size: 20px;
+  }
+`;
+
+const Likesroom = styled.button`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  left: 600px;
+  width: 100px;
+  height: 50px;
+  background-color: gray;
+  &:hover {
+    background-color: whitesmoke;
+  }
+`;
+
+const Chatsubmit = styled.button`
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  width: 100px;
+  height: 50px;
+  background-color: gray;
+  color: white;
+  border-radius: 15px;
+  font-size: 15px;
+  margin-top: 30px;
+  &:hover {
+    background-color: whitesmoke;
+  }
 `;

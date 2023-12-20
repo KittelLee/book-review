@@ -33,31 +33,6 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
     }
   };
 
-  const handlePasswordReset = async () => {
-    try {
-      if (auth.currentUser) {
-        const userEmail = auth.currentUser.email;
-
-        if (userEmail !== null) {
-          // userEmail이 null이 아닌 경우에만 비밀번호 재설정 이메일 보내기
-          await sendPasswordResetEmail(auth, userEmail);
-
-          closeModal(); // 모달 닫기
-        } else {
-          console.error("User email is null.");
-        }
-      } else {
-        console.error("No user is currently signed in.");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      } else {
-        console.error("An unknown error occurred");
-      }
-    }
-  };
-
   const handleUpload = async () => {
     try {
       if (!selectedFile) return;
@@ -91,8 +66,6 @@ function Intro({ closeModal, changeintro }: ChangeIntroProps) {
       } else {
         console.error("No user is currently signed in.");
       }
-
-      await handlePasswordReset();
 
       changeintro({
         imageUrl: downloadURL,

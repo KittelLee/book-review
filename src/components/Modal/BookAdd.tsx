@@ -3,6 +3,8 @@ import styled from "styled-components";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 import BookAddIcon from "../../assets/icons/BookAddIcon.jpeg";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface BookAddProps {
   closeBookAddModal: () => void;
@@ -52,35 +54,40 @@ function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
   };
 
   const handleUpload = async () => {
-    if (!selectedFile) return;
+    if (!selectedFile) {
+      toast.error("파일을 선택해주세요!");
+      return;
+    }
 
-    // 파일을 Firebase Storage에 업로드
-    const storageRef = storage.ref();
-    const fileRef = storageRef.child(selectedFile.name);
-    await fileRef.put(selectedFile);
+    try {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(selectedFile.name);
+      await fileRef.put(selectedFile);
 
-    // 업로드된 파일의 다운로드 URL을 가져옴
-    const downloadURL = await fileRef.getDownloadURL();
+      const downloadURL = await fileRef.getDownloadURL();
 
-    const newBook = {
-      imageUrl: downloadURL,
-      bookTitle,
-      author,
-      publisher,
-      price,
-    };
+      const newBook = {
+        imageUrl: downloadURL,
+        bookTitle,
+        author,
+        publisher,
+        price,
+      };
 
-    await addBookToFirestore(newBook);
+      await addBookToFirestore(newBook);
 
-    // 책 목록 새로고침
-    await refreshBooks();
+      await refreshBooks();
 
-    // 모달 닫기
-    closeBookAddModal();
+      toast.success("책이 성공적으로 추가되었습니다!");
+      closeBookAddModal();
+    } catch (error) {
+      toast.error("책 추가에 실패했습니다.");
+    }
   };
 
   return (
     <BookAddWrap>
+      <ToastContainer position="top-right" autoClose={5000} />
       <h2>책 추가하기</h2>
       <img
         src={selectedFile ? URL.createObjectURL(selectedFile) : BookAddIcon}

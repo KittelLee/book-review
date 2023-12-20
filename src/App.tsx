@@ -1,6 +1,8 @@
 import "../firebaseConfig";
 import { Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import BackgroundImg from "./assets/images/deco.png";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
@@ -26,6 +28,11 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        style={{ position: "absolute", top: "70px", right: "10px" }}
+      />
       <div className="App">
         <Header />
         <Routes>

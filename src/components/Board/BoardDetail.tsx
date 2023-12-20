@@ -55,8 +55,6 @@ function BoardDetail() {
     NickName: "",
   });
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
-  const [userImage, setUserImage] = useState<string | null>(null);
-  const [userNickname, setUserNickname] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {

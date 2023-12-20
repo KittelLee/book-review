@@ -2,7 +2,7 @@ import { db } from "../../Firebase";
 import { useState } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
-import { updatePassword, sendPasswordResetEmail } from "firebase/auth";
+import { updatePassword } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 

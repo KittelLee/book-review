@@ -7,6 +7,8 @@ import {
   QuerySnapshot,
   collection,
   getDocs,
+  doc,
+  updateDoc,
 } from "firebase/firestore";
 import Loader from "../components/Loader/Loader";
 
@@ -70,6 +72,25 @@ function Board() {
     fetchData();
   }, [page, pageSize]);
 
+  const incrementViews = async (postId: string) => {
+    try {
+      const postToUpdate = posts.find((post) => post.id === postId);
+      if (postToUpdate) {
+        const postRef = doc(db, "Board", postId);
+        await updateDoc(postRef, {
+          views: postToUpdate.views + 1,
+        });
+      }
+    } catch (error) {
+      console.error("Views 업데이트 중 오류 발생:", error);
+    }
+  };
+
+  const handlePostBtnClick = (postId: string) => {
+    navigate(`/boarddetail/${postId}`);
+    incrementViews(postId);
+  };
+
   return (
     <Main>
       <Loader loading={loading} />
@@ -89,7 +110,7 @@ function Board() {
               </ExBar>
               {posts.map((post) => (
                 <BoardBody key={post.id}>
-                  <PostBtn onClick={() => navigate(`/boarddetail/${post.id}`)}>
+                  <PostBtn onClick={() => handlePostBtnClick(post.id)}>
                     <PostTitle>{post.title}</PostTitle>
                     <Views>
                       {post.views} | <Likes> {post.likes} </Likes>

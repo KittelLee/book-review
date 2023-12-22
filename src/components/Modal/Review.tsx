@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CatImg from "../../assets/images/test5.jpg";
+import CatImg from "../../assets/images/book5.jpg";
 
 interface ReviewProps {
   bookId: string;

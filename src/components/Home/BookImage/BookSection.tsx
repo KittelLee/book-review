@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import cover from "../../../assets/images/cover.jpg";
-import side from "../../../assets/images/side.jpg";
-import back from "../../../assets/images/back.jpg";
+import cover from "../../../assets/images/book/cover.jpg";
+import side from "../../../assets/images/book/side.jpg";
+import back from "../../../assets/images/book/back.jpg";
 
 function BookComponent() {
   return (

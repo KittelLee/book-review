@@ -1,15 +1,59 @@
 import styled from "styled-components";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
+import { User } from "firebase/auth";
 
 function BoardWrite() {
-  const [newauthor, setnewAuthor] = useState("");
+  const [newauthor, setnewAuthor] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [newtitle, setnewTitle] = useState("");
   const [newcategory, setnewCategory] = useState("");
   const [newcontent, setnewContent] = useState("");
   const navigate = useNavigate();
+
+  const userDataGet = async () => {
+    try {
+      const currentUser = auth.currentUser;
+
+      if (currentUser) {
+        const uid = currentUser.uid;
+        const userDocRef = doc(db, "User", uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+
+          if (userData) {
+            setnewAuthor(userData.NickName);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error user data", error);
+    }
+  };
+
+  useEffect(() => {
+    // 현재 로그인된 사용자 상태 변경 감지
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    // 컴포넌트 언마운트 시 unsubscribe
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // 사용자가 로그인되면 해당 사용자의 데이터를 가져옴
+    if (user) {
+      userDataGet();
+    }
+  }, [user]);
 
   const AddBoard = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -51,8 +95,8 @@ function BoardWrite() {
             <Author
               type="text"
               placeholder="작성자"
-              value={newauthor}
-              onChange={(e) => setnewAuthor(e.target.value)}
+              value={newauthor || ""}
+              onChange={() => {}}
             ></Author>
           </li>
           <li>
@@ -122,6 +166,10 @@ const WriteForm = styled.form`
     display: flex;
     padding: 7px 0;
   }
+
+  @media (max-width: 1420px) {
+    width: 90%;
+  }
 `;
 
 const Command = styled.h1`
@@ -129,6 +177,10 @@ const Command = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1420px) {
+    font-size: 15pt;
+    width: 30%;
+  }
 `;
 
 const Line = styled.div`
@@ -198,6 +250,13 @@ const AddBtn = styled.button`
   background-color: #2f2fbe;
   color: #fff;
   margin-left: 30px;
+  @media (max-width: 1420px) {
+    padding: 5px 15px;
+  }
+  @media (max-width: 947px) {
+    padding: 5px 15px;
+    margin-left: 5%;
+  }
 `;
 
 const BackBtn = styled.button`
@@ -205,4 +264,15 @@ const BackBtn = styled.button`
   background-color: #3b3b44;
   color: #fff;
   margin-left: 600px;
+  @media (max-width: 1420px) {
+    padding: 5px 15px;
+  }
+  @media (max-width: 947px) {
+    padding: 5px 15px;
+    margin-left: 200px;
+  }
+  @media (max-width: 450px) {
+    padding: 5px 15px;
+    margin-left: 50px;
+  }
 `;

@@ -39,6 +39,8 @@ function BoardDetail() {
   interface CommentData {
     user: string;
     content: string;
+    profileImageUrl?: string; // 프로필 이미지 URL을 나타내는 속성 추가
+    NickName?: string;
   }
 
   interface UserGetData {
@@ -70,6 +72,8 @@ function BoardDetail() {
             ? doc.data().comments.map((commentDoc: any) => ({
                 user: commentDoc.user,
                 content: commentDoc.content,
+                NickName: commentDoc.NickName,
+                profileImageUrl: commentDoc.profileImageUrl,
               }))
             : [],
           content: doc.data().content,
@@ -102,6 +106,7 @@ function BoardDetail() {
       if (user) {
         setCurrentUserId(user.uid);
         userdataget();
+        console.log(chatdata);
       }
     });
     return () => unsubscribe();
@@ -112,10 +117,11 @@ function BoardDetail() {
 
     if (currentUser && commentInput.trim() !== "") {
       try {
-        console.log(currentUser);
         const commentData: CommentData = {
           user: currentUserId || "Anonymous",
           content: commentInput,
+          profileImageUrl: chatdata.imageUrl,
+          NickName: chatdata.NickName,
         };
 
         // Get a reference to the document
@@ -128,11 +134,19 @@ function BoardDetail() {
         if (boardDoc.exists()) {
           // Update Firestore with new comment
           await updateDoc(boardRef, {
-            comments: [...posts[0]?.comments, commentData],
+            comments: [
+              ...(posts[0]?.comments || []), // Keep existing comments
+              commentData, // Add the new comment
+            ],
           });
 
           console.log("Comment added successfully!");
-
+          console.log("Comment Data:", commentData);
+          console.log(
+            "Rendering Image:",
+            commentData.profileImageUrl || CatImg
+          );
+          console.log("Rendering NickName:", commentData.NickName || "익명");
           // Clear comment input
           setCommentInput("");
           window.location.reload();
@@ -213,28 +227,20 @@ function BoardDetail() {
           <h3>댓글: 4</h3>
           <ul>
             {posts[0]?.comments.map((comment, index) => (
-              <div>
+              <div key={index}>
                 <ChatLine></ChatLine>
-                <li key={index}>
+                <li>
                   <ChatUserRooom>
                     <ChatUserImg>
                       <img
-                        src={
-                          comment.user === currentUserId
-                            ? chatdata.imageUrl
-                            : CatImg
-                        }
+                        src={comment.profileImageUrl || CatImg}
                         alt="프로필"
-                      ></img>
+                      />
                     </ChatUserImg>
-                    <h3>
-                      {" "}
-                      {comment.user === currentUserId
-                        ? chatdata.NickName
-                        : "익명"}{" "}
-                    </h3>
+                    <h3>{comment.NickName || "익명"}</h3>
                   </ChatUserRooom>
-                  <br /> <span> {`${comment.content}`}</span>
+                  <br />
+                  <span>{`${comment.content}`}</span>
                 </li>
                 <ChatLine></ChatLine>
               </div>
@@ -272,6 +278,9 @@ const Box = styled.div`
   width: 1300px;
   height: 100%;
   background-color: #fff;
+  @media (max-width: 1420px) {
+    width: 80%;
+  }
 `;
 
 const Title = styled.div`
@@ -319,11 +328,17 @@ const Chatroom = styled.div`
     height: 100px;
     list-style: none;
   }
+  @media (max-width: 1420px) {
+    width: 100%;
+  }
 `;
 
 const Chatself = styled.textarea`
   width: 1300px;
   height: 150px;
+  @media (max-width: 1420px) {
+    width: 100%;
+  }
 `;
 
 const Line = styled.div`

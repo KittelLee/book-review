@@ -33,11 +33,6 @@ function Board() {
     content: string;
   }
 
-  const pageNumbers = Array.from(
-    { length: totalPages },
-    (_, index) => index + 1
-  );
-
   useEffect(() => {
     async function fetchData() {
       try {

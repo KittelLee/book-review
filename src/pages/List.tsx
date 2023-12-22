@@ -273,7 +273,7 @@ const ImgSection = styled.div`
 
 const InfoSection = styled.div`
   width: 50%;
-  margin: 0 0 0 45px;
+  margin-left: 45px;
   padding: 10px;
   p {
     cursor: pointer;

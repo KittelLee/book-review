@@ -107,10 +107,10 @@ function Board() {
               </Bh1>
               <Bar></Bar>
               <ExBar>
-                <Title>제목</Title>
-                <Time>작성 시간</Time>
-                <View> 조회수 |</View>
-                <Like> 좋아요</Like>
+                <span>제목</span>
+                <span>작성 시간</span>
+                <span> 조회수 |</span>
+                <span> 좋아요</span>
               </ExBar>
               {posts.map((post) => (
                 <BoardBody key={post.id}>
@@ -236,60 +236,47 @@ const ExBar = styled.div`
   align-items: center;
   position: relative;
   /*게시글 설명 바*/
-  @media (max-width: 1300px) {
-  }
-  @media (max-width: 1039px) {
-  }
-`;
-const Title = styled.span`
-  font-size: 9pt;
-  font-weight: bold;
-  position: absolute;
-  left: 430px;
-  @media (max-width: 1300px) {
-    left: 370px;
-  }
-  @media (max-width: 1039px) {
-    left: 175px;
-  }
-`;
+  span {
+    font-size: 9pt;
+    font-weight: bold;
+    position: absolute;
+    &:nth-child(1) {
+      left: 430px;
+      @media (max-width: 1300px) {
+        left: 370px;
+      }
+      @media (max-width: 1039px) {
+        left: 175px;
+      }
+    }
+    &:nth-child(2) {
+      left: 635px;
 
-const Time = styled.span`
-  font-size: 9pt;
-  font-weight: bold;
-  position: absolute;
-  left: 635px;
-  @media (max-width: 1300px) {
-    left: 525px;
-  }
-  @media (max-width: 1039px) {
-    display: none;
-  }
-`;
+      @media (max-width: 1300px) {
+        left: 525px;
+      }
+      @media (max-width: 1039px) {
+        display: none;
+      }
+    }
+    &:nth-child(3) {
+      right: 200px;
 
-const View = styled.span`
-  font-size: 9pt;
-  font-weight: bold;
-  position: absolute;
-  right: 200px;
+      @media (max-width: 1039px) {
+        right: 60px;
+      }
+    }
+    &:nth-child(4) {
+      color: purple;
+      right: 160px;
+      @media (max-width: 1039px) {
+        right: 70px;
+      }
 
-  @media (max-width: 1039px) {
-    right: 60px;
-  }
-`;
-
-const Like = styled.span`
-  color: purple;
-  font-size: 9pt;
-  font-weight: bold;
-  position: absolute;
-  right: 160px;
-  @media (max-width: 1039px) {
-    right: 70px;
-  }
-
-  @media (max-width: 1039px) {
-    right: 20px;
+      @media (max-width: 1039px) {
+        right: 20px;
+      }
+    }
   }
 `;
 

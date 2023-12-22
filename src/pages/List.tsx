@@ -7,7 +7,6 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Loader from "../components/Loader/Loader";
 
-
 const customStyles = {
   content: {
     top: "50%",
@@ -58,7 +57,6 @@ function List() {
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-
 
   const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -123,9 +121,11 @@ function List() {
     <BackColor>
       <Loader loading={loading} />
       <SearchSection>
-        <input placeholder="Search Title" 
-        value={searchTerm}
-        onChange={handleSearchTermChange}/>
+        <input
+          placeholder="Search Title"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+        />
       </SearchSection>
 
       <BookAddSection>

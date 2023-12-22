@@ -139,6 +139,7 @@ function Board() {
               >
                 다음
               </PgNext>
+
               <WriteBtn href="/Boardwrite">글쓰기</WriteBtn>
             </PgBody>
           </BoardMainBody>
@@ -163,6 +164,9 @@ const WrapBody = styled.div`
   padding: 0;
   width: 1200px;
   height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 1300px) {
     width: 1000px;
@@ -235,7 +239,7 @@ const Title = styled.span`
   font-size: 9pt;
   font-weight: bold;
   position: absolute;
-  left: 480px;
+  left: 430px;
   @media (max-width: 1300px) {
     left: 370px;
   }
@@ -276,14 +280,14 @@ const WriteBtn = styled.a`
   font-size: 12pt;
   border-radius: 30px;
   border: 1px solid gray;
-  margin-left: 350px;
+  position: absolute;
+  left: 400px;
   font-weight: bold;
   padding: 15px 30px;
-  bottom: 15%;
-  right: 5%;
-  text-align: center;
+
   text-decoration: none;
   padding-top: 2px;
+  white-space: nowrap;
 
   &:hover {
     background-color: white;
@@ -298,15 +302,17 @@ const WriteBtn = styled.a`
     padding: 10px 15px;
     font-size: 15px;
     margin-left: 100px;
+    left: 200px;
   }
   @media (max-width: 1039px) {
+    left: 100px;
   }
 `;
 
 const BoardMainBody = styled.div`
   height: 800px;
   width: 90%;
-  box-shadow: 5px 5px 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   background-color: white;
   border-radius: 25px;
   position: relative;
@@ -373,7 +379,7 @@ const PostTitle = styled.div`
 
 const Views = styled.span`
   font-size: 8pt;
-  left: 933px;
+  left: 820px;
   top: 15px;
   position: absolute;
   @media (max-width: 1300px) {
@@ -392,6 +398,9 @@ const Likes = styled.span`
 
 const PgBody = styled.div`
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   bottom: 50px;
 `;
 

@@ -211,13 +211,16 @@ const BookWrap = styled.div`
 const BookSection = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
 `;
 
 const BookLeftSection = styled.div`
   display: flex;
-  width: 50%;
+  width: 25%;
   padding: 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
 `;
 
 const ImgSection = styled.div`

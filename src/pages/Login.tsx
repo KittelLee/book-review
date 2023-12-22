@@ -16,7 +16,7 @@ function Login() {
   const [error, setError] = useState("");
   const [user, setUser] = useState<UserCredential | null>(null);
   const [showForm, setShowForm] = useState(false);
-  const [nickName, setnickName] = useState("");
+  const [nickName, setNickName] = useState("");
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -73,7 +73,9 @@ function Login() {
           });
         }
       }
-    } catch {}
+    } catch {
+      /* empty */
+    }
   };
 
   const toggleForm = () => {
@@ -83,19 +85,19 @@ function Login() {
   return (
     <Main showForm={showForm}>
       <Container>
-        <Bluebg>
-          <Boxsignin>
+        <BlueBg>
+          <BoxSignIn>
             <h2>Already have an Account?</h2>
-            <SingninBtn onClick={toggleForm}>로그인</SingninBtn>
-          </Boxsignin>
+            <SignInBtn onClick={toggleForm}>로그인</SignInBtn>
+          </BoxSignIn>
 
-          <Boxsignup>
+          <BoxSignUp>
             <h2>Don`t Already have an Account?</h2>
-            <SingninBtn onClick={() => setShowForm(false)}>회원가입</SingninBtn>
-          </Boxsignup>
-        </Bluebg>
-        <Formbox showForm={showForm}>
-          <SigninForm showForm={showForm}>
+            <SignInBtn onClick={() => setShowForm(false)}>회원가입</SignInBtn>
+          </BoxSignUp>
+        </BlueBg>
+        <FormBox showForm={showForm}>
+          <SignInForm showForm={showForm}>
             <form onSubmit={login}>
               <h3>Sign In</h3>
               <input
@@ -119,9 +121,9 @@ function Login() {
             {error && <p>Error: {error}</p>}
             {user && <div>Welcome back, {user.user.email}!</div>}{" "}
             {/* 사용자 정보 표시 */}
-          </SigninForm>
+          </SignInForm>
 
-          <SignupForm showForm={showForm}>
+          <SignUpForm showForm={showForm}>
             <form onSubmit={register}>
               <h3>Sign UP</h3>
               <input
@@ -139,14 +141,14 @@ function Login() {
               <input
                 type="text"
                 value={nickName}
-                onChange={(e) => setnickName(e.target.value)}
+                onChange={(e) => setNickName(e.target.value)}
                 placeholder="NickName"
               />
               <button type="submit">Sign Up</button>
             </form>
             {user && <div>Welcome, {user.user.email}!</div>}
-          </SignupForm>
-        </Formbox>
+          </SignUpForm>
+        </FormBox>
       </Container>
     </Main>
   );
@@ -183,7 +185,7 @@ const Container = styled.div`
   }
 `;
 
-const Bluebg = styled.div`
+const BlueBg = styled.div`
   position: absolute;
   top: 40px;
   width: 100%;
@@ -198,7 +200,7 @@ const Bluebg = styled.div`
   }
 `;
 
-const Boxsignin = styled.div`
+const BoxSignIn = styled.div`
   position: relative;
   width: 50%;
   height: 100%;
@@ -222,7 +224,7 @@ const Boxsignin = styled.div`
   }
 `;
 
-const Boxsignup = styled.div`
+const BoxSignUp = styled.div`
   position: relative;
   width: 50%;
   height: 100%;
@@ -246,7 +248,7 @@ const Boxsignup = styled.div`
   }
 `;
 
-const SingninBtn = styled.button`
+const SignInBtn = styled.button`
   cursor: pointer;
   padding: 10px 20px;
   background: #fff;
@@ -256,7 +258,7 @@ const SingninBtn = styled.button`
   border: none;
 `;
 
-const Formbox = styled.div<MainProps>`
+const FormBox = styled.div<MainProps>`
   position: absolute;
   top: 0;
   left: ${(props) => (props.showForm ? "0" : "400px")};
@@ -281,7 +283,7 @@ const Formbox = styled.div<MainProps>`
   }
 `;
 
-const SigninForm = styled.div<MainProps>`
+const SignInForm = styled.div<MainProps>`
   position: absolute;
   left: ${(props) => (props.showForm ? "0" : "-100%")};
   top: ${(props) => (props.showForm ? "0" : "150px")};
@@ -337,7 +339,7 @@ const SigninForm = styled.div<MainProps>`
   }
 `;
 
-const SignupForm = styled.div<MainProps>`
+const SignUpForm = styled.div<MainProps>`
   position: absolute;
   left: ${(props) => (props.showForm ? "100%" : "0")};
   width: 100%;

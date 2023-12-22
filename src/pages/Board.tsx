@@ -8,13 +8,16 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
+import Loader from "../components/Loader/Loader";
 
 function Board() {
   const [posts, setPosts] = useState<BoardData[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
+
   const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 추가
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   interface BoardData {
     id: string;
@@ -41,6 +44,9 @@ function Board() {
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
+        const startIdx: number = (page - 1) * pageSize;
+        const endIdx: number = startIdx + pageSize;
         const query = collection(db, "Board");
         const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(query);
         const data: BoardData[] = querySnapshot.docs.map((doc) => ({
@@ -59,11 +65,12 @@ function Board() {
         const endIdx: number = startIdx + pageSize;
         const slicedData: BoardData[] = data.slice(startIdx, endIdx);
         setPosts(slicedData);
-
         const total = Math.ceil(data.length / pageSize);
         setTotalPages(total);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     }
 
@@ -72,6 +79,7 @@ function Board() {
 
   return (
     <Main>
+      <Loader loading={loading} />
       <div>
         <WrapBody>
           <BoardMainBody>

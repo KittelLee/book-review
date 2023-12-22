@@ -123,7 +123,7 @@ function List() {
     <BackColor>
       <Loader loading={loading} />
       <SearchSection>
-        <input placeholder="검색창" 
+        <input placeholder="Search Title" 
         value={searchTerm}
         onChange={handleSearchTermChange}/>
       </SearchSection>
@@ -192,11 +192,19 @@ const BackColor = styled.div`
 const SearchSection = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 30px 0;
   padding: 70px 0 0 0;
   input {
     width: 300px;
     height: 20px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    // background: #283542;
   }
 `;
 

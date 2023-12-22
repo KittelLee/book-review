@@ -285,6 +285,12 @@ function BoardDetail() {
   const startEditingTitle = () => {
     setIsEditingTitle(true);
     setIsEditingContent(true);
+    if (posts.length > 0) {
+      setEditedTitle(posts[0]?.title || "");
+    }
+    if (posts.length > 0) {
+      setEditedContent(posts[0]?.content || "");
+    }
   };
 
   // 제목 수정 완료

@@ -7,6 +7,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Loader from "../components/Loader/Loader";
 
+
 const customStyles = {
   content: {
     top: "50%",
@@ -56,6 +57,18 @@ function List() {
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+
+  const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filterBooks = () => {
+    return books.filter((book) =>
+      book.bookTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
 
   const fetchBooks = useCallback(async () => {
     setLoading(true);
@@ -110,7 +123,9 @@ function List() {
     <BackColor>
       <Loader loading={loading} />
       <SearchSection>
-        <input placeholder="검색창" />
+        <input placeholder="검색창" 
+        value={searchTerm}
+        onChange={handleSearchTermChange}/>
       </SearchSection>
 
       <BookAddSection>
@@ -120,7 +135,7 @@ function List() {
       <BookMainWrap>
         <BookWrap>
           <BookSection>
-            {books.map((book, index) => (
+            {filterBooks().map((book, index) => (
               <BookLeftSection key={index}>
                 <ImgSection onClick={() => openReviewModal(book.id)}>
                   <img src={book.imageUrl} alt="책 이미지" />

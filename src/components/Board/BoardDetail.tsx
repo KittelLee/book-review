@@ -312,10 +312,9 @@ function BoardDetail() {
                 type="text"
                 value={editedTitle}
                 onChange={(e) => setEditedTitle(e.target.value)}
-                onBlur={finishEditingTitle}
               />
               <FinishButton onClick={finishEditingTitle}>
-                제목 수정
+                수정 완료
               </FinishButton>
             </div>
           ) : (
@@ -355,7 +354,6 @@ function BoardDetail() {
               <EditContent
                 value={editedContent}
                 onChange={(e) => setEditedContent(e.target.value)}
-                onBlur={finishEditingContent}
               />
               <FinishButton onClick={finishEditingContent}>
                 수정완료
@@ -394,7 +392,7 @@ function BoardDetail() {
           </ul>
 
           <BtnRoom onSubmit={handleCommentSubmit}>
-            <BackBtn>게시판으로</BackBtn>
+            <BackBtn onClick={() => navigate("/board")}>게시판으로</BackBtn>
             <Chatself
               placeholder="댓글을 입력해주세요"
               value={commentInput}

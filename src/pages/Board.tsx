@@ -56,8 +56,6 @@ function Board() {
           views: doc.data().views,
         }));
 
-        const startIdx: number = (page - 1) * pageSize;
-        const endIdx: number = startIdx + pageSize;
         const slicedData: BoardData[] = data.slice(startIdx, endIdx);
         setPosts(slicedData);
         const total = Math.ceil(data.length / pageSize);

@@ -9,6 +9,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { db } from "../Firebase";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ function Login() {
   const [user, setUser] = useState<UserCredential | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [nickName, setNickName] = useState("");
+  const navigate = useNavigate();
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ function Login() {
         password
       );
       setUser(userCredential); // 사용자 정보 상태에 저장
+      navigate("/");
       console.log("Login successful!", userCredential);
       // 로그인 성공 처리, 예를 들어 홈페이지로 리디렉션
     } catch (error) {
@@ -47,6 +50,7 @@ function Login() {
         password
       );
       setUser(userCredential);
+      toggleForm();
       await FirstLogin(); // 사용자 정보 저장
       // 회원가입 성공 처리, 예를 들어 홈페이지로 리디렉션
     } catch (error) {

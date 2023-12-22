@@ -310,7 +310,8 @@ function BoardDetail() {
             ))}
           </ul>
 
-          <form onSubmit={handleCommentSubmit}>
+          <BtnRoom onSubmit={handleCommentSubmit}>
+            <BackBtn>게시판으로</BackBtn>
             <Chatself
               placeholder="댓글을 입력해주세요"
               value={commentInput}
@@ -319,7 +320,7 @@ function BoardDetail() {
               }
             ></Chatself>
             <Chatsubmit type="submit">댓글 달기</Chatsubmit>
-          </form>
+          </BtnRoom>
         </Chatroom>
       </Box>
     </Main>
@@ -470,9 +471,35 @@ const Likesroom = styled.button`
   }
 `;
 
+const BtnRoom = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
+
+const BackBtn = styled.button`
+  cursor: pointer;
+  position: absolute;
+  top: 150px;
+  right: 130px;
+  width: 100px;
+  height: 50px;
+  background-color: gray;
+  color: white;
+  border-radius: 15px;
+  font-size: 15px;
+  margin-top: 30px;
+  &:hover {
+    color: black;
+    background-color: whitesmoke;
+  }
+`;
+
 const Chatsubmit = styled.button`
   cursor: pointer;
   position: absolute;
+  top: 150px;
   right: 0;
   width: 100px;
   height: 50px;
@@ -483,6 +510,7 @@ const Chatsubmit = styled.button`
   margin-top: 30px;
   &:hover {
     background-color: whitesmoke;
+    color: black;
   }
 `;
 

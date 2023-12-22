@@ -31,6 +31,7 @@ function Board() {
     likes: number;
     title: string;
     views: number;
+    createdAt: Date;
   }
 
   interface CommentData {
@@ -46,6 +47,7 @@ function Board() {
         const endIdx: number = startIdx + pageSize;
         const query = collection(db, "Board");
         const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(query);
+
         const data: BoardData[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           author: doc.data().author,
@@ -56,8 +58,9 @@ function Board() {
           likes: doc.data().likes,
           title: doc.data().title,
           views: doc.data().views,
+          createdAt: doc.data().createdAt.toDate(),
         }));
-
+        data.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
         const slicedData: BoardData[] = data.slice(startIdx, endIdx);
         setPosts(slicedData);
         const total = Math.ceil(data.length / pageSize);
@@ -105,6 +108,7 @@ function Board() {
               <Bar></Bar>
               <ExBar>
                 <Title>제목</Title>
+                <Time>작성 시간</Time>
                 <View> 조회수 |</View>
                 <Like> 좋아요</Like>
               </ExBar>
@@ -112,6 +116,9 @@ function Board() {
                 <BoardBody key={post.id}>
                   <PostBtn onClick={() => handlePostBtnClick(post.id)}>
                     <PostTitle>{post.title}</PostTitle>
+                    <Times>
+                      {`${post.createdAt.getFullYear()}.${post.createdAt.getMonth()}.${post.createdAt.getDate()}:${post.createdAt.getHours()}:${post.createdAt.getMinutes()}`}
+                    </Times>
                     <Views>
                       {post.views} | <Likes> {post.likes} </Likes>
                     </Views>
@@ -247,6 +254,19 @@ const Title = styled.span`
   }
 `;
 
+const Time = styled.span`
+  font-size: 9pt;
+  font-weight: bold;
+  position: absolute;
+  left: 635px;
+  @media (max-width: 1300px) {
+    left: 525px;
+  }
+  @media (max-width: 1039px) {
+    display: none;
+  }
+`;
+
 const View = styled.span`
   font-size: 9pt;
   font-weight: bold;
@@ -304,7 +324,7 @@ const WriteBtn = styled.a`
     left: 200px;
   }
   @media (max-width: 1039px) {
-    left: 100px;
+    left: 60px;
   }
 `;
 
@@ -374,6 +394,19 @@ const PostTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Times = styled.span`
+  font-size: 8pt;
+  left: 570px;
+  top: 15px;
+  position: absolute;
+  @media (max-width: 1300px) {
+    left: 460px;
+  }
+  @media (max-width: 1039px) {
+    display: none;
+  }
 `;
 
 const Views = styled.span`

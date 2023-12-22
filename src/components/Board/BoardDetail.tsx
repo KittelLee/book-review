@@ -66,7 +66,7 @@ function BoardDetail() {
   const [editedContent, setEditedContent] = useState<string>(
     posts[0]?.content || ""
   );
-  const [showFinishButton, setShowFinishButton] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -285,20 +285,19 @@ function BoardDetail() {
   const startEditingTitle = () => {
     setIsEditingTitle(true);
     setIsEditingContent(true);
-    setShowFinishButton(true);
   };
 
   // 제목 수정 완료
   const finishEditingTitle = () => {
     setIsEditingTitle(false);
-    setShowFinishButton(false);
+
     handleUpdatePost(); // 수정 완료 시 업데이트
   };
 
   // 내용 수정 완료
   const finishEditingContent = () => {
     setIsEditingContent(false);
-    setShowFinishButton(false);
+
     handleUpdatePost(); // 수정 완료 시 업데이트
   };
 

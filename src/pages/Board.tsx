@@ -9,7 +9,6 @@ import {
   getDocs,
   doc,
   updateDoc,
-  serverTimestamp,
 } from "firebase/firestore";
 import Loader from "../components/Loader/Loader";
 

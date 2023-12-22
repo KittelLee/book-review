@@ -13,7 +13,7 @@ function Board() {
   const [posts, setPosts] = useState<BoardData[]>([]);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
-  const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수 추가
+  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 추가
   const navigate = useNavigate();
 
   interface BoardData {
@@ -41,8 +41,6 @@ function Board() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const startIdx: number = (page - 1) * pageSize;
-        const endIdx: number = startIdx + pageSize;
         const query = collection(db, "Board");
         const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(query);
         const data: BoardData[] = querySnapshot.docs.map((doc) => ({
@@ -56,66 +54,74 @@ function Board() {
           title: doc.data().title,
           views: doc.data().views,
         }));
+
+        const startIdx: number = (page - 1) * pageSize;
+        const endIdx: number = startIdx + pageSize;
         const slicedData: BoardData[] = data.slice(startIdx, endIdx);
         setPosts(slicedData);
+
+        const total = Math.ceil(data.length / pageSize);
+        setTotalPages(total);
       } catch (error) {
         console.log(error);
       }
     }
+
     fetchData();
   }, [page, pageSize]);
-
-  useEffect(() => {
-    const total = Math.ceil(posts.length / pageSize);
-    setTotalPages(total);
-  }, [posts, pageSize]);
 
   return (
     <Main>
       <div>
-        <Bh1>
-          자유게시판
-          <Bh2>자유로운 소통을 위한 공간입니다.</Bh2>
-        </Bh1>
-        <Bar></Bar>
         <WrapBody>
-          <ExBar>
-            {" "}
-            제목
-            <View> | 조회수 |</View>
-            <Like> 좋아요</Like>
-          </ExBar>
+          <BoardMainBody>
+            <BoardRoom>
+              <Bh1>
+                자유게시판
+                <Bh2>자유로운 소통을 위한 공간입니다.</Bh2>
+              </Bh1>
+              <Bar></Bar>
+              <ExBar>
+                <Title>제목</Title>
+                <View> 조회수 |</View>
+                <Like> 좋아요</Like>
+              </ExBar>
+              {posts.map((post) => (
+                <BoardBody key={post.id}>
+                  <PostBtn onClick={() => navigate(`/boarddetail/${post.id}`)}>
+                    <PostTitle>{post.title}</PostTitle>
+                    <Views>
+                      {post.views} | <Likes> {post.likes} </Likes>
+                    </Views>
+                  </PostBtn>
+                </BoardBody>
+              ))}
+            </BoardRoom>
 
-          {posts.map((post) => (
-            <BoardBody key={post.id}>
-              <PostBtn onClick={() => navigate(`/boarddetail/${post.id}`)}>
-                {post.title}
-                <Views>
-                  {" "}
-                  {post.views} | <Likes> {post.likes} </Likes>
-                </Views>
-              </PostBtn>{" "}
-              {/* navigate 함수 사용 */}
-            </BoardBody>
-          ))}
+            <PgBody>
+              <PgPrev onClick={() => setPage(page - 1)} disabled={page === 1}>
+                이전
+              </PgPrev>
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <PgSelect
+                  key={index + 1}
+                  onClick={() => setPage(index + 1)}
+                  active={index + 1 === page}
+                >
+                  {index + 1}
+                </PgSelect>
+              ))}
+              <PgNext
+                onClick={() => setPage(page + 1)}
+                disabled={page >= totalPages}
+              >
+                다음
+              </PgNext>
+              <WriteBtn href="/Boardwrite">글쓰기</WriteBtn>
+            </PgBody>
+          </BoardMainBody>
         </WrapBody>
-      </div>{" "}
-      {/*wrapbody div*/}
-      <PgBody>
-        <PgPrev onClick={() => setPage(page - 1)} disabled={page === 1}>
-          이전
-        </PgPrev>
-        {/* 페이지 번호 목록 렌더링 */}
-        {pageNumbers.map((pageNumber) => (
-          <PgSelect key={pageNumber} onClick={() => setPage(pageNumber)}>
-            {pageNumber}
-          </PgSelect>
-        ))}
-        <PgNext onClick={() => setPage(page + 1)} disabled={page >= totalPages}>
-          다음
-        </PgNext>
-      </PgBody>
-      <WriteBtn href="/Boardwrite">글쓰기</WriteBtn>
+      </div>
     </Main>
   );
 }
@@ -130,61 +136,101 @@ const Main = styled.div`
   align-items: center;
 `;
 
+const WrapBody = styled.div`
+  margin-top: 150px;
+  padding: 0;
+  width: 1200px;
+  height: 1000px;
+
+  @media (max-width: 1300px) {
+    width: 1000px;
+  }
+
+  @media (max-width: 1039px) {
+    width: 450px;
+  }
+`;
+
 const Bh1 = styled.h1`
-  background-color: whitesmoke;
   color: black;
   font-size: 30pt;
   padding: 10px 0 0 6em;
   margin-top: 30px;
   margin-left: 100px;
+  @media (max-width: 1300px) {
+    font-size: 15pt;
+  }
+
+  @media (max-width: 1039px) {
+    font-size: 10pt;
+    margin-left: 0;
+  }
 `;
 
 const Bh2 = styled.span`
-  background-color: whitesmoke;
   color: gray;
   font-size: 12pt;
   height: auto;
   padding-top: 10px;
   padding-left: 20px;
   /*제목 옆 부제목*/
+  @media (max-width: 1039px) {
+    font-size: 10pt;
+  }
 `;
 
 const Bar = styled.div`
   position: relative;
-  width: 1200px;
+  width: 100%;
   height: 3px;
   margin-top: 10px;
-  margin-left: 15%;
   background: linear-gradient(120deg, purple, skyblue);
   margin-bottom: 20px;
 `;
 
-const WrapBody = styled.div`
-  padding: 0;
-  width: 1200px;
-  height: 100vh;
-`;
-
 const ExBar = styled.div`
-  width: 1100px;
+  width: 100%;
   height: auto;
   text-align: left;
-  margin-left: 22.5%;
+
   padding-left: 10px;
   font-size: 9pt;
   font-weight: bold;
   text-align: center;
-  border-bottom: lightgray 1px solid;
-  margin-top: 50px;
+
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   /*게시글 설명 바*/
+  @media (max-width: 1300px) {
+  }
+  @media (max-width: 1039px) {
+  }
+`;
+const Title = styled.span`
+  font-size: 9pt;
+  font-weight: bold;
+  position: absolute;
+  left: 480px;
+  @media (max-width: 1300px) {
+    left: 370px;
+  }
+  @media (max-width: 1039px) {
+    left: 175px;
+  }
 `;
 
 const View = styled.span`
   font-size: 9pt;
   font-weight: bold;
-  text-align: right;
   position: absolute;
-  right: 12%;
+  right: 200px;
+
+  @media (max-width: 1039px) {
+    right: 60px;
+  }
 `;
 
 const Like = styled.span`
@@ -192,7 +238,14 @@ const Like = styled.span`
   font-size: 9pt;
   font-weight: bold;
   position: absolute;
-  right: 9.3%;
+  right: 160px;
+  @media (max-width: 1039px) {
+    right: 70px;
+  }
+
+  @media (max-width: 1039px) {
+    right: 20px;
+  }
 `;
 
 const WriteBtn = styled.a`
@@ -201,7 +254,7 @@ const WriteBtn = styled.a`
   font-size: 12pt;
   border-radius: 30px;
   border: 1px solid gray;
-
+  margin-left: 350px;
   font-weight: bold;
   padding: 15px 30px;
   bottom: 15%;
@@ -209,49 +262,115 @@ const WriteBtn = styled.a`
   text-align: center;
   text-decoration: none;
   padding-top: 2px;
+
+  &:hover {
+    background-color: white;
+    color: black;
+
+    visibility: visible;
+    transition: all 0.2s ease;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1300px) {
+    padding: 10px 15px;
+    font-size: 15px;
+    margin-left: 100px;
+  }
+  @media (max-width: 1039px) {
+  }
+`;
+
+const BoardMainBody = styled.div`
+  height: 800px;
+  width: 90%;
+  box-shadow: 5px 5px 5px;
+  background-color: white;
+  border-radius: 25px;
+  position: relative;
+  display: flex;
+
+  justify-content: center;
+  @media (max-width: 1300px) {
+    width: 90%;
+  }
+`;
+
+const BoardRoom = styled.div`
+  height: 80%;
+  width: 100%;
+  position: absolute;
+
+  margin-top: 25px;
 `;
 
 const BoardBody = styled.div`
   height: 30px;
-  width: 967px;
+  width: 90%;
   margin: 0;
   margin-bottom: 10px;
-  background-color: whitesmoke;
 `;
 
 const PostBtn = styled.button`
+  cursor: pointer;
   border-bottom: lightgray 1px solid;
+  border-left: none;
+  border-right: none;
   color: black;
-  background-color: whitesmoke;
-  width: 1100px;
+  background-color: white;
+  width: 100%;
   height: 40px;
   font-size: 13pt;
   text-align: left;
-  margin-left: 28%;
   margin-bottom: 10px;
+  margin-left: 50px;
   padding-left: 20px;
+  position: relative;
+
+  &:hover {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+  }
+  @media (max-width: 1300px) {
+    width: 800px;
+  }
+  @media (max-width: 1039px) {
+    width: 330px;
+    font-size: 10px;
+  }
+`;
+
+const PostTitle = styled.div`
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Views = styled.span`
   font-size: 8pt;
-  right: 12%;
-  padding-top: 5px;
+  left: 933px;
+  top: 15px;
   position: absolute;
+  @media (max-width: 1300px) {
+    left: 643px;
+  }
+  @media (max-width: 1039px) {
+    left: 290px;
+  }
 `;
 
 const Likes = styled.span`
   color: purple;
 
   margin-left: 5px;
-  position: absolute;
 `;
 
 const PgBody = styled.div`
   position: absolute;
-  left: 45%;
-  box-sizing: content-box;
-  margin-top: 20px;
-  width: 30%;
+  bottom: 50px;
 `;
 
 const PgPrev = styled.button`
@@ -290,14 +409,14 @@ const PgNext = styled.button`
   }
 `;
 
-const PgSelect = styled.button`
+const PgSelect = styled.button<{ active: boolean }>`
   background-color: white;
   color: black;
   box-sizing: content-box;
   width: auto;
   margin-left: 15px;
   margin-right: 15px;
-  margin-bottom: 20px;
+
   &:hover {
     opacity: 1;
     visibility: visible;

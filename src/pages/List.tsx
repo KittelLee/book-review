@@ -5,6 +5,7 @@ import Review from "../components/Modal/Review";
 import BookAdd from "../components/Modal/BookAdd";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
+import Loader from "../components/Loader/Loader";
 
 const customStyles = {
   content: {
@@ -54,11 +55,13 @@ function List() {
   const [bookAddModalIsOpen, setBookAddModalIsOpen] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchBooks = useCallback(async () => {
+    setLoading(true);
     const db = firebase.firestore();
     const booksSnapshot = await db.collection("books").get();
-    return booksSnapshot.docs.map((doc) => ({
+    const books = booksSnapshot.docs.map((doc) => ({
       id: doc.id,
       imageUrl: doc.data().imageUrl,
       bookTitle: doc.data().bookTitle,
@@ -66,6 +69,8 @@ function List() {
       publisher: doc.data().publisher,
       price: doc.data().price,
     }));
+    setLoading(false);
+    return books;
   }, []);
 
   const refreshBooks = useCallback(async () => {
@@ -103,6 +108,7 @@ function List() {
 
   return (
     <BackColor>
+      <Loader loading={loading} />
       <SearchSection>
         <input placeholder="검색창" />
       </SearchSection>

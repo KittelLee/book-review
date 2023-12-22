@@ -8,6 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { User } from "firebase/auth";
+import Loader from "../components/Loader/Loader";
 
 const modalStyles = {
   content: {
@@ -30,9 +31,10 @@ interface NewIntro {
 
 function MyPage() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [newintro, setNewIntro] = useState<NewIntro | null>(null);
+  const [newIntro, setNewIntro] = useState<NewIntro | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   function openModal() {
     setModalOpen(true);
@@ -42,7 +44,7 @@ function MyPage() {
     setModalOpen(false);
   }
 
-  const userdataget = async () => {
+  const userDataGet = async () => {
     try {
       const currentUser = auth.currentUser;
 
@@ -82,23 +84,24 @@ function MyPage() {
   useEffect(() => {
     // 사용자가 로그인되면 해당 사용자의 데이터를 가져옴
     if (user) {
-      userdataget();
+      userDataGet();
     }
   }, [user]);
 
   return (
     <Body>
+      <Loader loading={loading} />
       <Card>
         <Lines />
         {!modalOpen && (
           <ImgBx>
-            <img src={newintro?.imageUrl || CatImg} alt="User Image" />
+            <img src={newIntro?.imageUrl || CatImg} alt="User Image" />
           </ImgBx>
         )}
         <ConTent>
           <DeTail>
             <h2>
-              {newintro?.NickName} <br />
+              {newIntro?.NickName} <br />
             </h2>
             <Data>
               <h3>
@@ -107,7 +110,7 @@ function MyPage() {
               </h3>
               <h3>
                 NickName <br />
-                <span>{newintro?.NickName}</span>{" "}
+                <span>{newIntro?.NickName}</span>{" "}
               </h3>
             </Data>
 
@@ -118,8 +121,11 @@ function MyPage() {
         </ConTent>
       </Card>
       <Modal isOpen={modalOpen} onRequestClose={closeModal} style={modalStyles}>
-        <Intro closeModal={closeModal} changeintro={setNewIntro}></Intro>
-
+        <Intro
+          closeModal={closeModal}
+          changeIntro={setNewIntro}
+          setLoading={setLoading}
+        />
         <button onClick={closeModal}>닫기</button>
       </Modal>
     </Body>

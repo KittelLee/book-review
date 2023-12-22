@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, ChangeEvent } from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
 import Review from "../components/Modal/Review";
@@ -193,6 +193,7 @@ const SearchSection = styled.div`
   display: flex;
   justify-content: center;
   margin: 30px 0;
+  padding: 70px 0 0 0;
   input {
     width: 300px;
     height: 20px;

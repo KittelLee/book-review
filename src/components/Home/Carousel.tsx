@@ -2,11 +2,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-import Test1 from "../../assets/images/test1.jpg";
-import Test2 from "../../assets/images/test2.jpg";
+import Test1 from "../../assets/images/test4.jpg";
+import Test2 from "../../assets/images/test11.jpg";
 import Test3 from "../../assets/images/test3.jpg";
-import Test4 from "../../assets/images/test4.jpg";
+import Test4 from "../../assets/images/test1.jpg";
 import Test5 from "../../assets/images/test5.jpg";
+import Test6 from "../../assets/images/test6.jpg";
 
 function Carousel() {
   const settings = {
@@ -43,7 +44,7 @@ function Carousel() {
             <Photobox src={Test5}></Photobox>
           </Carousela>
           <Carousela>
-            <Photobox src={Test5}></Photobox>
+            <Photobox src={Test6}></Photobox>
           </Carousela>
         </Slider>
       </Main>

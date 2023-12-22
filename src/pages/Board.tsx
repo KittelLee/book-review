@@ -160,7 +160,6 @@ const Main = styled.div`
 `;
 
 const WrapBody = styled.div`
-  margin-top: 150px;
   padding: 0;
   width: 1200px;
   height: 1000px;

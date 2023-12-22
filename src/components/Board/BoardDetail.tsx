@@ -60,6 +60,13 @@ function BoardDetail() {
   });
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [commentCount, setCommentCount] = useState<number>(0);
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [isEditingContent, setIsEditingContent] = useState(false);
+  const [editedTitle, setEditedTitle] = useState<string>(posts[0]?.title || "");
+  const [editedContent, setEditedContent] = useState<string>(
+    posts[0]?.content || ""
+  );
+  const [showFinishButton, setShowFinishButton] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,6 +102,8 @@ function BoardDetail() {
         } else {
           console.error("Post not found");
         }
+        setIsEditingTitle(false);
+        setIsEditingContent(false);
       } catch (error) {
         console.log(error);
       }
@@ -176,6 +185,33 @@ function BoardDetail() {
     }
   };
 
+  const handleUpdatePost = async () => {
+    try {
+      const postToUpdate = posts[0];
+      if (postToUpdate) {
+        const postRef = doc(db, "Board", postToUpdate.id);
+
+        const updatedPostData: Partial<BoardData> = {
+          title: editedTitle,
+          content: editedContent,
+        };
+
+        await updateDoc(postRef, updatedPostData);
+
+        setPosts((prevPosts) => [
+          {
+            ...prevPosts[0],
+            ...updatedPostData,
+          },
+        ]);
+
+        console.log("Post updated successfully!");
+      }
+    } catch (error) {
+      console.error("Error updating post: ", error);
+    }
+  };
+
   const incrementLikes = async () => {
     try {
       const postToUpdate = posts[0];
@@ -246,21 +282,55 @@ function BoardDetail() {
     }
   };
 
+  const startEditingTitle = () => {
+    setIsEditingTitle(true);
+    setIsEditingContent(true);
+    setShowFinishButton(true);
+  };
+
+  // 제목 수정 완료
+  const finishEditingTitle = () => {
+    setIsEditingTitle(false);
+    setShowFinishButton(false);
+    handleUpdatePost(); // 수정 완료 시 업데이트
+  };
+
+  // 내용 수정 완료
+  const finishEditingContent = () => {
+    setIsEditingContent(false);
+    setShowFinishButton(false);
+    handleUpdatePost(); // 수정 완료 시 업데이트
+  };
+
   return (
     <Main>
       <Box>
         <Title>
           <Line></Line>
-          <h1>{posts[0]?.title}</h1>
+          {isEditingTitle ? (
+            <div>
+              <EditTitle
+                type="text"
+                value={editedTitle}
+                onChange={(e) => setEditedTitle(e.target.value)}
+                onBlur={finishEditingTitle}
+              />
+              <FinishButton onClick={finishEditingTitle}>
+                제목 수정
+              </FinishButton>
+            </div>
+          ) : (
+            <h1>{posts[0]?.title}</h1>
+          )}
           <Line></Line>
 
           <h2>
             {posts[0]?.author}
             {chatdata.NickName === posts[0]?.author && (
               <>
-                <p>
+                <EditBtn onClick={startEditingTitle}>
                   <FontAwesomeIcon icon={faEraser} />
-                </p>
+                </EditBtn>
 
                 <DeleteBtn>
                   <FontAwesomeIcon icon={faTrash} onClick={handleDeletePost} />
@@ -281,11 +351,25 @@ function BoardDetail() {
           </RightSide>
         </Title>
         <Content>
-          <h3>{posts[0]?.content}</h3>
+          {isEditingContent ? (
+            <div>
+              <EditContent
+                value={editedContent}
+                onChange={(e) => setEditedContent(e.target.value)}
+                onBlur={finishEditingContent}
+              />
+              <FinishButton onClick={finishEditingContent}>
+                수정완료
+              </FinishButton>
+            </div>
+          ) : (
+            <h3>{posts[0]?.content}</h3>
+          )}
           <Likesroom onClick={incrementLikes}>
             <FontAwesomeIcon icon={faThumbsUp} />
           </Likesroom>
         </Content>
+
         <Chatroom>
           <h3>댓글: {commentCount}</h3>
           <ul>
@@ -513,11 +597,59 @@ const Chatsubmit = styled.button`
     color: black;
   }
 `;
+const EditTitle = styled.input`
+  width: 80%;
+  height: 50px;
+  margin-left: 5%;
+  margin-bottom: 30px;
+  @media (max-width: 1420px) {
+    width: 60%;
+  }
+  @media (max-width: 480px) {
+    width: 40%;
+  }
+`;
+
+const EditContent = styled.textarea`
+  margin-top: 15px;
+  margin-left: 5%;
+  width: 80%;
+  height: 500px;
+  @media (max-width: 1420px) {
+    width: 60%;
+  }
+  @media (max-width: 480px) {
+    width: 40%;
+  }
+`;
+
+const FinishButton = styled.button`
+  cursor: pointer;
+  margin-left: 30px;
+  height: 40px;
+  background-color: #3abf30;
+  color: white;
+  border-radius: 15px;
+  font-size: 15px;
+  margin-top: 30px;
+  &:hover {
+    background-color: whitesmoke;
+    color: black;
+  }
+`;
 
 const DeleteBtn = styled.p`
   cursor: pointer;
 
   &:hover {
     color: red; /* 호버 시 적용될 스타일 */
+  }
+`;
+
+const EditBtn = styled.p`
+  cursor: pointer;
+
+  &:hover {
+    color: blue; /* 호버 시 적용될 스타일 */
   }
 `;

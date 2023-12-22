@@ -12,15 +12,17 @@ import Loader from "../components/Loader/Loader";
 
 const modalStyles = {
   content: {
-    top: "50%",
+    top: "40%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "80%",
-    width: "80%",
-    zIndex: 11,
+    height: "54%",
+    width: "40%",
+  },
+  overlay: {
+    backgroundColor: "rgb(255, 255, 255, 0.8)",
   },
 };
 
@@ -125,7 +127,9 @@ function MyPage() {
           changeIntro={setNewIntro}
           setLoading={setLoading}
         />
-        <button onClick={closeModal}>닫기</button>
+        <CloseBtn>
+          <button onClick={closeModal}>X</button>
+        </CloseBtn>
       </Modal>
     </Body>
   );
@@ -334,6 +338,21 @@ const Card = styled.div`
 
     ${DeTail} {
       transform: translateY(0px);
+    }
+  }
+`;
+
+const CloseBtn = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  button {
+    border: none;
+    background-color: #fff;
+    font-size: 1.2rem;
+    &:hover {
+      cursor: pointer;
+      color: red;
     }
   }
 `;

@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import Board from "./pages/Board";
 import BoardWrite from "./components/Board/BoardWrite";
-import Boarddetail from "./components/Board/BoardDetail";
+import BoardDetail from "./components/Board/BoardDetail";
 import MyPage from "./pages/MyPage";
 import List from "./pages/List";
 
@@ -37,9 +37,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Mypage" element={<MyPage />} />
-          <Route path="/Boardwrite" element={<BoardWrite />} />
-          <Route path="/Boarddetail/:id" element={<Boarddetail />} />
+          <Route path="/MyPage" element={<MyPage />} />
+          <Route path="/BoardWrite" element={<BoardWrite />} />
+          <Route path="/BoardDetail/:id" element={<BoardDetail />} />
           <Route path="/List" element={<List />} />
           <Route path="/Board" element={<Board />} />
           <Route path="/Login" element={<Login />} />

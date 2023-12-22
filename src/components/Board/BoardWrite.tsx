@@ -3,7 +3,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { User } from "firebase/auth";
@@ -68,6 +68,7 @@ function BoardWrite() {
         views: 0,
         comments: [],
         image: "",
+        createdAt: serverTimestamp(),
       });
       // 성공적으로 추가되었을 때 필요한 작업 수행
       console.log("Author:", newauthor);

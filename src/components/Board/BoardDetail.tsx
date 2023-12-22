@@ -18,6 +18,7 @@ import { auth } from "../../../firebaseConfig";
 import { User } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faClock,
   faEraser,
   faEye,
   faThumbsUp,
@@ -36,6 +37,7 @@ function BoardDetail() {
     likes: number;
     title: string;
     views: number;
+    createdAt: Date;
   }
 
   interface CommentData {
@@ -92,6 +94,7 @@ function BoardDetail() {
           likes: doc.data().likes,
           title: doc.data().title,
           views: doc.data().views,
+          createdAt: doc.data().createdAt.toDate(),
         }));
 
         const selectedPost = data.find((post) => post.id === id);
@@ -345,6 +348,11 @@ function BoardDetail() {
 
           <RightSide>
             <p>
+              <FontAwesomeIcon icon={faClock} />
+            </p>
+            <p>{`${posts[0]?.createdAt.getFullYear()}.${posts[0]?.createdAt.getMonth()}.${posts[0]?.createdAt.getDate()}:${posts[0]?.createdAt.getHours()}:${posts[0]?.createdAt.getMinutes()}`}</p>
+
+            <p>
               <FontAwesomeIcon icon={faEye} />
             </p>
             <p>{posts[0]?.views}</p>
@@ -532,13 +540,16 @@ const RightSide = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  right: 0;
+  right: 200px;
   top: 95px;
 
   height: 100px;
   width: 150px;
   p {
     font-size: 20px;
+  }
+  @media (max-width: 720px) {
+    display: none;
   }
 `;
 

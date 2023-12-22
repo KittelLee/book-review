@@ -97,8 +97,8 @@ function MyPage() {
 
   return (
     <Body>
-      <ToastContainer position="top-right" autoClose={5000} />
       <Loader loading={loading} />
+      <ToastContainer position="top-right" autoClose={5000} />
       <Card>
         <Lines />
         {!modalOpen && (

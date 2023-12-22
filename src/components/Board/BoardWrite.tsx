@@ -11,9 +11,9 @@ import { User } from "firebase/auth";
 function BoardWrite() {
   const [newauthor, setnewAuthor] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
-  const [newtitle, setnewTitle] = useState("");
-  const [newcategory, setnewCategory] = useState("");
-  const [newcontent, setnewContent] = useState("");
+  const [newTitle, setnewTitle] = useState("");
+  const [newCategory, setnewCategory] = useState("");
+  const [newContent, setnewContent] = useState("");
   const navigate = useNavigate();
 
   const userDataGet = async () => {
@@ -61,9 +61,9 @@ function BoardWrite() {
       const query = collection(db, "Board");
       await addDoc(query, {
         author: newauthor,
-        title: newtitle,
-        category: newcategory,
-        content: newcontent,
+        title: newTitle,
+        category: newCategory,
+        content: newContent,
         likes: 0,
         views: 0,
         comments: [],
@@ -71,9 +71,9 @@ function BoardWrite() {
       });
       // 성공적으로 추가되었을 때 필요한 작업 수행
       console.log("Author:", newauthor);
-      console.log("Title:", newtitle);
-      console.log("Category:", newcategory);
-      console.log("Content:", newcontent);
+      console.log("Title:", newTitle);
+      console.log("Category:", newCategory);
+      console.log("Content:", newContent);
       console.log("게시물이 성공적으로 추가되었습니다.");
 
       navigate("/board");
@@ -104,14 +104,14 @@ function BoardWrite() {
             <Title
               type="text"
               placeholder="제목"
-              value={newtitle}
+              value={newTitle}
               onChange={(e) => setnewTitle(e.target.value)}
             ></Title>
           </li>
           <li>
             <CategorySpan>카테고리</CategorySpan>
             <select
-              value={newcategory}
+              value={newCategory}
               onChange={(e) => setnewCategory(e.target.value)}
             >
               <option value="카테고리1" disabled>
@@ -128,7 +128,7 @@ function BoardWrite() {
             <ContentSpan>내용</ContentSpan>
             <Content
               placeholder="내용"
-              value={newcontent}
+              value={newContent}
               onChange={(e) => setnewContent(e.target.value)}
             ></Content>
           </li>

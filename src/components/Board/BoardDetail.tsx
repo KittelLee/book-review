@@ -159,6 +159,30 @@ function BoardDetail() {
     }
   };
 
+  const incrementLikes = async () => {
+    try {
+      const postToUpdate = posts[0];
+      if (postToUpdate) {
+        const postRef = doc(db, "Board", postToUpdate.id);
+        await updateDoc(postRef, {
+          likes: postToUpdate.likes + 1,
+        });
+
+        // 업데이트된 데이터를 상태에 반영
+        setPosts((prevPosts) => [
+          {
+            ...prevPosts[0],
+            likes: prevPosts[0].likes + 1,
+          },
+        ]);
+
+        console.log("Likes incremented successfully!");
+      }
+    } catch (error) {
+      console.error("Likes 업데이트 중 오류 발생:", error);
+    }
+  };
+
   const userdataget = async () => {
     try {
       const currentUser = auth.currentUser;
@@ -208,19 +232,17 @@ function BoardDetail() {
             <p>
               <FontAwesomeIcon icon={faEye} />
             </p>
-            <p>21</p>
+            <p>{posts[0]?.views}</p>
             <p>
               <FontAwesomeIcon icon={faThumbsUp} />
             </p>
-            <p>15</p>
+            <p>{posts[0]?.likes}</p>
           </RightSide>
         </Title>
         <Content>
           <h3>{posts[0]?.content}</h3>
-          <Likesroom>
-            <p>
-              <FontAwesomeIcon icon={faThumbsUp} />
-            </p>
+          <Likesroom onClick={incrementLikes}>
+            <FontAwesomeIcon icon={faThumbsUp} />
           </Likesroom>
         </Content>
         <Chatroom>
@@ -398,7 +420,7 @@ const Likesroom = styled.button`
   justify-content: center;
   position: absolute;
   bottom: 10px;
-  left: 600px;
+  left: 45%;
   width: 100px;
   height: 50px;
   background-color: gray;

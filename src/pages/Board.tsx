@@ -31,6 +31,7 @@ function Board() {
     likes: number;
     title: string;
     views: number;
+    createdAt: Date;
   }
 
   interface CommentData {
@@ -46,6 +47,7 @@ function Board() {
         const endIdx: number = startIdx + pageSize;
         const query = collection(db, "Board");
         const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(query);
+
         const data: BoardData[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           author: doc.data().author,
@@ -56,8 +58,9 @@ function Board() {
           likes: doc.data().likes,
           title: doc.data().title,
           views: doc.data().views,
+          createdAt: doc.data().createdAt.toDate(),
         }));
-
+        data.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
         const slicedData: BoardData[] = data.slice(startIdx, endIdx);
         setPosts(slicedData);
         const total = Math.ceil(data.length / pageSize);
@@ -104,14 +107,18 @@ function Board() {
               </Bh1>
               <Bar></Bar>
               <ExBar>
-                <Title>제목</Title>
-                <View> 조회수 |</View>
-                <Like> 좋아요</Like>
+                <span>제목</span>
+                <span>작성 시간</span>
+                <span> 조회수 |</span>
+                <span> 좋아요</span>
               </ExBar>
               {posts.map((post) => (
                 <BoardBody key={post.id}>
                   <PostBtn onClick={() => handlePostBtnClick(post.id)}>
                     <PostTitle>{post.title}</PostTitle>
+                    <Times>
+                      {`${post.createdAt.getFullYear()}.${post.createdAt.getMonth()}.${post.createdAt.getDate()}:${post.createdAt.getHours()}:${post.createdAt.getMinutes()}`}
+                    </Times>
                     <Views>
                       {post.views} | <Likes> {post.likes} </Likes>
                     </Views>
@@ -229,47 +236,47 @@ const ExBar = styled.div`
   align-items: center;
   position: relative;
   /*게시글 설명 바*/
-  @media (max-width: 1300px) {
-  }
-  @media (max-width: 1039px) {
-  }
-`;
-const Title = styled.span`
-  font-size: 9pt;
-  font-weight: bold;
-  position: absolute;
-  left: 430px;
-  @media (max-width: 1300px) {
-    left: 370px;
-  }
-  @media (max-width: 1039px) {
-    left: 175px;
-  }
-`;
+  span {
+    font-size: 9pt;
+    font-weight: bold;
+    position: absolute;
+    &:nth-child(1) {
+      left: 430px;
+      @media (max-width: 1300px) {
+        left: 370px;
+      }
+      @media (max-width: 1039px) {
+        left: 175px;
+      }
+    }
+    &:nth-child(2) {
+      left: 635px;
 
-const View = styled.span`
-  font-size: 9pt;
-  font-weight: bold;
-  position: absolute;
-  right: 200px;
+      @media (max-width: 1300px) {
+        left: 525px;
+      }
+      @media (max-width: 1039px) {
+        display: none;
+      }
+    }
+    &:nth-child(3) {
+      right: 200px;
 
-  @media (max-width: 1039px) {
-    right: 60px;
-  }
-`;
+      @media (max-width: 1039px) {
+        right: 60px;
+      }
+    }
+    &:nth-child(4) {
+      color: purple;
+      right: 160px;
+      @media (max-width: 1039px) {
+        right: 70px;
+      }
 
-const Like = styled.span`
-  color: purple;
-  font-size: 9pt;
-  font-weight: bold;
-  position: absolute;
-  right: 160px;
-  @media (max-width: 1039px) {
-    right: 70px;
-  }
-
-  @media (max-width: 1039px) {
-    right: 20px;
+      @media (max-width: 1039px) {
+        right: 20px;
+      }
+    }
   }
 `;
 
@@ -304,7 +311,7 @@ const WriteBtn = styled.a`
     left: 200px;
   }
   @media (max-width: 1039px) {
-    left: 100px;
+    left: 60px;
   }
 `;
 
@@ -374,6 +381,19 @@ const PostTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Times = styled.span`
+  font-size: 8pt;
+  left: 570px;
+  top: 15px;
+  position: absolute;
+  @media (max-width: 1300px) {
+    left: 460px;
+  }
+  @media (max-width: 1039px) {
+    display: none;
+  }
 `;
 
 const Views = styled.span`

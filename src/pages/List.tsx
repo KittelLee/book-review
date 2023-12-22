@@ -237,6 +237,18 @@ const BookSection = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  @media screen and (max-width: 780px) {
+    flex-direction: column;
+    align-items: center;
+    }
+
+
+    @media screen and (max-width: 1300px) {
+      & > * {
+        flex-basis: calc(50% - 10px);
+        margin: 5px;
+      }
+    }
 `;
 
 const BookLeftSection = styled.div`
@@ -261,6 +273,7 @@ const ImgSection = styled.div`
 
 const InfoSection = styled.div`
   width: 50%;
+  margin-left: 45px;
   padding: 10px;
   p {
     cursor: pointer;

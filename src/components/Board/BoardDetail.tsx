@@ -10,6 +10,7 @@ import {
   getDoc,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
@@ -22,6 +23,7 @@ import {
   faThumbsUp,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 function BoardDetail() {
   interface BoardData {
@@ -57,6 +59,8 @@ function BoardDetail() {
     NickName: "",
   });
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [commentCount, setCommentCount] = useState<number>(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -106,11 +110,24 @@ function BoardDetail() {
       if (user) {
         setCurrentUserId(user.uid);
         userdataget();
+        console.log(user.uid);
         console.log(chatdata);
       }
     });
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    // 이 부분에서 댓글 수를 업데이트하는 함수 호출
+    updateCommentCount();
+  }, [posts[0]?.comments]);
+
+  const updateCommentCount = () => {
+    const selectedPost = posts[0];
+    if (selectedPost) {
+      setCommentCount(selectedPost.comments.length);
+    }
+  };
 
   const handleCommentSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -189,7 +206,6 @@ function BoardDetail() {
 
       if (currentUser) {
         const uid = currentUser.uid;
-        console.log(uid);
         const userDocRef = doc(db, "User", uid);
         const userDocSnapshot = await getDoc(userDocRef);
 
@@ -202,10 +218,31 @@ function BoardDetail() {
               NickName: userData.NickName,
             });
           }
+          console.log(userData.NickName);
         }
       }
     } catch (error) {
       console.error("Error user data", error);
+    }
+  };
+
+  const handleDeletePost = async () => {
+    try {
+      const postToDelete = posts[0];
+
+      if (postToDelete) {
+        const postRef = doc(db, "Board", postToDelete.id);
+
+        // 해당 게시글 문서 삭제
+        await deleteDoc(postRef);
+        navigate(`/board`);
+
+        console.log("Post deleted successfully!");
+
+        // 이후 필요한 작업 수행 (예: 리다이렉트, 메시지 표시 등)
+      }
+    } catch (error) {
+      console.error("Error deleting post: ", error);
     }
   };
 
@@ -219,13 +256,17 @@ function BoardDetail() {
 
           <h2>
             {posts[0]?.author}
-            <p>
-              <FontAwesomeIcon icon={faEraser} />
-            </p>
+            {chatdata.NickName === posts[0]?.author && (
+              <>
+                <p>
+                  <FontAwesomeIcon icon={faEraser} />
+                </p>
 
-            <p>
-              <FontAwesomeIcon icon={faTrash} />
-            </p>
+                <DeleteBtn>
+                  <FontAwesomeIcon icon={faTrash} onClick={handleDeletePost} />
+                </DeleteBtn>
+              </>
+            )}
           </h2>
 
           <RightSide>
@@ -246,7 +287,7 @@ function BoardDetail() {
           </Likesroom>
         </Content>
         <Chatroom>
-          <h3>댓글: 4</h3>
+          <h3>댓글: {commentCount}</h3>
           <ul>
             {posts[0]?.comments.map((comment, index) => (
               <div key={index}>
@@ -442,5 +483,13 @@ const Chatsubmit = styled.button`
   margin-top: 30px;
   &:hover {
     background-color: whitesmoke;
+  }
+`;
+
+const DeleteBtn = styled.p`
+  cursor: pointer;
+
+  &:hover {
+    color: red; /* 호버 시 적용될 스타일 */
   }
 `;

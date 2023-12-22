@@ -59,7 +59,7 @@ function BoardWrite() {
     e.preventDefault();
     try {
       const query = collection(db, "Board");
-      await addDoc(query, {
+      const docRef = await addDoc(query, {
         author: newauthor,
         title: newTitle,
         category: newCategory,
@@ -76,7 +76,8 @@ function BoardWrite() {
       console.log("Content:", newContent);
       console.log("게시물이 성공적으로 추가되었습니다.");
 
-      navigate("/board");
+      const newPostId = docRef.id;
+      navigate(`/boarddetail/${newPostId}`);
       // 추가 후에 필요한 작업을 수행하거나 페이지를 리디렉션할 수 있습니다.
     } catch (error) {
       console.error("게시물 추가 중 오류 발생:", error);

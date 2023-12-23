@@ -6,13 +6,13 @@ import "firebase/compat/auth";
 import { ReviewProps, Comment } from "../../types/Review";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAu1pu4r4m_kJLEyeL7Jgc6tWz94Upzk98",
-  authDomain: "book-review-a7be9.firebaseapp.com",
-  projectId: "book-review-a7be9",
-  storageBucket: "book-review-a7be9.appspot.com",
-  messagingSenderId: "905824431279",
-  appId: "1:905824431279:web:f56fdfc06bc60dd733785a",
-  measurementId: "G-L9QXD3H138",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 if (!firebase.apps.length) {

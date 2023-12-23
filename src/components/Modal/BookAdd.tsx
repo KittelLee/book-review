@@ -5,19 +5,7 @@ import "firebase/compat/storage";
 import BookAddIcon from "../../assets/icons/BookAddIcon.jpeg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface BookAddProps {
-  closeBookAddModal: () => void;
-  refreshBooks: () => Promise<void>;
-}
-
-interface Book {
-  imageUrl: string;
-  bookTitle: string;
-  author: string;
-  publisher: string;
-  price: string;
-}
+import { BookAddProps, Book } from "../../types/BookAdd";
 
 /*firebaseConfig부분 props로 내려줄수있지않나?*/
 const firebaseConfig = {
@@ -133,6 +121,12 @@ const BookAddWrap = styled.div`
     border-radius: 20px;
     margin-bottom: 10px;
   }
+  @media screen and (max-width: 600px) {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
 `;
 
 const Upload = styled.div`
@@ -155,6 +149,11 @@ const Upload = styled.div`
     padding: 4px 6px;
     background-color: #fff;
     box-shadow: 2px 2px 2px 2px;
+  }
+  @media screen and (max-width: 600px) {
+    input {
+      width: 90%;
+    }
   }
 `;
 

@@ -25,40 +25,14 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import {
+  BoardData,
+  CommentData,
+  CommentDoc,
+  UserGetData,
+} from "../../types/BoardDetail";
 
 function BoardDetail() {
-  interface BoardData {
-    id: string;
-    author: string;
-    category: string;
-    comments: CommentData[];
-    content: string;
-    image: string;
-    likes: number;
-    title: string;
-    views: number;
-    createdAt: Date;
-  }
-
-  interface CommentData {
-    user: string;
-    content: string;
-    profileImageUrl?: string;
-    NickName?: string;
-  }
-
-  interface CommentDoc {
-    user: string;
-    content: string;
-    profileImageUrl?: string;
-    NickName?: string;
-  }
-
-  interface UserGetData {
-    imageUrl: string;
-    NickName: string;
-  }
-
   const { id } = useParams<{ id: string }>();
   const [posts, setPosts] = useState<BoardData[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -107,7 +81,6 @@ function BoardDetail() {
 
         const selectedPost = data.find((post) => post.id === id);
 
-        
         if (selectedPost) {
           setPosts([selectedPost]);
         } else {
@@ -116,7 +89,7 @@ function BoardDetail() {
         setIsEditingTitle(false);
         setIsEditingContent(false);
       } catch (error) {
-        console.log(error);
+        /* Empty */
       }
     }
 
@@ -130,8 +103,6 @@ function BoardDetail() {
       if (user) {
         setCurrentUserId(user.uid);
         userdataget();
-        console.log(user.uid);
-        console.log(chatdata);
       }
     });
     return () => unsubscribe();
@@ -159,11 +130,9 @@ function BoardDetail() {
           NickName: chatdata.NickName,
         };
 
-        
         const boardCollection = collection(db, "Board");
         const boardRef = doc(boardCollection, id);
 
-        
         const boardDoc = await getDoc(boardRef);
 
         if (boardDoc.exists()) {
@@ -272,13 +241,10 @@ function BoardDetail() {
       if (postToDelete) {
         const postRef = doc(db, "Board", postToDelete.id);
 
-        
         await deleteDoc(postRef);
         navigate(`/board`);
 
         console.log("Post deleted successfully!");
-
-       
       }
     } catch (error) {
       console.error("Error deleting post: ", error);
@@ -296,18 +262,16 @@ function BoardDetail() {
     }
   };
 
-  
   const finishEditingTitle = () => {
     setIsEditingTitle(false);
 
-    handleUpdatePost(); 
+    handleUpdatePost();
   };
 
- 
   const finishEditingContent = () => {
     setIsEditingContent(false);
 
-    handleUpdatePost(); 
+    handleUpdatePost();
   };
 
   return (

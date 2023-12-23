@@ -135,6 +135,28 @@ BOOK-REVIEW
 │   │    ├── Header.tsx
 │   │    └── Footer.tsx
 │   │
+│   ├── contexts/
+│   │    └── AuthContext.tsx/
+│   │
+│   ├── hooks/
+│   │    └── useAuthState.ts/
+│   │
+│   ├── pages/
+│   │    ├── Board.tsx
+│   │    ├── Home.tsx
+│   │    ├── List.tsx
+│   │    ├── Login.tsx
+│   │    └── MyPage.tsx
+│   │
+│   ├── types/
+│   │    ├── Board.ts
+│   │    ├── BoardDetail.ts
+│   │    ├── BookAdd.ts
+│   │    ├── Intro.ts
+│   │    ├── List.ts
+│   │    ├── MyPage.ts
+│   │    └── Review.ts
+│   │
 |   ├── firebase.ts/
 |   ├── App.tsx/
 │   ├── main.tsx/

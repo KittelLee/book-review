@@ -11,6 +11,7 @@ import { User } from "firebase/auth";
 import Loader from "../components/Loader/Loader";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { NewIntro } from "../types/Mypage";
 
 const modalStyles = {
   content: {
@@ -21,17 +22,12 @@ const modalStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "54%",
-    width: "40%",
+    width: "50%",
   },
   overlay: {
     backgroundColor: "rgb(255, 255, 255, 0.8)",
   },
 };
-
-interface NewIntro {
-  imageUrl: string;
-  NickName: string;
-}
 
 const showToast = (message: string) => {
   toast(message);
@@ -74,7 +70,7 @@ function MyPage() {
         setUserEmail(currentUser.email);
       }
     } catch (error) {
-      
+      /* Empty */
     }
   };
 

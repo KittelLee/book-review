@@ -6,6 +6,7 @@ import BookAdd from "../components/Modal/BookAdd";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Loader from "../components/Loader/Loader";
+import { Book } from "../types/List";
 
 const customStyles = {
   content: {
@@ -38,15 +39,6 @@ const customStyles2 = {
     backgroundColor: "rgba(0, 0, 0, 0.8)",
   },
 };
-
-interface Book {
-  id: string;
-  imageUrl: string;
-  bookTitle: string;
-  author: string;
-  publisher: string;
-  price: string;
-}
 
 Modal.setAppElement("#root");
 
@@ -275,10 +267,9 @@ const BookLeftSection = styled.div`
   box-sizing: border-box;
   @media screen and (max-width: 720px) {
     flex-direction: column;
-    flex-direction: row; 
+    flex-direction: row;
     width: 100%;
   }
-
 `;
 
 const ImgSection = styled.div`
@@ -294,7 +285,6 @@ const ImgSection = styled.div`
   @media screen and (max-width: 720px) {
     width: 100%;
   }
-
 `;
 
 const InfoSection = styled.div`

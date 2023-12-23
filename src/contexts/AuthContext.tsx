@@ -1,5 +1,5 @@
 import { onAuthStateChanged, User } from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { auth } from "../../firebaseConfig";
 
 type AuthState =
@@ -8,7 +8,7 @@ type AuthState =
   | { state: "loaded"; isAuthentication: false; user: null }
   | { state: "error"; error: Error };
 
-const AuthStateContext = createContext<AuthState | undefined>(undefined);
+export const AuthStateContext = createContext<AuthState | undefined>(undefined);
 
 export const AuthContextProvider = ({
   children,
@@ -38,10 +38,4 @@ export const AuthContextProvider = ({
       {children}
     </AuthStateContext.Provider>
   );
-};
-
-export const useAuthState = () => {
-  const authState = useContext(AuthStateContext);
-  if (!authState) throw new Error("AuthProvider not found");
-  return authState;
 };

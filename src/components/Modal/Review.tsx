@@ -279,7 +279,13 @@ const Submit = styled.div`
     width: 10%;
     padding: 10px;
     margin-top: 6px;
+    background-color: #fff;
+    border: 2px solid #ccc;
     border-radius: 4px;
+    &:hover {
+      background-color: black;
+      color: #fff;
+    }
   }
   @media screen and (max-width: 600px) {
     input {

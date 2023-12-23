@@ -10,6 +10,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { db } from "../Firebase";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -28,15 +30,13 @@ function Login() {
         email,
         password
       );
-      setUser(userCredential); // 사용자 정보 상태에 저장
+      setUser(userCredential);
       navigate("/");
-      console.log("Login successful!", userCredential);
-      // 로그인 성공 처리, 예를 들어 홈페이지로 리디렉션
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message); // 'error'는 여기서 'Error' 타입으로 간주됩니다.
+        setError(error.message);
       } else {
-        setError("An unknown error occurred"); // 'error'가 'Error' 타입이 아닌 경우의 처리
+        setError("An unknown error occurred");
       }
     }
   };
@@ -50,14 +50,14 @@ function Login() {
         password
       );
       setUser(userCredential);
+      toast.success("회원가입 되었습니다");
       toggleForm();
-      await FirstLogin(); // 사용자 정보 저장
-      // 회원가입 성공 처리, 예를 들어 홈페이지로 리디렉션
+      await FirstLogin();
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message); // 'error'는 여기서 'Error' 타입으로 간주됩니다.
+        setError(error.message);
       } else {
-        setError("An unknown error occurred"); // 'error'가 'Error' 타입이 아닌 경우의 처리
+        setError("An unknown error occurred");
       }
     }
   };
@@ -124,7 +124,6 @@ function Login() {
             </form>
             {error && <p>Error: {error}</p>}
             {user && <div>Welcome back, {user.user.email}!</div>}{" "}
-            {/* 사용자 정보 표시 */}
           </SignInForm>
 
           <SignUpForm showForm={showForm}>

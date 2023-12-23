@@ -147,7 +147,7 @@ function Board() {
                 다음
               </PgNext>
 
-              <WriteBtn href="/Boardwrite">글쓰기</WriteBtn>
+              <WriteBtn href="/BoardWrite">글쓰기</WriteBtn>
             </PgBody>
           </BoardMainBody>
         </WrapBody>
@@ -190,11 +190,11 @@ const Bh1 = styled.h1`
   margin-top: 30px;
   margin-left: 100px;
   @media (max-width: 1300px) {
-    font-size: 15pt;
+    font-size: 18pt;
   }
 
   @media (max-width: 1039px) {
-    font-size: 10pt;
+    font-size: 14pt;
     margin-left: 0;
   }
 `;
@@ -287,7 +287,8 @@ const WriteBtn = styled.a`
   border-radius: 30px;
   border: 1px solid gray;
   position: absolute;
-  left: 400px;
+  left: 500px;
+  bottom: -10px;
   font-weight: bold;
   padding: 15px 30px;
 
@@ -308,10 +309,10 @@ const WriteBtn = styled.a`
     padding: 10px 15px;
     font-size: 15px;
     margin-left: 100px;
-    left: 200px;
+    left: 350px;
   }
   @media (max-width: 1039px) {
-    left: 60px;
+    left: 100px;
   }
 `;
 
@@ -319,7 +320,7 @@ const BoardMainBody = styled.div`
   height: 800px;
   width: 90%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background-color: white;
+  background-color: rgb(251, 251, 251);
   border-radius: 25px;
   position: relative;
   display: flex;
@@ -411,7 +412,6 @@ const Views = styled.span`
 
 const Likes = styled.span`
   color: purple;
-
   margin-left: 5px;
 `;
 

@@ -195,7 +195,7 @@ function List() {
 export default List;
 
 const BackColor = styled.div`
-  background-color: #fff;
+  background-color: rgb(251, 251, 251);
 `;
 
 const SearchSection = styled.div`
@@ -203,7 +203,7 @@ const SearchSection = styled.div`
   justify-content: center;
   align-items: center;
   margin: 30px 0;
-  padding: 70px 0 0 0;
+  padding-top: 70px;
   input {
     width: 300px;
     height: 20px;
@@ -213,7 +213,6 @@ const SearchSection = styled.div`
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 50px;
-    // background: #283542;
   }
 `;
 
@@ -224,10 +223,19 @@ const BookAddSection = styled.div`
   button {
     width: 150px;
     height: 50px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: black;
+    cursor: pointer;
     &:hover {
-      cursor: pointer;
-      background-color: #fff;
+      background-color: black;
+      color: #fff;
     }
+  }
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+    margin-right: 0;
   }
 `;
 
@@ -235,6 +243,7 @@ const BookMainWrap = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px;
+  padding-bottom: 30px;
 `;
 
 const BookWrap = styled.div`

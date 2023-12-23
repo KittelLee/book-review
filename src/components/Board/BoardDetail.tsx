@@ -43,7 +43,14 @@ function BoardDetail() {
   interface CommentData {
     user: string;
     content: string;
-    profileImageUrl?: string; // 프로필 이미지 URL을 나타내는 속성 추가
+    profileImageUrl?: string;
+    NickName?: string;
+  }
+
+  interface CommentDoc {
+    user: string;
+    content: string;
+    profileImageUrl?: string;
     NickName?: string;
   }
 
@@ -82,13 +89,14 @@ function BoardDetail() {
           author: doc.data().author,
           category: doc.data().category,
           comments: Array.isArray(doc.data().comments)
-            ? doc.data().comments.map((commentDoc: any) => ({
+            ? doc.data().comments.map((commentDoc: CommentDoc) => ({
                 user: commentDoc.user,
                 content: commentDoc.content,
                 NickName: commentDoc.NickName,
                 profileImageUrl: commentDoc.profileImageUrl,
               }))
             : [],
+
           content: doc.data().content,
           image: doc.data().image,
           likes: doc.data().likes,
@@ -127,19 +135,17 @@ function BoardDetail() {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [chatdata]);
 
   useEffect(() => {
-    // 이 부분에서 댓글 수를 업데이트하는 함수 호출
+    const updateCommentCount = () => {
+      const selectedPost = posts[0];
+      if (selectedPost) {
+        setCommentCount(selectedPost.comments.length);
+      }
+    };
     updateCommentCount();
-  }, [posts[0]?.comments]);
-
-  const updateCommentCount = () => {
-    const selectedPost = posts[0];
-    if (selectedPost) {
-      setCommentCount(selectedPost.comments.length);
-    }
-  };
+  }, [posts]);
 
   const handleCommentSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -161,12 +167,8 @@ function BoardDetail() {
         const boardDoc = await getDoc(boardRef);
 
         if (boardDoc.exists()) {
-          // Update Firestore with new comment
           await updateDoc(boardRef, {
-            comments: [
-              ...(posts[0]?.comments || []), // Keep existing comments
-              commentData, // Add the new comment
-            ],
+            comments: [...(posts[0]?.comments || []), commentData],
           });
 
           console.log("Comment added successfully!");
@@ -406,7 +408,7 @@ function BoardDetail() {
           </ul>
 
           <BtnRoom onSubmit={handleCommentSubmit}>
-            <BackBtn onClick={() => navigate("/board")}>게시판으로</BackBtn>
+            <BackBtn onClick={() => navigate("/board")}>뒤로가기</BackBtn>
             <Chatself
               placeholder="댓글을 입력해주세요"
               value={commentInput}
@@ -432,11 +434,11 @@ const Main = styled.div`
 `;
 
 const Box = styled.div`
-  margin-top: 150px;
+  margin-top: 100px;
   margin-bottom: 150px;
   width: 1300px;
   height: 100%;
-  background-color: #fff;
+  background-color: rgb(251, 251, 251);
   @media (max-width: 1420px) {
     width: 80%;
   }

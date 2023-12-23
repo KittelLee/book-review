@@ -9,8 +9,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { User } from "firebase/auth";
 import Loader from "../components/Loader/Loader";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { NewIntro } from "../types/Mypage";
 
 const modalStyles = {
@@ -22,15 +20,11 @@ const modalStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "54%",
-    width: "50%",
+    width: "40%",
   },
   overlay: {
     backgroundColor: "rgb(255, 255, 255, 0.8)",
   },
-};
-
-const showToast = (message: string) => {
-  toast(message);
 };
 
 function MyPage() {
@@ -70,7 +64,7 @@ function MyPage() {
         setUserEmail(currentUser.email);
       }
     } catch (error) {
-      /* Empty */
+      /*Empty*/
     }
   };
 
@@ -91,7 +85,7 @@ function MyPage() {
   return (
     <Body>
       <Loader loading={loading} />
-      <ToastContainer position="top-right" autoClose={5000} />
+
       <Card>
         <Lines />
         {!modalOpen && (
@@ -126,7 +120,6 @@ function MyPage() {
           closeModal={closeModal}
           changeIntro={setNewIntro}
           setLoading={setLoading}
-          showToast={showToast}
         />
         <CloseBtn>
           <button onClick={closeModal}>X</button>

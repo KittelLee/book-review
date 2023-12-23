@@ -7,7 +7,6 @@ import {
 import { auth } from "../../firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { db } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

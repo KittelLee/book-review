@@ -6,7 +6,7 @@ export const modalStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "54%",
+    height: "60%",
     width: "40%",
   },
   overlay: {

@@ -52,6 +52,7 @@ function Review({
     return () => unsubscribe();
   }, []);
 
+  // 'NickName' 입력 필드의 값으로 'user.NickName' 사용
   useEffect(() => {
     if (user && user.NickName) {
       setNickName(user.NickName);
@@ -168,7 +169,7 @@ const Book = styled.div`
   background-color: whitesmoke;
   margin-right: 100px;
   img {
-    width: 350px;
+    width: 95%;
     height: 350px;
   }
   @media screen and (max-width: 600px) {
@@ -195,7 +196,7 @@ const BookInfo = styled.div`
   }
   @media screen and (max-width: 600px) {
     margin-right: 0px;
-    width: 260px;
+    width: 90%;
     height: 260px;
   }
 `;

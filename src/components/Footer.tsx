@@ -58,7 +58,7 @@ function Footer() {
           <h3>BOOK-REVIEW</h3>
           <p>개발자: 이진욱 강수진 손진빈</p>
           <p>
-            레포지토리 주소:{" "}
+            레포지토리 주소:
             <a href="https://github.com/KittelLee/book-review">
               github.com/KittelLee/book-review
             </a>
@@ -152,20 +152,8 @@ const IconImg = styled.img`
 
 const FooterRight = styled.div`
   width: 30%;
-  @media screen and (max-width: 600px) {
-    margin-top: 20px;
-    width: 100%;
-    h3,
-    p,
-    a {
-      text-align: center;
-    }
-    a {
-      font-size: 0.72rem;
-    }
-  }
   p {
-    line-height: 0.5;
+    line-height: 0.9;
     font-family: Arial;
     font-size: 0.8rem;
   }
@@ -175,5 +163,20 @@ const FooterRight = styled.div`
   }
   a:hover {
     color: red;
+  }
+  @media screen and (max-width: 600px) {
+    margin-top: 20px;
+    width: 100%;
+    h3,
+    p,
+    a {
+      text-align: center;
+    }
+    p {
+      line-height: 0.5;
+    }
+    a {
+      font-size: 0.72rem;
+    }
   }
 `;

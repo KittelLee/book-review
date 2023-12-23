@@ -140,7 +140,8 @@ const Upload = styled.div`
     border: none;
     border-radius: 4px;
     padding: 4px 6px;
-    background-color: skyblue;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px 2px;
   }
 `;
 
@@ -154,7 +155,8 @@ const BottomBtn = styled.div`
   flex-direction: column;
   button {
     margin-right: 4px;
-    background-color: lightblue;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px 1px;
     border: unset;
     border-radius: 4px;
     padding: 4px 10px;
@@ -172,7 +174,7 @@ const BottomBtn = styled.div`
       height: 100%;
       width: 0;
       border-radius: 4px;
-      background-color: lightcoral;
+      background-color: black;
       z-index: -1;
       transition: all 250ms;
     }

@@ -7,6 +7,7 @@ import { auth } from "../../../firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import styled from "styled-components";
 import ProfileAddIcon from "../../assets/icons/ProfileAddIcon.jpeg";
+import { toast, ToastContainer } from "react-toastify";
 
 interface NewIntro {
   imageUrl: string;
@@ -17,15 +18,13 @@ interface ChangeIntroProps {
   closeModal: () => void;
   changeIntro: React.Dispatch<React.SetStateAction<NewIntro | null>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  showToast: (message: string) => void;
 }
 
-function Intro({
-  closeModal,
-  changeIntro,
-  setLoading,
-  showToast,
-}: ChangeIntroProps) {
+const showToast = (message: string) => {
+  toast(message);
+};
+
+function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
   if (!firebase.apps.length) {
     firebase.initializeApp(db);
   }
@@ -75,17 +74,20 @@ function Intro({
       });
 
       showToast("프로필이 성공적으로 업데이트되었습니다!");
+      console.log("MyPage component rendered");
       closeModal();
     } catch (error) {
       console.error("An error occurred during upload:", error);
       showToast("프로필 업데이트에 실패했습니다.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
     <MyPageModalWrap>
       <MyPageInfoWrap>
+        <ToastContainer position="top-right" autoClose={5000} />
         <h2>정보 수정하기</h2>
         <img
           src={

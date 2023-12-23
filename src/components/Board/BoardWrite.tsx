@@ -39,17 +39,14 @@ function BoardWrite() {
   };
 
   useEffect(() => {
-    // 현재 로그인된 사용자 상태 변경 감지
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
 
-    // 컴포넌트 언마운트 시 unsubscribe
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    // 사용자가 로그인되면 해당 사용자의 데이터를 가져옴
     if (user) {
       userDataGet();
     }
@@ -70,7 +67,7 @@ function BoardWrite() {
         image: "",
         createdAt: serverTimestamp(),
       });
-      // 성공적으로 추가되었을 때 필요한 작업 수행
+
       console.log("Author:", newauthor);
       console.log("Title:", newTitle);
       console.log("Category:", newCategory);
@@ -79,10 +76,8 @@ function BoardWrite() {
 
       const newPostId = docRef.id;
       navigate(`/boarddetail/${newPostId}`);
-      // 추가 후에 필요한 작업을 수행하거나 페이지를 리디렉션할 수 있습니다.
     } catch (error) {
       console.error("게시물 추가 중 오류 발생:", error);
-      // 오류가 발생했을 경우 사용자에게 알림을 표시하거나 다른 조치를 취할 수 있습니다.
     }
   };
 

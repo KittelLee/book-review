@@ -83,7 +83,6 @@ function Review({
     return () => unsubscribe();
   }, []);
 
-  // 'NickName' 입력 필드의 값으로 'user.NickName' 사용
   useEffect(() => {
     if (user && user.NickName) {
       setNickName(user.NickName);

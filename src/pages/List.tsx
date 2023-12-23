@@ -7,7 +7,6 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Loader from "../components/Loader/Loader";
 
-
 const customStyles = {
   content: {
     top: "50%",
@@ -55,10 +54,9 @@ function List() {
   const [reviewModalIsOpen, setReviewModalIsOpen] = useState(false);
   const [bookAddModalIsOpen, setBookAddModalIsOpen] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
-  const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -102,8 +100,8 @@ function List() {
     refreshBooks();
   }, [refreshBooks]);
 
-  const openReviewModal = (bookId: string) => {
-    setSelectedBookId(bookId);
+  const openReviewModal = (book: Book) => {
+    setSelectedBook({ ...book });
     setReviewModalIsOpen(true);
   };
 
@@ -123,9 +121,11 @@ function List() {
     <BackColor>
       <Loader loading={loading} />
       <SearchSection>
-        <input placeholder="Search Title" 
-        value={searchTerm}
-        onChange={handleSearchTermChange}/>
+        <input
+          placeholder="Search Title"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+        />
       </SearchSection>
 
       <BookAddSection>
@@ -137,11 +137,11 @@ function List() {
           <BookSection>
             {filterBooks().map((book, index) => (
               <BookLeftSection key={index}>
-                <ImgSection onClick={() => openReviewModal(book.id)}>
+                <ImgSection onClick={() => openReviewModal(book)}>
                   <img src={book.imageUrl} alt="책 이미지" />
                 </ImgSection>
 
-                <InfoSection onClick={() => openReviewModal(book.id)}>
+                <InfoSection onClick={() => openReviewModal(book)}>
                   <p>책 제목: {book.bookTitle}</p>
                   <p>저자: {book.author}</p>
                   <p>출판사: {book.publisher}</p>
@@ -158,8 +158,17 @@ function List() {
         onRequestClose={closeReviewModal}
         style={customStyles}
       >
-        {selectedBookId !== null && (
-          <Review bookId={selectedBookId} onDelete={deleteBook} />
+        {selectedBook && (
+          <Review
+            bookId={selectedBook.id}
+            bookTitle={selectedBook.bookTitle}
+            author={selectedBook.author}
+            publisher={selectedBook.publisher}
+            price={selectedBook.price}
+            imageUrl={selectedBook.imageUrl}
+            onDelete={deleteBook}
+            onClose={closeReviewModal}
+          />
         )}
         <CloseBtn>
           <button onClick={closeReviewModal}>X</button>
@@ -240,15 +249,14 @@ const BookSection = styled.div`
   @media screen and (max-width: 780px) {
     flex-direction: column;
     align-items: center;
-    }
+  }
 
-
-    @media screen and (max-width: 1300px) {
-      & > * {
-        flex-basis: calc(50% - 10px);
-        margin: 5px;
-      }
+  @media screen and (max-width: 1300px) {
+    & > * {
+      flex-basis: calc(50% - 10px);
+      margin: 5px;
     }
+  }
 `;
 
 const BookLeftSection = styled.div`

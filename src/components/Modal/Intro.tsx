@@ -17,9 +17,15 @@ interface ChangeIntroProps {
   closeModal: () => void;
   changeIntro: React.Dispatch<React.SetStateAction<NewIntro | null>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  showToast: (message: string) => void;
 }
 
-function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
+function Intro({
+  closeModal,
+  changeIntro,
+  setLoading,
+  showToast,
+}: ChangeIntroProps) {
   if (!firebase.apps.length) {
     firebase.initializeApp(db);
   }
@@ -40,12 +46,10 @@ function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
     try {
       if (!selectedFile) return;
 
-      // 파일을 Firebase Storage에 업로드
       const storageRef = storage.ref();
       const fileRef = storageRef.child(selectedFile.name);
       await fileRef.put(selectedFile);
 
-      // 업로드된 파일의 다운로드 URL을 가져옴
       const downloadURL = await fileRef.getDownloadURL();
 
       const uid = auth.currentUser?.uid;
@@ -53,7 +57,6 @@ function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
       if (uid) {
         const userDocRef = doc(db, "User", uid);
         const userDocSnapshot = await getDoc(userDocRef);
-        console.log(uid);
         if (userDocSnapshot.exists()) {
           await updateDoc(userDocRef, {
             profileImageUrl: downloadURL,
@@ -61,13 +64,9 @@ function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
           });
         }
       }
-      console.log(downloadURL);
-      // Firebase Authentication의 비밀번호 업데이트
+
       if (auth.currentUser) {
         await updatePassword(auth.currentUser, newPassword);
-        console.log("Password updated successfully!");
-      } else {
-        console.error("No user is currently signed in.");
       }
 
       changeIntro({
@@ -75,9 +74,11 @@ function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
         NickName: newNickname,
       });
 
+      showToast("프로필이 성공적으로 업데이트되었습니다!");
       closeModal();
     } catch (error) {
       console.error("An error occurred during upload:", error);
+      showToast("프로필 업데이트에 실패했습니다.");
     }
     setLoading(false);
   };

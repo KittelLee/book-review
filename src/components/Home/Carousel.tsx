@@ -2,12 +2,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
-import Test1 from "../../assets/images/test4.jpg";
-import Test2 from "../../assets/images/test11.jpg";
-import Test3 from "../../assets/images/test3.jpg";
-import Test4 from "../../assets/images/test1.jpg";
-import Test5 from "../../assets/images/test5.jpg";
-import Test6 from "../../assets/images/test6.jpg";
+import SlideImg1 from "../../assets/images/book1.jpg";
+import SlideImg2 from "../../assets/images/book2.jpg";
+import SlideImg3 from "../../assets/images/book3.jpg";
+import SlideImg4 from "../../assets/images/book4.jpg";
+import SlideImg5 from "../../assets/images/book5.jpg";
+import SlideImg6 from "../../assets/images/book6.jpg";
 
 function Carousel() {
   const settings = {
@@ -29,22 +29,22 @@ function Carousel() {
       <Main>
         <Slider {...settings}>
           <Carousela>
-            <Photobox src={Test1}></Photobox>
+            <Photobox src={SlideImg1}></Photobox>
           </Carousela>
           <Carousela>
-            <Photobox src={Test2}></Photobox>
+            <Photobox src={SlideImg2}></Photobox>
           </Carousela>
           <Carousela>
-            <Photobox src={Test3}></Photobox>
+            <Photobox src={SlideImg3}></Photobox>
           </Carousela>
           <Carousela>
-            <Photobox src={Test4}></Photobox>
+            <Photobox src={SlideImg4}></Photobox>
           </Carousela>
           <Carousela>
-            <Photobox src={Test5}></Photobox>
+            <Photobox src={SlideImg5}></Photobox>
           </Carousela>
           <Carousela>
-            <Photobox src={Test6}></Photobox>
+            <Photobox src={SlideImg6}></Photobox>
           </Carousela>
         </Slider>
       </Main>

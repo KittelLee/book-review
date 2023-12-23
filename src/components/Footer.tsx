@@ -111,7 +111,6 @@ const MenuList = styled.div`
   }
   @media screen and (max-width: 600px) {
     ul li {
-      margin: 0 2px;
       font-size: 0.9rem;
     }
     ul li a {

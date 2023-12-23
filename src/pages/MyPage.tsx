@@ -9,6 +9,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { User } from "firebase/auth";
 import Loader from "../components/Loader/Loader";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const modalStyles = {
   content: {
@@ -30,6 +32,10 @@ interface NewIntro {
   imageUrl: string;
   NickName: string;
 }
+
+const showToast = (message: string) => {
+  toast(message);
+};
 
 function MyPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -92,6 +98,7 @@ function MyPage() {
   return (
     <Body>
       <Loader loading={loading} />
+      <ToastContainer position="top-right" autoClose={5000} />
       <Card>
         <Lines />
         {!modalOpen && (
@@ -126,6 +133,7 @@ function MyPage() {
           closeModal={closeModal}
           changeIntro={setNewIntro}
           setLoading={setLoading}
+          showToast={showToast}
         />
         <CloseBtn>
           <button onClick={closeModal}>X</button>

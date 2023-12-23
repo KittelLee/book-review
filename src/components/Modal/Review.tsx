@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
 import { ReviewProps, Comment } from "../../types/Review";
-
-const db = firebase.firestore();
+import { db, auth } from "../../Firebase";
 
 function Review({
   bookId,
@@ -29,7 +25,7 @@ function Review({
   const [user] = useState({ NickName: "" });
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         setIsAuthenticated(true);
         db.collection("User")

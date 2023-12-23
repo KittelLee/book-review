@@ -1,19 +1,23 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
+import "firebase/compat/auth";
+import { getApps } from "firebase/app";
 
-// Firebase 프로젝트 설정
 const firebaseConfig = {
-  apiKey: "AIzaSyAu1pu4r4m_kJLEyeL7Jgc6tWz94Upzk98",
-  authDomain: "book-review-a7be9.firebaseapp.com",
-  projectId: "book-review-a7be9",
-  storageBucket: "book-review-a7be9.appspot.com",
-  messagingSenderId: "905824431279",
-  appId: "1:905824431279:web:f56fdfc06bc60dd733785a",
-  measurementId: "G-L9QXD3H138",
+  apiKey: import.meta.env.VITE_APP_API_KEY,
+  authDomain: import.meta.env.VITE_APP_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_APP_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_APP_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_APP_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_APP_ID,
+  measurementId: import.meta.env.VITE_APP_MEASUREMENT_ID,
 };
 
-// Firebase 앱 초기화
-const app = initializeApp(firebaseConfig);
+if (!getApps().length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-// Firebase 인증 객체
-export const auth = getAuth(app);
+export const db = firebase.firestore();
+export const auth = firebase.auth();
+export const storage = firebase.storage();

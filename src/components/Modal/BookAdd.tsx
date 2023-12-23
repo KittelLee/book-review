@@ -1,13 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import firebase from "firebase/compat/app";
-import "firebase/compat/storage";
 import BookAddIcon from "../../assets/icons/BookAddIcon.jpeg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BookAddProps, Book } from "../../types/BookAdd";
-
-const storage = firebase.storage();
+import { db, storage } from "../../Firebase";
 
 function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -24,7 +21,6 @@ function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
   };
 
   const addBookToFirestore = async (book: Book) => {
-    const db = firebase.firestore();
     await db.collection("books").add(book);
   };
 
@@ -50,9 +46,7 @@ function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
       };
 
       await addBookToFirestore(newBook);
-
       await refreshBooks();
-
       toast.success("책이 성공적으로 추가되었습니다!");
       closeBookAddModal();
     } catch (error) {

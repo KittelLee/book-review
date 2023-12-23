@@ -9,7 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { User } from "firebase/auth";
 import Loader from "../components/Loader/Loader";
-import "react-toastify/dist/ReactToastify.css";
+import { NewIntro } from "../types/MyPage";
 
 const modalStyles = {
   content: {
@@ -26,11 +26,6 @@ const modalStyles = {
     backgroundColor: "rgb(255, 255, 255, 0.8)",
   },
 };
-
-interface NewIntro {
-  imageUrl: string;
-  NickName: string;
-}
 
 function MyPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -68,7 +63,9 @@ function MyPage() {
         }
         setUserEmail(currentUser.email);
       }
-    } catch (error) {}
+    } catch (error) {
+      /*Empty*/
+    }
   };
 
   useEffect(() => {

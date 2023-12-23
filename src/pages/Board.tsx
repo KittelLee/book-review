@@ -11,6 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import Loader from "../components/Loader/Loader";
+import { BoardData } from "../types/Board";
 
 function Board() {
   const [posts, setPosts] = useState<BoardData[]>([]);
@@ -20,24 +21,6 @@ function Board() {
   const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-  interface BoardData {
-    id: string;
-    author: string;
-    category: string;
-    comments: CommentData[];
-    content: string;
-    image: string;
-    likes: number;
-    title: string;
-    views: number;
-    createdAt: Date;
-  }
-
-  interface CommentData {
-    user: string;
-    content: string;
-  }
 
   useEffect(() => {
     async function fetchData() {

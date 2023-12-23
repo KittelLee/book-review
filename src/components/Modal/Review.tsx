@@ -3,22 +3,7 @@ import styled from "styled-components";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-
-interface ReviewProps {
-  bookId: string;
-  bookTitle: string;
-  author: string;
-  publisher: string;
-  price: string;
-  imageUrl: string;
-  onDelete: (id: string) => void;
-  onClose: () => void;
-}
-
-interface Comment {
-  NickName: string;
-  comment: string;
-}
+import { ReviewProps, Comment } from "../../types/Review";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAu1pu4r4m_kJLEyeL7Jgc6tWz94Upzk98",
@@ -29,6 +14,7 @@ const firebaseConfig = {
   appId: "1:905824431279:web:f56fdfc06bc60dd733785a",
   measurementId: "G-L9QXD3H138",
 };
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }

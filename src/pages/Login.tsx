@@ -118,7 +118,6 @@ function Login() {
               />
 
               <button type="submit">Login</button>
-              
             </form>
             {error && <p>아이디/비밀번호가 틀립니다.</p>}
             {user && <div>Welcome back, {user.user.email}!</div>}{" "}

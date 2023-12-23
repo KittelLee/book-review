@@ -18,21 +18,13 @@ interface ChangeIntroProps {
   closeModal: () => void;
   changeIntro: React.Dispatch<React.SetStateAction<NewIntro | null>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  /* showToast: (message: string) => void;*/
 }
 
 const showToast = (message: string) => {
   toast(message);
 };
 
-function Intro({
-  closeModal,
-  changeIntro,
-  setLoading,
-}: /*
-  showToast,
-  */
-ChangeIntroProps) {
+function Intro({ closeModal, changeIntro, setLoading }: ChangeIntroProps) {
   if (!firebase.apps.length) {
     firebase.initializeApp(db);
   }

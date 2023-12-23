@@ -170,7 +170,13 @@ const Upload = styled.div`
     position: relative;
 
     input:nth-child(1) {
-      margin-left: 30px;
+      position: absolute;
+      top: -30px;
+      left: -20px;
+    }
+
+    input:nth-child(2) {
+      margin-top: 10px;
     }
   }
 `;
@@ -219,7 +225,7 @@ const BottomBtn = styled.div`
   }
   @media (max-width: 700px) {
     button {
-      width: 70%;
+      width: 65%;
       margin-left: auto;
       margin-right: auto;
       margin-top: 5px;

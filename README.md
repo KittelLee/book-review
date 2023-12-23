@@ -1,7 +1,7 @@
 # Book-Review
 
 <div align="center">
-<img src="https://github.com/KittelLee/book-review/tree/main/src/assets/images/main.png" alt='메인페이지'>
+<img src="https://github.com/KittelLee/book-review/blob/main/src/assets/images/main.png" alt='메인페이지'>
 </div>
 
 <p align="center">

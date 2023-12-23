@@ -114,6 +114,8 @@ const MyPageModalWrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 
   img {
     width: 200px;
@@ -168,12 +170,7 @@ const Upload = styled.div`
     position: relative;
 
     input:nth-child(1) {
-      position: absolute;
-      top: -10px;
-      left: -10px;
-    }
-    input:nth-child(n + 2) {
-      margin-top: 30px;
+      margin-left: 30px;
     }
   }
 `;
@@ -225,7 +222,7 @@ const BottomBtn = styled.div`
       width: 70%;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 30px;
+      margin-top: 5px;
     }
   }
 `;

@@ -6,10 +6,15 @@ import {
   faLock,
   faBook,
   faUser,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { AuthStateContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 
 function Header() {
+  const authState = useContext(AuthStateContext);
+
   return (
     <HeaderWrap>
       <Navbar>
@@ -29,10 +34,19 @@ function Header() {
           <FontAwesomeIcon icon={faUser} id="icon-color4" />
           <span>MyPage</span>
         </Link>
-        <Link to="/Login" className="sub-list">
-          <FontAwesomeIcon icon={faLock} id="icon-color5" />
-          <span>Login</span>
-        </Link>
+        {authState &&
+        authState.state === "loaded" &&
+        authState.isAuthentication ? (
+          <Link to="/Logout" className="sub-list">
+            <FontAwesomeIcon icon={faRightFromBracket} id="icon-color5" />
+            <span>Logout</span>
+          </Link>
+        ) : (
+          <Link to="/Login" className="sub-list">
+            <FontAwesomeIcon icon={faLock} id="icon-color5" />
+            <span>Login</span>
+          </Link>
+        )}
       </Navbar>
     </HeaderWrap>
   );

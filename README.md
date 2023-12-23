@@ -59,7 +59,7 @@
 
 저희는 `BOOK-REVIEW`라는 사이트를 개발하였으며 본 사이트는 책 리뷰 사이트로 사용자가 책의 리뷰를 남길 수 있는 플랫폼을 만들었습니다.
 
-## 🧑🏻‍💻 Contributor
+## 🧑🏻‍💻 맡은 부분
 
 > @[KittelLee](https://github.com/KittelLee) (이진욱) : <br />
 > @[POZIP](https://github.com/heriondb) (강수진) : <br />
@@ -91,21 +91,22 @@
   <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white" />
   <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
      <img src="https://img.shields.io/badge/styledComponents-DB7093?style=for-the-badge&logo=styledComponents&logoColor=white" />
-  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/react(VITE)-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
   <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
 </div>
     
 ### Deploy
 
 <div style="display: flex;">
- <img src="https://img.shields.io/badge/FireBase-000000.svg?style=for-the-badge&logo=firebase&logoColor=white" />
+  <img src="https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase" />
+  <img src="https://img.shields.io/badge/github actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white" />
 </div>
 
 ### Communication
 
 <div style="display: flex;">
   <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white" />
-  <img src="https://img.shields.io/badge/kakaotalk-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=black" />
+  <img src="https://img.shields.io/badge/kakaotalk-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=white" />
 </div>
 
 ### 🧑🏻‍💻 개발 기간 : `18일` `23.12.06 ~ 23.12.24`

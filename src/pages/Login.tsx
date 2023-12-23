@@ -7,7 +7,6 @@ import {
 import { auth } from "../../firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { db } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -118,9 +117,6 @@ function Login() {
               />
 
               <button type="submit">Login</button>
-              <Link to="#" className="forgot">
-                Forgot Password
-              </Link>
             </form>
             {error && <p>아이디/비밀번호가 틀립니다.</p>}
             {user && <div>Welcome back, {user.user.email}!</div>}{" "}

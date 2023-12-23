@@ -378,7 +378,7 @@ function BoardDetail() {
                 setCommentInput(e.target.value)
               }
             ></Chatself>
-            <Chatsubmit type="submit">댓글 달기</Chatsubmit>
+            <ChatSubmit type="submit">댓글 달기</ChatSubmit>
           </BtnRoom>
         </Chatroom>
       </Box>
@@ -558,7 +558,7 @@ const BackBtn = styled.button`
   }
 `;
 
-const Chatsubmit = styled.button`
+const ChatSubmit = styled.button`
   cursor: pointer;
   position: absolute;
   top: 150px;

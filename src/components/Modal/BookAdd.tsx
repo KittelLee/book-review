@@ -1,25 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import firebase from "firebase/compat/app";
-import "firebase/compat/storage";
 import BookAddIcon from "../../assets/icons/BookAddIcon.jpeg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BookAddProps, Book } from "../../types/BookAdd";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAu1pu4r4m_kJLEyeL7Jgc6tWz94Upzk98",
-  authDomain: "book-review-a7be9.firebaseapp.com",
-  projectId: "book-review-a7be9",
-  storageBucket: "book-review-a7be9.appspot.com",
-  messagingSenderId: "905824431279",
-  appId: "1:905824431279:web:f56fdfc06bc60dd733785a",
-  measurementId: "G-L9QXD3H138",
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const storage = firebase.storage();
+import { db, storage } from "../../Firebase";
 
 function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -36,7 +21,6 @@ function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
   };
 
   const addBookToFirestore = async (book: Book) => {
-    const db = firebase.firestore();
     await db.collection("books").add(book);
   };
 
@@ -62,9 +46,7 @@ function BookAdd({ closeBookAddModal, refreshBooks }: BookAddProps) {
       };
 
       await addBookToFirestore(newBook);
-
       await refreshBooks();
-
       toast.success("책이 성공적으로 추가되었습니다!");
       closeBookAddModal();
     } catch (error) {

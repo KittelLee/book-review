@@ -1,24 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/auth";
 import { ReviewProps, Comment } from "../../types/Review";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAu1pu4r4m_kJLEyeL7Jgc6tWz94Upzk98",
-  authDomain: "book-review-a7be9.firebaseapp.com",
-  projectId: "book-review-a7be9",
-  storageBucket: "book-review-a7be9.appspot.com",
-  messagingSenderId: "905824431279",
-  appId: "1:905824431279:web:f56fdfc06bc60dd733785a",
-  measurementId: "G-L9QXD3H138",
-};
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-const db = firebase.firestore();
+import { db, auth } from "../../Firebase";
 
 function Review({
   bookId,
@@ -42,7 +25,7 @@ function Review({
   const [user] = useState({ NickName: "" });
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         setIsAuthenticated(true);
         db.collection("User")

@@ -17,7 +17,7 @@ function Board() {
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
 
-  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 추가
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 

@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://book-review-a7be9.web.app/">
-    <img src="https://img.shields.io/badge/BookReview BookReview-gray?style=for-the-badge&logoColor=white" alt="BOOKREVIEW" />
+    <img src="https://img.shields.io/badge/책리뷰사이트 BookReview-gray?style=for-the-badge&logoColor=white" alt="BOOKREVIEW" />
   </a>
   <a href="https://github.com/KittelLee/book-review">
     <img src="https://img.shields.io/badge/배포 Repository-212125?style=for-the-badge&logoColor=white" alt="배포 레포"/>

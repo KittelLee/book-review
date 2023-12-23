@@ -6,10 +6,10 @@
 
 <p align="center">
   <a href="https://book-review-a7be9.web.app/">
-    <img src="https://img.shields.io/badge/Book-Review-gray?style=for-the-badge&logoColor=white" alt="BOOKREVIEW" />
+    <img src="https://img.shields.io/badge/BookReview BookReview-gray?style=for-the-badge&logoColor=white" alt="BOOKREVIEW" />
   </a>
   <a href="https://github.com/KittelLee/book-review">
-    <img src="https://img.shields.io/badge/배포 repository-212125?style=for-the-badge&logoColor=white" alt="배포 레포"/>
+    <img src="https://img.shields.io/badge/배포 Repository-212125?style=for-the-badge&logoColor=white" alt="배포 레포"/>
   </a>
 </p>
 
@@ -68,8 +68,8 @@
 ## 🧑🏻‍💻 맡은 부분
 
 > @[KittelLee](https://github.com/KittelLee) (이진욱) : 총괄, CI/CD구축, Header구현, Footer구현, 모달전체구현, ...<br />
-> @[POZIP](https://github.com/heriondb) (강수진) : 책 360도 회전, List페이지 검색부분, 책 정렬부분<br />
-> @[withsjb](https://github.com/withsjb) (손진빈) : 캐로셀, 게시판, 회원가입&로그인 ...<br />
+> @[POZIP](https://github.com/heriondb) (강수진) : 책 360도 회전, List페이지 검색, 책 정렬<br />
+> @[withsjb](https://github.com/withsjb) (손진빈) : 캐로셀, 게시판, 회원가입&로그인, 마이페이지, 개인정보수정(닉네임&비밀번호)<br />
 
 <br/>
 
@@ -162,7 +162,29 @@ BOOK-REVIEW
 
 ## 🧑🏻‍💻 화면 구성
 
-보류
+### 메인 페이지+헤더
+
+<img src="https://github.com/KittelLee/book-review/blob/main/src/assets/images/main2.png" />
+
+### 메인 페이지+푸터
+
+<img src="https://github.com/KittelLee/book-review/blob/main/src/assets/images/main3.png" />
+
+### 책 리스트페이지 & 검색페이지
+
+<img src="https://github.com/KittelLee/book-review/blob/main/src/assets/images/main4.png" />
+
+### 게시판 페이지
+
+<img src="https://github.com/KittelLee/book-review/blob/main/src/assets/images/main5.png" />
+
+### 마이 페이지
+
+<img src="https://github.com/KittelLee/book-review/blob/main/src/assets/images/main6.png" />
+
+### 회원가입&로그인 페이지
+
+<img src="https://github.com/KittelLee/book-review/blob/main/src/assets/images/main7.png" />
 
 <br/>
 

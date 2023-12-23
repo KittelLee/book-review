@@ -85,7 +85,7 @@ function Board() {
         });
       }
     } catch (error) {
-      
+      /* empty */
     }
   };
 

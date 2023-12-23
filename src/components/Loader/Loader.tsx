@@ -18,7 +18,6 @@ function Loader({ loading }: { loading: boolean }) {
 
 export default Loader;
 
-// Loader 컴포넌트를 감싸는 컨테이너 스타일
 const LoaderContainer = styled.div<{ loading: boolean }>`
   display: ${({ loading }) => (loading ? "flex" : "none")};
   align-items: center;

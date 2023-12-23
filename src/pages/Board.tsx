@@ -17,7 +17,7 @@ function Board() {
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
 
-  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 추가
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -85,7 +85,7 @@ function Board() {
         });
       }
     } catch (error) {
-      console.error("Views 업데이트 중 오류 발생:", error);
+      
     }
   };
 
@@ -205,7 +205,6 @@ const Bh2 = styled.span`
   height: auto;
   padding-top: 10px;
   padding-left: 20px;
-  /*제목 옆 부제목*/
   @media (max-width: 1039px) {
     font-size: 10pt;
   }
@@ -235,7 +234,6 @@ const ExBar = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  /*게시글 설명 바*/
   span {
     font-size: 9pt;
     font-weight: bold;

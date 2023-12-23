@@ -90,7 +90,6 @@ function List() {
   }, [fetchBooks]);
 
   const deleteBook = async (id: string) => {
-    // async 키워드를 추가합니다
     const db = firebase.firestore();
     await db.collection("books").doc(id).delete();
     setBooks(books.filter((book) => book.id !== id));

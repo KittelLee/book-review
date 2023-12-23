@@ -67,7 +67,7 @@
 
 ## 🧑🏻‍💻 맡은 부분
 
-> @[KittelLee](https://github.com/KittelLee) (이진욱) : 총괄, CI/CD구축, Header구현, Footer구현, List페이지 로직(정렬등), 모달전체구현, 로딩애니메이션, Toast알람<br />
+> @[KittelLee](https://github.com/KittelLee) (이진욱) : 총괄, CI/CD구축, Header구현, Footer구현, List페이지 로직(정렬등), 모달구현, 로딩애니메이션<br />
 > @[POZIP](https://github.com/heriondb) (강수진) : 책 360도 회전, List페이지 검색, 책 정렬<br />
 > @[withsjb](https://github.com/withsjb) (손진빈) : 캐로셀, 게시판, 회원가입&로그인, 마이페이지, 개인정보수정(닉네임&비밀번호)<br />
 

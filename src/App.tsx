@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Board from "./pages/Board";
 import BoardWrite from "./components/Board/BoardWrite";
 import BoardDetail from "./components/Board/BoardDetail";
@@ -43,6 +44,7 @@ function App() {
           <Route path="/List" element={<List />} />
           <Route path="/Board" element={<Board />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Logout" element={<Logout />} />
         </Routes>
 
         <Footer />

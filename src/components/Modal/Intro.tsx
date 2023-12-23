@@ -113,6 +113,8 @@ const MyPageModalWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
   img {
     width: 200px;
     height: 200px;
@@ -123,17 +125,56 @@ const MyPageModalWrap = styled.div`
   button {
     margin-bottom: 10px;
   }
+  @media (max-width: 1300px) {
+  }
+
+  @media (max-width: 930px) {
+    img {
+      width: 200px;
+    }
+  }
+  @media (max-width: 700px) {
+    img {
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 {
+      font-size: 20px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 `;
 
 const Upload = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
+
   input:nth-child(n + 2) {
     border: none;
     border-radius: 4px;
     padding: 4px 6px;
     background-color: #fff;
     box-shadow: 2px 2px 2px 2px;
+    width: 90%;
+  }
+  @media (max-width: 700px) {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+    input:nth-child(1) {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+    }
+    input:nth-child(n + 2) {
+      margin-top: 30px;
+    }
   }
 `;
 
@@ -158,6 +199,7 @@ const BottomBtn = styled.div`
     z-index: 1;
     font-weight: 1000;
     font-size: 17px;
+
     &::before {
       content: "";
       position: absolute;
@@ -176,6 +218,14 @@ const BottomBtn = styled.div`
     }
     &:hover::before {
       width: 100%;
+    }
+  }
+  @media (max-width: 700px) {
+    button {
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 30px;
     }
   }
 `;

@@ -84,9 +84,7 @@ function Board() {
           views: postToUpdate.views + 1,
         });
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   const handlePostBtnClick = (postId: string) => {
@@ -128,24 +126,26 @@ function Board() {
             </BoardRoom>
 
             <PgBody>
-              <PgPrev onClick={() => setPage(page - 1)} disabled={page === 1}>
-                이전
-              </PgPrev>
-              {Array.from({ length: totalPages }).map((_, index) => (
-                <PgSelect
-                  key={index + 1}
-                  onClick={() => setPage(index + 1)}
-                  active={index + 1 === page}
+              <Pagnation>
+                <PgPrev onClick={() => setPage(page - 1)} disabled={page === 1}>
+                  이전
+                </PgPrev>
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <PgSelect
+                    key={index + 1}
+                    onClick={() => setPage(index + 1)}
+                    active={index + 1 === page}
+                  >
+                    {index + 1}
+                  </PgSelect>
+                ))}
+                <PgNext
+                  onClick={() => setPage(page + 1)}
+                  disabled={page >= totalPages}
                 >
-                  {index + 1}
-                </PgSelect>
-              ))}
-              <PgNext
-                onClick={() => setPage(page + 1)}
-                disabled={page >= totalPages}
-              >
-                다음
-              </PgNext>
+                  다음
+                </PgNext>
+              </Pagnation>
 
               <WriteBtn href="/BoardWrite">글쓰기</WriteBtn>
             </PgBody>
@@ -195,7 +195,7 @@ const Bh1 = styled.h1`
 
   @media (max-width: 1039px) {
     font-size: 14pt;
-    margin-left: 0;
+    margin-left: 50px;
   }
 `;
 
@@ -206,7 +206,7 @@ const Bh2 = styled.span`
   padding-top: 10px;
   padding-left: 20px;
   @media (max-width: 1039px) {
-    font-size: 10pt;
+    display: none;
   }
 `;
 
@@ -285,8 +285,8 @@ const WriteBtn = styled.a`
   border-radius: 30px;
   border: 1px solid gray;
   position: absolute;
-  left: 500px;
-  bottom: -10px;
+  right: 30px;
+  top: 0;
   font-weight: bold;
   padding: 15px 30px;
 
@@ -307,10 +307,9 @@ const WriteBtn = styled.a`
     padding: 10px 15px;
     font-size: 15px;
     margin-left: 100px;
-    left: 350px;
   }
   @media (max-width: 1039px) {
-    left: 100px;
+    padding: 5px 10px;
   }
 `;
 
@@ -321,7 +320,6 @@ const BoardMainBody = styled.div`
   background-color: rgb(251, 251, 251);
   border-radius: 25px;
   position: relative;
-  display: flex;
 
   justify-content: center;
   @media (max-width: 1300px) {
@@ -332,7 +330,6 @@ const BoardMainBody = styled.div`
 const BoardRoom = styled.div`
   height: 80%;
   width: 100%;
-  position: absolute;
 
   margin-top: 25px;
 `;
@@ -414,11 +411,17 @@ const Likes = styled.span`
 `;
 
 const PgBody = styled.div`
-  position: absolute;
+  height: 200px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  bottom: 50px;
+  position: relative;
+`;
+
+const Pagnation = styled.div`
+  position: absolute;
+  top: 0;
 `;
 
 const PgPrev = styled.button`
@@ -440,7 +443,6 @@ const PgPrev = styled.button`
 `;
 
 const PgNext = styled.button`
-  right: 20%;
   width: auto;
   box-sizing: content-box;
   background-color: #fff;

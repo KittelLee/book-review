@@ -107,7 +107,7 @@ function BoardDetail() {
 
         const selectedPost = data.find((post) => post.id === id);
 
-        // 해당 게시물만을 상태에 저장
+        
         if (selectedPost) {
           setPosts([selectedPost]);
         } else {
@@ -159,11 +159,11 @@ function BoardDetail() {
           NickName: chatdata.NickName,
         };
 
-        // Get a reference to the document
+        
         const boardCollection = collection(db, "Board");
         const boardRef = doc(boardCollection, id);
 
-        // Get the current document data
+        
         const boardDoc = await getDoc(boardRef);
 
         if (boardDoc.exists()) {
@@ -178,7 +178,6 @@ function BoardDetail() {
             commentData.profileImageUrl || CatImg
           );
           console.log("Rendering NickName:", commentData.NickName || "익명");
-          // Clear comment input
           setCommentInput("");
           window.location.reload();
         } else {
@@ -226,7 +225,6 @@ function BoardDetail() {
           likes: postToUpdate.likes + 1,
         });
 
-        // 업데이트된 데이터를 상태에 반영
         setPosts((prevPosts) => [
           {
             ...prevPosts[0],
@@ -274,13 +272,13 @@ function BoardDetail() {
       if (postToDelete) {
         const postRef = doc(db, "Board", postToDelete.id);
 
-        // 해당 게시글 문서 삭제
+        
         await deleteDoc(postRef);
         navigate(`/board`);
 
         console.log("Post deleted successfully!");
 
-        // 이후 필요한 작업 수행 (예: 리다이렉트, 메시지 표시 등)
+       
       }
     } catch (error) {
       console.error("Error deleting post: ", error);
@@ -298,18 +296,18 @@ function BoardDetail() {
     }
   };
 
-  // 제목 수정 완료
+  
   const finishEditingTitle = () => {
     setIsEditingTitle(false);
 
-    handleUpdatePost(); // 수정 완료 시 업데이트
+    handleUpdatePost(); 
   };
 
-  // 내용 수정 완료
+ 
   const finishEditingContent = () => {
     setIsEditingContent(false);
 
-    handleUpdatePost(); // 수정 완료 시 업데이트
+    handleUpdatePost(); 
   };
 
   return (

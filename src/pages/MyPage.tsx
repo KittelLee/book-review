@@ -74,22 +74,19 @@ function MyPage() {
         setUserEmail(currentUser.email);
       }
     } catch (error) {
-      console.error("Error user data", error);
+      
     }
   };
 
   useEffect(() => {
-    // 현재 로그인된 사용자 상태 변경 감지
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
 
-    // 컴포넌트 언마운트 시 unsubscribe
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    // 사용자가 로그인되면 해당 사용자의 데이터를 가져옴
     if (user) {
       userDataGet();
     }
@@ -312,7 +309,6 @@ const ActionBtn = styled.div`
   }
 `;
 
-/*변수 사용 순서때문에 card에 css를 imgbx밑으로 내렸음 */
 const Card = styled.div`
   position: relative;
   width: 350px;

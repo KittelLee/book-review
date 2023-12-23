@@ -274,6 +274,12 @@ const BookLeftSection = styled.div`
   padding: 10px;
   margin-top: 10px;
   box-sizing: border-box;
+  @media screen and (max-width: 720px) {
+    flex-direction: column;
+    flex-direction: row; 
+    width: 100%;
+  }
+
 `;
 
 const ImgSection = styled.div`
@@ -286,6 +292,10 @@ const ImgSection = styled.div`
     height: 200px;
     cursor: pointer;
   }
+  @media screen and (max-width: 720px) {
+    width: 100%;
+  }
+
 `;
 
 const InfoSection = styled.div`
@@ -295,6 +305,10 @@ const InfoSection = styled.div`
   p {
     cursor: pointer;
     font-weight: bold;
+  }
+  @media screen and (max-width: 700px) {
+    margin-left: 0; /* 700px 미만일 때, 여백 제거 */
+    margin-top: 10px; /* 700px 미만일 때, 상단 여백 추가 */
   }
 `;
 

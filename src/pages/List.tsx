@@ -7,38 +7,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import Loader from "../components/Loader/Loader";
 import { Book } from "../types/List";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "80%",
-    width: "80%",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
-  },
-};
-
-const customStyles2 = {
-  content: {
-    top: "40%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    height: "54%",
-    width: "40%",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
-  },
-};
+import { customStyles, customStyles2 } from "../styles/ListModalStyle";
 
 Modal.setAppElement("#root");
 

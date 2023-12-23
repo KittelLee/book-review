@@ -148,6 +148,10 @@ BOOK-REVIEW
 │   │    ├── Login.tsx
 │   │    └── MyPage.tsx
 │   │
+│   ├── styles/
+│   │    ├── ListModalStyle.ts
+│   │    └── MyPageModalStyle.ts
+│   │
 │   ├── types/
 │   │    ├── Board.ts
 │   │    ├── BoardDetail.ts

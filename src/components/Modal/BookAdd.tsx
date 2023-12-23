@@ -19,7 +19,6 @@ interface Book {
   price: string;
 }
 
-/*firebaseConfig부분 props로 내려줄수있지않나?*/
 const firebaseConfig = {
   apiKey: "AIzaSyAu1pu4r4m_kJLEyeL7Jgc6tWz94Upzk98",
   authDomain: "book-review-a7be9.firebaseapp.com",

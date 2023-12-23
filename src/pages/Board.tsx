@@ -84,7 +84,9 @@ function Board() {
           views: postToUpdate.views + 1,
         });
       }
+
     } catch (error) {}
+
   };
 
   const handlePostBtnClick = (postId: string) => {

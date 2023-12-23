@@ -13,6 +13,8 @@
   </a>
 </p>
 
+<br/>
+
 ## 🧑🏻‍💻 팀 소개
 
 <table>
@@ -55,15 +57,19 @@
   </tr>
 </table>
 
+<br/>
+
 ## 🧑🏻‍💻 프로젝트 소개
 
 저희는 `BOOK-REVIEW`라는 사이트를 개발하였으며 본 사이트는 책 리뷰 사이트로 사용자가 책의 리뷰를 남길 수 있는 플랫폼을 만들었습니다.
 
+<br/>
+
 ## 🧑🏻‍💻 맡은 부분
 
-> @[KittelLee](https://github.com/KittelLee) (이진욱) : <br />
-> @[POZIP](https://github.com/heriondb) (강수진) : <br />
-> @[withsjb](https://github.com/withsjb) (손진빈) : 캐로셀, 게시판, <br />
+> @[KittelLee](https://github.com/KittelLee) (이진욱) : 총괄, CI/CD구축, Header구현, Footer구현, 모달전체구현, ...<br />
+> @[POZIP](https://github.com/heriondb) (강수진) : 책 360도 회전, List페이지 검색부분, 책 정렬부분<br />
+> @[withsjb](https://github.com/withsjb) (손진빈) : 캐로셀, 게시판, 회원가입&로그인 ...<br />
 
 <br/>
 
@@ -106,7 +112,58 @@
 
 <div style="display: flex;">
   <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white" />
-  <img src="https://img.shields.io/badge/kakaotalk-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=white" />
+  <img src="https://img.shields.io/badge/kakaotalk-FFCD00?style=for-the-badge&logo=kakaotalk&logoColor=black" />
 </div>
+
+<br/>
+
+## 🧑🏻‍💻 파일 구조
+
+```
+BOOK-REVIEW
+├── src/
+│   ├── assets/
+|   |    ├── icons/
+|   |    └── images/
+|   |
+│   ├── components/
+│   │    ├── Board/
+│   │    ├── Home/
+│   │    ├── Loader/
+│   │    ├── Modal/
+│   │    ├── Contexts/
+│   │    ├── Header.tsx
+│   │    └── Footer.tsx
+│   │
+|   ├── firebase.ts/
+|   ├── App.tsx/
+│   ├── main.tsx/
+│   └── vite-env.d.ts/
+│
+├── .firebase
+├── .github
+├── build
+├── node_modules/
+├── .eslintrc.cjs
+├── .firebaserc
+├── .gitignore
+├── .firebase.json
+├── .firebaseConfig.ts
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+```
+
+<br/>
+
+## 🧑🏻‍💻 화면 구성
+
+보류
+
+<br/>
 
 ### 🧑🏻‍💻 개발 기간 : `18일` `23.12.06 ~ 23.12.24`

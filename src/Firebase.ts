@@ -5,7 +5,7 @@ import "firebase/compat/auth";
 import { getApps } from "firebase/app";
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_APP_API_KEY,
+  apiKey: import.meta.env.VITE_APP_API_KEY || "mock_key",
   authDomain: import.meta.env.VITE_APP_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_APP_PROJECT_ID,
   storageBucket: import.meta.env.VITE_APP_STORAGE_BUCKET,

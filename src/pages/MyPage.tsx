@@ -9,7 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { User } from "firebase/auth";
 import Loader from "../components/Loader/Loader";
-import { NewIntro } from "../types/Mypage";
+import { NewIntro } from "../types/MyPage";
 
 const modalStyles = {
   content: {

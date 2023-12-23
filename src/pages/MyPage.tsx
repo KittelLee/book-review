@@ -20,8 +20,9 @@ const modalStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     height: "54%",
-    width: "40%",
+    width: "50%",
   },
+
   overlay: {
     backgroundColor: "rgb(255, 255, 255, 0.8)",
   },
